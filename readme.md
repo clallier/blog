@@ -11,3 +11,6 @@ See: https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll
    - `bundle install` to install dependencies 
    - `bundle exec jekyll serve` to build and serve
 
+## Update github pages gem
+`bundle update github-pages`
+
