@@ -35,6 +35,8 @@ This experiment is live here:
 
 This project leverages several key tools and technologies. Special thanks to the following:
 
+- **Kenneth Fejer**: The spaceship model is inspired from his work. [Explore his work](https://kennethfejer).
+
 - **Three.js**: A powerful JavaScript library and API for creating and displaying animated 3D computer graphics in a web browser. [Learn more about Three.js](https://threejs.org/).
 
 - **Blender**: An open-source 3D creation suite supporting the entirety of the 3D pipeline. [Visit Blender3D](https://www.blender.org/).
