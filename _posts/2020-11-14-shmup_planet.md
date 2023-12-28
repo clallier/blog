@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "A shaders experiment: crafting a small mobile shooter game using three.js, ECS and Coroutines!"
+title:  "A shaders experiment: crafting a small mobile shooter game using three.js, ECS and coroutines!"
 date:   2020-11-14 21:12:33 +0100
 categories: experiment, three.js, ECS, shaders, coroutines, mini-console
 ---
@@ -112,14 +112,43 @@ This approach allowed me to create dynamic, visually appealing particle effects 
 
 ![Particles example]({{ site.url }}{{ site.baseurl }}/assets/img/shmup_planet_particles.png)
 
+### Making Things Easier with Coroutines 
 
-This project, done during my weekends, was very instructive. I learned a lot and had fun making it. It's a good example of my work and how I like to learn new things in game development.
+In this project, I utilized coroutines[^5] to simplify complex tasks, such as chaining animations and updating game states. In JavaScript, this is achievable through function generators, a powerful feature for writing asynchronous code in a more readable way.
+
+
+Here’s an example from the game, showing how I managed enemy waves:
+
+```js
+*createEnemies() {
+    // For ten waves ... 
+    for (let i = 0; i < 10; i++) {
+      // Spawn enemies
+      EntityFactory.createEnemies(i);
+      // Then wait for the end of the wave
+      // Internally, will check every second if they are still enemies
+      yield this.waitEndOfWave(i);
+
+      // End of wave: wait 2 s, then go next wave
+      yield this.runner.waitSeconds(2);
+    }
+    console.log('Well done!')
+  }
+```
+In this code, each yield pauses the execution until a certain condition is met, like the end of a wave, making it straightforward to implement complex game logic. This approach allows for creating sequences of events in a clear and manageable way.
+
+Each coroutine can include sub-routines, they are stored in the [CoroutineRunner](https://github.com/clallier/shmup_planet/blob/master/src/coroutinerunner.js).
+Itself integrated into the game’s ECS (Entity Component System) as a system. This integration streamlines the process of managing various game states and interactions, further simplifying the game development process.
 
 ## Final Thoughts:
-I encourage others to dive into similar projects. It's a rewarding way to learn new things and can really show your potential in game development or any field you're passionate about. Don't hesitate to experiment and explore - it's a great way to grow!
 
-Let's keep in touch! I’m always open to discussing ideas, sharing experiences, or collaborating on new projects. Feel free to reach out!
+That's all for the quick overview of the technical side of my project. I've thoroughly enjoyed learning and using technologies like Three.js for graphics, developing a particle system, and delving into coroutines and ECS for game logic management.
 
+One last feature to mention is the mini-console. It's a handy tool that displays console.log messages right on the game screen, which is extremely helpful for debugging on mobile devices[^6].
+
+I hope my project encourages you to explore your own creative ideas and see what you can build. Remember, it's all about learning, experimenting, and enjoying the journey!
+
+Let's keep in touch! I’m always open to discussing new ideas, sharing experiences, and collaborating on future projects. Feel free to reach out!
 
 [^1]: For instance on [Ben Chung's blog](http://benchung.com/basic-glsl-displacement-shader-three-js/) and on [Lee Stemkoski's three.js examples](http://stemkoski.github.io/Three.js/Particle-Engine.html).
 
@@ -128,3 +157,7 @@ Let's keep in touch! I’m always open to discussing ideas, sharing experiences,
 [^3]: Included in three.js: [threejs.org/examples/webgl_postprocessing_unreal_bloom](https://threejs.org/examples/webgl_postprocessing_unreal_bloom.html)
 
 [^4]: We use [Ape ECS](https://github.com/fritzy/ape-ecs)
+
+[^5]: From [David Beazley's talk](http://www.dabeaz.com/coroutines/Coroutines.pdf)
+
+[^6]: Inspired from [this StackOverflow answer](https://stackoverflow.com/questions/47064232/how-can-i-get-console-log-output-from-my-mobile-on-the-mobile-device/48377000#48377000)
