@@ -4,15 +4,14 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+## The world is your canvas!
 
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
+Hello there and welcome! My name is Corentin and I am a data scientist / software engineer with over a decade of experience (and a PhD in the field of neural networks since 2022!).
 
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
+Driven by a deep passion for technology, I am continually learning and exploring new technologies and techniques, convinced that the best way to truly understand something is to get hands-on experience and try it myself.
 
+This is my personal blog, I share my experiments and sometime interesting pieces of knowledge.
+I hope that my posts will be both helpful and informative but also to spark your curiosity and inspire a passion for learning. If you find them useful, feel free to reach out to me :)
 
-[jekyll-organization]: https://github.com/jekyll
+Thank you for stopping by and have a nice day!
+
