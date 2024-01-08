@@ -27,8 +27,9 @@ baseurl: "/blog" # the subpath of your site, e.g. /blog
 url: "https://clallier.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 permalink: /:year/:month/:day/:title/
 
-twitter_username: gooodjam
 github_username: clallier
+linkedin_username: corentin-lallier-7b6a1469
+twitter_username: gooodjam
 
 # Build settings
 theme: minima
