@@ -1,8 +1,9 @@
 ---
 layout: post
 title:  "A shaders experiment: crafting a small mobile shooter game using three.js, ECS and coroutines!"
-date:   2020-11-14 21:12:33 +0100
+date:   2020-11-14 21:00:00 +0100
 categories: experiment, three.js, ECS, shaders, coroutines, mini-console
+image: "/assets/img/shmup_planet_displacement.png"
 ---
 
 <iframe src="https://shmup-6a843.web.app" width="100%" height="500px"></iframe>
