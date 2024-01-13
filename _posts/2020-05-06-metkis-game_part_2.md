@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "[Metkis game 2] 3D physics for the mobile web!"
+title:  "[Metkis game - 2] 3D physics for the mobile web!"
 date:   2020-05-05 21:00:00 +0100
-categories: experiment, three.js, Cannon.js
+categories: video game, gamedev, Three.js, 3D, Cannon.js, physics, physics engine, ECS, Entity-Component-Systems
 image: "/assets/img/metkis_player.png"
 ---
 
@@ -39,7 +39,9 @@ The physics engine keeps an eye on all the physical objects in the game.
 During these 16 ms, it runs its own simulation and updates each object's state, like its position, its rotation, its velocity, and whether it had a collision, with which other objects, and at what speed.
 
 <!-- https://youtu.be/NJ1hLZ8ztNw -->
-{% include youtube.html id='NJ1hLZ8ztNw' %}
+<!-- {% include youtube.html id='NJ1hLZ8ztNw' %} -->
+<!-- https://giphy.com/embed/NT7BKluIkiw7kxnle5 -->
+{% include giphy.html id='NT7BKluIkiw7kxnle5' %}
 
 At the end of this quick inner update, the physics engine lets us access all of this information; we have a fresh snapshot we can explore and use to render the next frame.
 For instance, if we see two objects crash very fast, like a bullet hitting an enemy, we can decide to take the bullet out of the game in the next frame, and to reduce the enemy's health.

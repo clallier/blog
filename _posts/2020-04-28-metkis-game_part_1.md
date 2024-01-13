@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "[Metkis game 1] Dynamic textures drawing for Three.js!"
+title:  "[Metkis game - 1] Dynamic textures drawing for Three.js!"
 date:   2020-04-28 21:00:00 +0100
-categories: experiment, three.js, Cannon.js
+categories: video game, gamedev, Three.js, 3D, Cannon.js, physics, physics engine, ECS, Entity-Component-Systems
 image: "/assets/img/metkis_player.png"
 ---
 
@@ -78,7 +78,7 @@ createTexture(/* ... */) {
 }
 ```
 
-Finally, we can now apply our texture on a mesh. An example for this can be seen in `createCrate`` in [entityfactory.js](https://github.com/clallier/metkis_game/blob/master/src/game/entityfactory.js#L244)
+Finally, we can now apply our texture on a mesh. An example for this can be seen in `createCrate` in [entityfactory.js](https://github.com/clallier/metkis_game/blob/master/src/game/entityfactory.js#L244)
 
 ```js 
 createCrate(position = new Vector3(), size = new Vector3(1, 1, 1)) {

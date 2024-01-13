@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "[Metkis game 0] Building 3D mobile game with Cannon.js physics: an experimental journey!"
+title:  "[Metkis game - 0] Building 3D mobile game with Cannon.js physics: an experimental journey!"
 date:   2020-04-19 21:00:00 +0100
-categories: experiment, three.js, Cannon.js
+categories: video game, gamedev, Three.js, 3D, Cannon.js, physics, physics engine, ECS, Entity-Component-Systems
 image: "/assets/img/metkis_player.png"
 ---
 
