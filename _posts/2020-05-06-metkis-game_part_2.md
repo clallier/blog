@@ -16,55 +16,103 @@ This article is a part of a series, composed of:
 
 ## Do we really need 3D physics? Isn't it slow?
 
-One interesting aspect of incorporating a physics engine is the oppportunity of emergent gameplay.
-This refers to unpredictable and complex behaviors that arise from simple interactions within the game's mechanics.
+One interesting aspect of using a physics engine is the oppportunity of emergent gameplay.
+'Emergent gameplay' refers to unpredictable and complex behaviors that arise from simple interactions within the game's mechanics.
 
 For example, players might strategically move blocks to create shields or alter enemy paths by blocking routes.
 
-There are several 3D physics libraries available in JavaScript, such as `Oimo.js`, `Ammo.js`, and `Physijs`. (See the [References](#references) section for more.)
+There are bunch of tools in JavaScript to make this magic happens, such as `Oimo.js`, `Ammo.js`, and `Physijs`. (See the [References](#references) section for more.)
 
-For this project, I choose to use `Cannon.js`. My decision was based on its robustness, similarity to `Box2D` (which I had experience with), ease of integration with ThreeJS, and high performance on mobile device (probably because it's a bit old).
+For this project, I choose to use `Cannon.js`. Why? Well it's super robust, a lot like `Box2D` (which I've used before), works well with Three.js, and is really fast on mobile devices (probably because it's a bit older).
 
-**_NOTE:_** [Jan 2024]: When I first wrote this post, `Cannon.js` was already a quite old library. It as been unmaintained for years, and `Rapier` appears to be emerging as its successor. I've updated the [References](#references) section accordingly. However, the principles and experiences shared here still provide valuable insights into working with physics engines in game development.
+**_NOTE:_** [Jan 2024]: When I first talked about `Cannon.js`, it was an old but good tool. It hasn't been updated in a while, and now `Rapier` appears to be its successor.
+I've updated the [References](#references) section accordingly. However, the principles shared here still provide valuable insights into working with physics engines.
 
-The main principle of physics engines is that they are running in 'parrallel' of the rest of the world of our game.
+![Physics engine example]({{ site.url }}{{ site.baseurl }}/assets/img/metkis_physics_example.png)
 
-While the game is running the physics 'world' with some parameters. 
-This world will contains all the physics elements (called bodies) of the simulation, and run this simulation a given number of time each second.
-We need to parameter this simulation with this number of updates per seconds, and the gravity.
-The gravity can be seen as a constant force applied to all the bodies at each update.
+Physics engines run alongside 'in parallel' with the rest of the world of our game.
+In a game, everything happens frame by frame.
+For example, at 60 frames per second (fps), it's 16 milliseconds (ms) between each frame.
 
+Each frame is a snapshot of the game's world at a moment.
+The physics engine keeps an eye on all the physical objects in the game.
+During these 16 ms, it runs its own simulation and updates each object's state, like its position, its rotation, its velocity, and whether it had a collision, with which other objects, and at what speed.
 
-Usually we use them using the following process: 
-1. We first initialize the physics 'world' with some parameters. 
-This world will contains all the physics elements (called bodies) of the simulation, and run this simulation a given number of time each second.
-We need to parameter this simulation with this number of updates per seconds, and the gravity.
-The gravity can be seen as a constant force applied to all the bodies at each update.
+<!-- https://youtu.be/NJ1hLZ8ztNw -->
+{% include youtube.html id='NJ1hLZ8ztNw' %}
 
-Init the physic world
+At the end of this quick inner update, the physics engine lets us access all of this information; we have a fresh snapshot we can explore and use to render the next frame.
+For instance, if we see two objects crash very fast, like a bullet hitting an enemy, we can decide to take the bullet out of the game in the next frame, and to reduce the enemy's health.
+We do this for every frame, for hundreds of objects, all the way until the game ends.
+
+We need to configure the simulation with specific settings, such as the number of updates per frame and constant forces affecting all objects, such as gravity. 
+Gravity is a continuous force that acts on every object during each update.
+
+Let's start by creating our physics world:
 
 ```js
-// Initialization
+// Instanciate a new World that will handle all the physical objects and the simulation.
 this.world = new CANNON.World();
-// Set the gravity
+// Set the gravity to -10 on the y-axis (this is a constant acceleration of 10m/s to the ground, things will fall as on Earth)
 this.world.gravity.set(0, -10, 0);
-// set the debug renderer
+// Set the debug renderer to see what's happening
 this.debugRenderer = new CannonDebugRenderer(this.ts.scene, this.world);
 ```
 
-The debug renderer can be found [here](https://github.com/clallier/metkis_game/blob/master/src/cannondebugrenderer.js)
+You can see the debug renderer [here](https://github.com/clallier/metkis_game/blob/master/src/cannondebugrenderer.js)
+It shows a wireframe view of everything in the physics world.
 
-When a entity is created, it's created with it's onw body, for instance for a crate:
-We setup it's size, note that the physical size is half the size of the mesh.
-The two systems, Three.js and Cannon.js, considere sizes a bit differently, which can be error prone.
-Collision groups are usefull to filter collisions (for instance we don't want the player's bullets collide with itself)
+As we use an Entity-Component-System (ECS, more about that in the next article), we also have to initialize the [PhysicSystem](https://github.com/clallier/metkis_game/blob/master/src/systems/physicsystem.js):
+```js
+export default class PhysicSystem extends System {
+    constructor(world, attributes) {
+        super(world, attributes);
+        // Get a reference to the new Cannon.World() we just have created
+        this.cannon_world = attributes.cannon_world;
+        // The controller will track the player's input and translate them in force applied to the player object
+        this.controller = attributes.controller;
+        // Precision is how many updates Cannon.js will do each simulation step
+        // Here, we aim for 3 updates during our 16 ms budget
+        this.precision = 3;
+    }
+    // ...
+}
+```
+Now, let's see how the controller affects the player.
+This is applied for the player, which is linked to the controller:
+
+```js
+// The controller's direction is a simple normalized (x, y) vector.
+const dir = this.controller.state.dir;
+// We constrain the power of the force we'll apply on the player
+const power = 0.4;
+// We compute the force applied on the player
+// In our 3D physics engine, the player move on a 2D plan using the x and z axes:
+// - x from the controller is converted to a x force
+// - y from the controller is converted to a z force
+let force = new CANNON.Vec3(dir.x, 0, dir.y)
+    .scale(-1 * power);
+// Finally, we apply this force to the player as an impulse (a force applied at a point of time)
+// We can see this as a quick push every step
+body.applyImpulse(force, body.position);
+```
+
+In physics engines, a `body` usually refers to an object.
+Think of it as the object's `shape` (or multiple shapes for complex objects).
+When we create an entity, it gets its own body. For example, for a crate:
+
+We define it's size. 
+Three.js and Cannon.js, handle sizes differently, which can cause confusion, that's why we apply a `0.4` on the sizes.
+Collision groups help manage which objects bump into each other. For instance we don't want a player's bullets collide with themselves or with the player.
 
 ```js
 createCrate(position = new Vector3(), size = new Vector3(1, 1, 1)) {
-  /* Create the geometry, the texture and the mesh, see the code above */
+  /* Create the geometry, the texture and the mesh, as shown in the previous article */
 
-  // create the shape of the body of the crate,
-
+  // Define the crate's body shape,
+  // Remember that the physical size is half the size of the mesh 
+  // we also remove a little offset of the body size, that's why we have this `0.4` instead of `0.5`
+  // We do this to have smaller hitbox, it not mandatory, it just feels better in the game
   const box_size = new CANNON.Vec3(0.4 * size.x, 0.4 * size.y, 0.4 * size.z);
   const box = new CANNON.Box(box_size);
 
@@ -74,42 +122,54 @@ createCrate(position = new Vector3(), size = new Vector3(1, 1, 1)) {
       position: position,
       shape: box,
       
-      // collision groups permit to filter collisions
-      // Its own group is neutral 
+      // Use collision groups to manage interactions
+      // The crate belongs to a neutral group 
       collisionFilterGroup: COLLISION_GROUP.NEUTRAL,
-      // And it can collide with anything from all groups
+      // And It can interact with any group
       collisionFilterMask: COLLISION_GROUP.ALL
   })
 
+  // Add the mesh and body components to the entity (more on this in the next article)    
   this.ecsy.createEntity()
       .addComponent(ThreeMesh, { value: mesh })
       .addComponent(CannonBody, { value: body })
 }
 ```
+In this example, we have crafted the crate's physical body and matched its visual appearance.
+By setting the collision groups, we ensure it interacts appropriately with other elements in the game world. 
 
-Update the physics simulation at a certain precision (or sub step) 
-See [physicsystem.js](https://github.com/clallier/metkis_game/blob/master/src/systems/physicsystem.js)
+Next, we update the physics simulation each frame. For more information, you can refer to [physicsystem.js](https://github.com/clallier/metkis_game/blob/master/src/systems/physicsystem.js):
 ```js
-// sim
+// the simulation itself
+// `delta` is the number of ms since the last render. 
+// As time is relative, it can be slightly more or less than our 16 ms target.
+// So we use the real value to stay accurate with time.
 for (let i = 0; i < this.precision; i++) {
     this.cannon_world.step(delta / this.precision);
 }
 ```
-
-After the Cannon.js's p world update we want to sync the 3d world of Three.js.
-Generally at the end of the update loop, before the render loop.
+After updating Cannon.js' world, we want to sync it with the Three.js' world.
+This is typically done at the end of the update loop, just before rendering.
 
 ```js
-// Query everything that have a Mesh component and a CannonBody (physics) component 
+// Find all entities with Mesh and CannonBody (physics) components 
   this.queries.syncWithPhysics.results.forEach(e => {
       const mesh = e.getComponent(ThreeMesh).value;
       const body = e.getComponent(CannonBody).value;
       
-      // and sync the mesh position/rotation with the physics body  
+      // Sync the mesh's position and rotation with the physics body  
       mesh.position.copy(body.position);
       mesh.quaternion.copy(body.quaternion);
   })
 ```
+This process guarantees that the physical interactions are reflected in the visual 3D world. Which is usually good.
+
+That's it for now. Congratulations on making it through this detailed technical article!
+
+Next time, we'll explore how to make everything work smoothly together using our ECS. 
+[See you here!]({{ site.baseurl }}{% post_url 2020-05-15-metkis-game_part_3 %})
+
+Stay tuned for more in the series!
 
 ## References: 
 
