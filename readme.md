@@ -19,3 +19,6 @@ See: https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll
 ## Update github pages gem
 `bundle update github-pages`
 
+
+## Access to the default theme file (minima theme)
+`open $(bundle info --path minima)`
