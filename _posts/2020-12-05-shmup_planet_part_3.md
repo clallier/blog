@@ -16,8 +16,6 @@ This article is part of a series, here are all the other articles:
 
 ---
 
-### Making Things Easier with Coroutines 
-
 In this project, I utilized coroutines[^5] to simplify complex tasks, such as chaining animations and updating game states. In JavaScript, this is achievable through function generators, a powerful feature for writing asynchronous code in a more readable way.
 
 
