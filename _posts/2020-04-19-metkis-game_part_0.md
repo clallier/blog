@@ -48,7 +48,6 @@ Everything is pretty standard for a 3D game but here are some specificities, tha
 - Part 2: [3D physics for the mobile web]({{ site.baseurl }}{% post_url 2020-05-06-metkis-game_part_2 %})
 - Part 3: [Gluing all together with ECS (Entity-Component-System)]({{ site.baseurl }}{% post_url 2020-05-15-metkis-game_part_3 %})
 
-<!-- GUI and Custom Textures: -->
 
 ## References: 
 
