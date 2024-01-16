@@ -1,4 +1,5 @@
 
+<!-- Adapted from Sourish Kundu's video : https://www.youtube.com/watch?v=_gmQZToTMac -->
 
 Brief overview of Reinforcement Learning (RL) and Proximal Policy Optimization (PPO).
 Introduction to the Mario Bros game as a testbed for RL algorithms.
