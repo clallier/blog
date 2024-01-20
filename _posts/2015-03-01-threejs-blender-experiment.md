@@ -15,7 +15,7 @@ I Love the idea to combine retro vibes with modern rendering techniques. This po
 ## Approach
 
 - I wanted to try 3D graphics in the web browser. This project utilizes `three.js` for rendering a JSON 3D model modeled previously using Blender.
-- Blender is used for creating simple model and wrap a texture created using AseSprite.
+- Blender is used for creating simple model and wrap a texture created using GraphicsGale.
 - The pixel art textures is in 64 x 64px and 8 colors, giving a unique vibrant aesthetic to this project.
 - The modeling / wrapping / texturing takes me a few weekends. The coding part is about one or two hours.
 - Everything is sticked together using browserify and Babel
