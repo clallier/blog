@@ -60,19 +60,19 @@ In order to download the Genymotion product, you have to register a Genymotion a
 
 1. Once it's installed, launch it. The main interface is pretty neat.
 
-   ![The main interface](http://2.bp.blogspot.com/-umt1FU0teR4/Uu7trR83D3I/AAAAAAAAC-w/Rx6dTIJVRLM/s1600/Genymotion_main.png)
+   ![The main interface]({{ site.url }}{{ site.baseurl }}/assets/img/AVD_articles/Genymotion_main.png)
    *The main interface*
 
 2. Right after the launch, a new window appears to add a new device. You will need to enter your logins by clicking the "connect" button.
 
-   ![The virtual device creation interface](http://1.bp.blogspot.com/-Q2Ut_cZSMM8/Uu7tqPyLZMI/AAAAAAAAC-c/4gJwYk4TJI8/s1600/Genymotion_add.png)
+   ![The virtual device creation interface]({{ site.url }}{{ site.baseurl }}/assets/img/AVD_articles/Genymotion_add.png)
    *The virtual device creation interface*
 
 3. Select a device in the device list, for instance, the Nexus7 - 4.4.2 - API 19, go next, give it a name, and validate.
 4. The virtual device begins to be downloaded and installed. It's now fully functional and already blazing fast.
 5. Play a bit with the interface and the buttons, on the right side, to explore the widgets.
 
-![Genymotion device launched](http://2.bp.blogspot.com/-VUVc1x6rliU/Uu7trq1vz3I/AAAAAAAAC_Q/JTGkXpurwQY/s1600/Genymotion_device_launched.png)
+![Genymotion device launched]({{ site.url }}{{ site.baseurl }}/assets/img/AVD_articles/Genymotion_device_launched.png)
 *Genymotion device launched*
 
 Now it's time to integrate it with ADT.
@@ -85,17 +85,17 @@ Now it's time to integrate it with ADT.
 
 Okay, now Eclipse has rebooted, do you feel the difference? Not yet? Did you notice the difference? Better, right? No? Hmm, maybe you should focus on this tiny little button of 12x16 pixels. This one.
 
-![The Genymotion Virtual Device Manager](http://3.bp.blogspot.com/-Ev_XTVnrBm8/Uu7trsBW4oI/AAAAAAAAC-4/gV2gWYDHExM/s1600/Genymotion_virtual_device_manager.png)
+![The Genymotion Virtual Device Manager]({{ site.url }}{{ site.baseurl }}/assets/img/AVD_articles/Genymotion_virtual_device_manager.png)
 *The Genymotion Virtual Device Manager button*
 
 - In this new Genymotion virtual device manager, select the previously created virtual device, and press "start". The device should be launched.
 
-![Launching the new Genymotion virtual device](http://3.bp.blogspot.com/-iAhJhn8Hf6U/Uu7trM8oMVI/AAAAAAAAC-0/XMg_RRAOAio/s1600/Genymotion_lauching_device.png)
+![Launching the new Genymotion virtual device]({{ site.url }}{{ site.baseurl }}/assets/img/AVD_articles/Genymotion_lauching_device.png)
 *Launching the new Genymotion virtual device*
 
 Now you are nearly ready. Select your Android project and run it. It should be deployed on the Genymotion device. You can now have access to the ADB and your breakpoints. And, it's fast! Brilliant.
 
-![Debugging on Genymotion](http://4.bp.blogspot.com/-ZhRlAiUdooU/Uu7tsPdUxMI/AAAAAAAAC_I/MQILn_a0phs/s1600/You_can_now_debug.png)
+![Debugging on Genymotion]({{ site.url }}{{ site.baseurl }}/assets/img/AVD_articles/You_can_now_debug.png)
 *Debugging on Genymotion*
 
 To finish with Genymotion you can find all these instructions and more on their [documentation](https://cloud.genymotion.com/page/doc/) page.
