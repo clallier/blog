@@ -35,8 +35,8 @@ Most Intel CPUs provide extensions for running virtual machines more efficiently
 
 Launch the Android SDK, from Eclipse it can be found by clicking on this icon.
 
-![The Android SDK Manager](http://3.bp.blogspot.com/-yJ7NAIX480E/Uu7tr4jiXqI/AAAAAAAAC_M/cO1640qKTaQ/s1600/SDK.png)
-*The Android SDK Manager*
+![The Android SDK Manager]({{ site.url }}{{ site.baseurl }}/assets/img/AVD_articles/SDK.png)
+*The Android SDK Manager Icon*
 
 In order to be able to use the Intel HAXM, one will need two things:
 
@@ -54,11 +54,17 @@ Select these two packages and click on "Install 2 packages" and let the magic in
    ```shell
    sc query intelhaxm
     ```
-   You should see a message indicating the state "running".
+4. You should see a message indicating the state "running".
+
+   ![Running OK]({{ site.url }}{{ site.baseurl }}/assets/img/AVD_articles/sc_query_intel_haxm.png)
+   *Running OK*
 
 ### Running a new Virtual Device.
 
 The Intel HAXM is now functional, go to the Android Virtual Device Manager in Eclipse and create a new x86 device based on the previously installed Intel x86 Atom System Image.
+
+   ![x86 virtual device creation]({{ site.url }}{{ site.baseurl }}/assets/img/AVD_articles/AVD_x86.png)
+   *x86 virtual device creation*
 
 1. Now launch it.
 2. Run your debug project on it. This is pretty fast.
