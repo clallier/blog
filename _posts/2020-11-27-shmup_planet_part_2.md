@@ -11,18 +11,25 @@ This article is part of a series, here are all the other articles:
 
 - Part 0: [Introduction]({{ site.baseurl }}{% post_url 2020-11-14-shmup_planet_part_0 %})
 - Part 1: [Shaders: displacement map and Bloom]({{ site.baseurl }}{% post_url 2020-11-19-shmup_planet_part_1 %})
-- Part 2: [Making a Small Library for particles animation]({{ site.baseurl }}{% post_url 2020-11-27-shmup_planet_part_2 %})
-- Part 3: [Making Things Easier with Coroutines ]({{ site.baseurl }}{% post_url 2020-12-05-shmup_planet_part_3 %})
+- Part 2: [Making a Small Library for particles animation]({{ site.baseurl }}{% post_url 2020-11-27-shmup_planet_part_2 %}) ⬅️
+- Part 3: [Making Things Easier with Coroutines]({{ site.baseurl }}{% post_url 2020-12-05-shmup_planet_part_3 %})
 
 ---
 
+In this article, I'll talk about particles and a little library I made for particles and emitters management.
 I love particles! They're used for many effects in this project, like static stars, trails, and explosions.
 
- - **Particle Systems in ECS**: We handle particles using the Entity Component System (ECS)[^4] principle. We have particle emitters (Components), and a particles system (System) that manages the life cycle of the particles and emitters. For example, if we want the ship to have a trail of particles, we simply add a trail component to the ship entity.
+ - **Particle Systems in ECS**: We handle particles using the Entity Component System (ECS)[^4] principle. 
+ We have particle emitters (Components), and a particles system (System) that manages the life cycle of the particles and emitters.
+ For example, if we want the ship to have a trail of particles, we simply add a trail component to the ship entity.
 
-- **Performance Challenge**: A big issue was dealing with many particles being created and destroyed. This process was heavy on performance, causing slowdowns mostly due to the garbage collector. To fix this, I optimized how particles are handled to reduce the workload on the game's engine.
+- **Performance Challenge**: A big issue was dealing with many particles being created and destroyed. 
+This process was heavy on performance, causing slowdowns mostly due to the garbage collector. 
+To fix this, I optimized how particles are handled to reduce the workload on the game's engine.
 
-- **Emitter Features**: Emitters have several settings like the shape (dot, square or triangle), system size, and maximum number of particles. There are also settings for each particle, like size evolution (size_start, size_end) and color (color_start, color_end). The emitting behavior includes settings like count_per_s and initial_visibles.
+- **Emitter Features**: Emitters have several settings like the shape (`dot`, `square` or `triangle`), system size, and maximum number of particles. 
+There are also settings for each particle, like size evolution (`size_start`, `size_end`) and color (`color_start`, `color_end`). 
+The emitting behavior includes settings like `count_per_s` and `initial_visibles`.
 Here's an example of how an explosion is created:
 
 ```js
@@ -75,9 +82,11 @@ vec4 tex_color = texture2D(u_texture, rotated_uv);
 gl_FragColor = tex_color * v_color;
 ```
 
-This approach allowed me to create dynamic, visually appealing particle effects efficiently, adding depth and excitement to the game's environment.
-
+This approach allowed me to create dynamic, visually appealing particle effects efficiently, adding depth to the game's environment.
 
 ![Particles example]({{ site.url }}{{ site.baseurl }}/assets/img/shmup_planet_particles.png)
+
+In the [next article]({{ site.baseurl }}{% post_url 2020-12-05-shmup_planet_part_3 %}) I'll talk about coroutines, and how to use them in a game. 
+Thanks for reading and see you! 
 
 [^4]: We use [Ape ECS](https://github.com/fritzy/ape-ecs)
