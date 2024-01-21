@@ -15,9 +15,9 @@ This article is part of a series, here are the other articles:
 
 ---
 
-In this article, I'll first talk about a displacement shader, including its vertex and fragment shaders.
-Then, I'll show how to use the `EffectComposer` for a Bloom pass.
-Let's begin with the displacement map!
+In this article, I'll first discuss a displacement shader, including its vertex and fragment shaders. 
+Then, I'll demonstrate how to use the EffectComposer for a Bloom pass. 
+Let's start with the displacement map!
 
 ### Displacement map on the central sphere
 
