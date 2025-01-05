@@ -1,7 +1,8 @@
 ---
 layout: post
-title:  "[Shmup planet - 0] A shaders experiment: crafting a mobile shooter game using Three.js, ECS and coroutines!"
-date:   2020-11-14 21:00:00 +0100
+group: Shmup planet
+title: "0. A shaders experiment: crafting a mobile shooter game using Three.js, ECS and coroutines!"
+date: 2020-11-14 21:00:00 +0100
 categories: game, gamedev, experiment, Three.js, ECS, shaders, coroutines, mini-console, tech
 image: "/assets/img/shmup_planet_player.png"
 ---
