@@ -1,6 +1,7 @@
 ---
 layout: post
-title: "[Shmup planet - 1] Shaders: displacement map and Bloom"
+group: "Shmup planet"
+title: "1. Shaders: displacement map and Bloom"
 date: 2020-11-19 21:00:00 +0100
 categories: game, gamedev, experiment, Three.js, ECS, shaders, coroutines, mini-console, tech
 image: "/assets/img/shmup_planet_player.png"

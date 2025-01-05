@@ -1,7 +1,8 @@
 ---
 layout: post
-title:  "[Shmup planet - 3] Making Things Easier with Coroutines!"
-date:   2020-12-05 21:00:00 +0100
+group: "Shmup planet"
+title: "3. Making Things Easier with Coroutines!"
+date: 2020-12-05 21:00:00 +0100
 categories: game, gamedev, experiment, Three.js, ECS, shaders, coroutines, mini-console, tech
 image: "/assets/img/shmup_planet_player.png"
 ---

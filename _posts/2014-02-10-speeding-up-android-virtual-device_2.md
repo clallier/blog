@@ -1,7 +1,8 @@
 ---
 layout: post
-title:  "Speeding up the Android Virtual Device part 2: using Intel HAXM!"
-date:   2014-02-10 21:00:00 +0100
+group: "Android Virtual Device"
+title: "Speeding up the Android Virtual Device part 2: using Intel HAXM!"
+date: 2014-02-10 21:00:00 +0100
 categories: android, debugging, virtualization
 image: /assets/img/AVD.png
 ---

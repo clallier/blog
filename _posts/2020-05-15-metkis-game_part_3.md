@@ -1,7 +1,8 @@
 ---
 layout: post
-title:  "[Metkis game - 3] Gluing all together with ECS (Entity-Component-System)!"
-date:   2020-05-15 21:00:00 +0100
+group: "Metkis game"
+title: "3. Gluing all together with ECS (Entity-Component-System)!"
+date: 2020-05-15 21:00:00 +0100
 categories: video game, gamedev, Three.js, 3D, Cannon.js, physics, physics engine, ECS, Entity-Component-Systems
 image: "/assets/img/metkis_player.png"
 ---

@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "PhD Defence"
-date:   2022-12-23 21:00:00 +0100
+title: "PhD Defence"
+date: 2022-12-23 21:00:00 +0100
 categories: life, studies
 image: "/assets/img/phd_defence_mini.png"
 ---

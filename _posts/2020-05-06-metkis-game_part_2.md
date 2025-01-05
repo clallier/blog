@@ -1,7 +1,8 @@
 ---
 layout: post
-title:  "[Metkis game - 2] 3D physics for the mobile web!"
-date:   2020-05-05 21:00:00 +0100
+group: "Metkis game"
+title: "2. 3D physics for the mobile web!"
+date: 2020-05-05 21:00:00 +0100
 categories: video game, gamedev, Three.js, 3D, Cannon.js, physics, physics engine, ECS, Entity-Component-Systems
 image: "/assets/img/metkis_player.png"
 ---
