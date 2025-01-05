@@ -204,6 +204,12 @@
     border-radius: 8px;
     overflow: hidden;
     background-color: #fff;
+    min-height: 100px;
+    transition: background-color 0.05s;
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.1); // Adjust the color and opacity as needed
+    }
   }
 
   .post-card {
@@ -229,7 +235,7 @@
   .post-meta {
     font-size: $small-font-size;
     color: $grey-color;
-  }
+      }
   
   .post-group {
     font-weight: bold;
