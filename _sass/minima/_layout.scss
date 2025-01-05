@@ -204,7 +204,6 @@
     border-radius: 8px;
     overflow: hidden;
     background-color: #fff;
-    min-height: 100px;
     transition: background-color 0.05s;
 
     &:hover {
@@ -212,10 +211,15 @@
     }
   }
 
+  a.post-card {
+    text-decoration: none;
+  }
+
   .post-card {
     display: flex;
     align-items: center;
     padding: 1em;
+    min-height: 100px;
   }
 
   .post-img {
@@ -235,7 +239,7 @@
   .post-meta {
     font-size: $small-font-size;
     color: $grey-color;
-      }
+  }
   
   .post-group {
     font-weight: bold;
