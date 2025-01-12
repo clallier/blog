@@ -1,4 +1,8 @@
 // https://stackoverflow.com/questions/6964144/dynamically-generated-favicon?rq=3
+// https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/Matrix_math_for_the_web
+
+import Matrix from './modules/matrix.js';
+const mtx = new Matrix();
 
 // create a canvas element and get the context
 const canvas = document.createElement('canvas');
@@ -35,13 +39,25 @@ document.getElementsByTagName('head')[0].appendChild(link);
 
 
 // store the triangle points in an array
-const triangle = [
-    [8, 0],
-    [16, 16],
-    [0, 16]
+// const shape = [
+//     [8, 0],
+//     [16, 16],
+//     [0, 16],
+//     [8, 0]
+// ];
+
+// store the rectangle points in an array
+const shape = [
+    new Float32Array([-2, -2, 0, 1]),
+    new Float32Array([2, -2, 0, 1]),
+    new Float32Array([2, 2, 0, 1]),
+    new Float32Array([-2, 2, 0, 1]),
+    new Float32Array([-2, -2, 0, 1])
 ];
-// TODO: this should be the transformation matrix
-let tx = 1;
+
+const translation = mtx.translate(8, 12, 0);
+const scale = mtx.scale(2, 2, 1);
+const rotation = mtx.rotateZ(Math.PI / 6);
 
 // apply a transform matrix to the points
 let angle = 0;// Math.PI;
@@ -49,10 +65,12 @@ let timeMs = 0, dtMs = 0, lastTimeMs = 0;
 let timeSinceLastUpdateMs = 0;
 
 const update = (ms) => {
+    // time vars
     timeMs = ms;
     dtMs = timeMs - lastTimeMs;
     lastTimeMs = timeMs;
-    console.log(timeSinceLastUpdateMs.toFixed(2));
+    const time = timeMs * 0.001;
+    // console.log(time.toFixed(0));
 
     // we cant update the favicon too fast
     timeSinceLastUpdateMs += dtMs;
@@ -70,50 +88,50 @@ const update = (ms) => {
     ctx.fillStyle = "#f00";
     ctx.fillRect(0, 0, 16, 7);
     ctx.fillStyle = '#fff';
+    ctx.textRendering = "optimizeSpeed";
     ctx.font = '10px sans-serif';
     ctx.fillText((timeMs * .001).toFixed(1), 0, 7);
 
 
-    // angle = 0;
-    // angle = angle % (2 * Math.PI);
-    // const cos0 = Math.cos(angle);
-    // const sin0 = Math.sin(angle);
+    // update transformation matrix
+    // rotation
+    rotation[0] = Math.cos(.4 * time);
+    rotation[1] = -Math.sin(.4 * time);
+    rotation[4] = Math.sin(.4 * time);
+    rotation[5] = Math.cos(.4 * time);
+    const transformation = mtx.compose([
+        translation,
+        scale, 
+        rotation,
+    ]);
 
-    // apply the transform to the points
-    // x' = a * x + c * y + e
-    // y' = b * x + d * y + f
-    // For the explanation of the formula, see:
-    // https://en.wikipedia.org/wiki/Transformation_matrix#Affine_transformations
-    // Here it applies a rotation of 45 degrees
+    // y position (sin wave)
+    // transformation[1][3] = 8 + Math.sin(.5 * time) * 4;
 
-    for (let i = 0; i < triangle.length; i++) {
+    // x and y scale (sin wave)
+    // const scale = .5 + Math.sin(.5 * time) * .5; // between 0 and 1
+    // transformation[0][0] = transformation[1][1] = 1 + Math.sin(scale * 1.57) * .5; // between 0.5 and 1.5
 
-        if(triangle[0][0] < 0) {
-            tx = 1;
-        } else if(triangle[0][0] > 16) {
-            tx = -1;
-        }
-
-        const x = triangle[i][0];
-        const y = triangle[i][1];
-        triangle[i][0] = x + tx * .5;
-        // triangle[i][0] = x * cos0 - y * sin0;
-        // triangle[i][1] = x * sin0 + y * cos0;
-    }
-
-    // draw the triangle from the points in a loop
+    // apply the transformation matrix to the points
+    const transformed = shape.map(point => mtx.mat4xvec4(transformation, point));
+    // console.table("shape", shape);
+    // console.table("shape transformed", transformed);
+    // draw the shape from the points in a loop
     ctx.beginPath();
-    ctx.moveTo(triangle[0][0], triangle[0][1]);
 
-    for (let i = 1; i < triangle.length; i++) {
-        ctx.lineTo(triangle[i][0], triangle[i][1]);
+    ctx.moveTo(transformed[0][0], transformed[0][1]);
+    for (let i = 1; i < transformed.length; i++) {
+        ctx.lineTo(transformed[i][0], transformed[i][1]);
     }
 
-    ctx.fillStyle = '#00f';
-    ctx.fill();
+    // ctx.fillStyle = '#00f';
+    // ctx.fill();
+    ctx.strokeStyle = '#00f';
+    ctx.lineWidth = 1;
+    ctx.stroke();
     ctx.closePath();
 
-    
+
     // end of the draw loop
     // set the favicon
     link.href = canvas.toDataURL();
