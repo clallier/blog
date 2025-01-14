@@ -79,6 +79,55 @@ export default class Matrix {
         ]);
     }
 
+    updateRotationZ(rotation, angle) {
+        const sin = Math.sin(angle);
+        const cos = Math.cos(angle);
+        rotation[0] = cos;
+        rotation[1] = -sin;
+        rotation[4] = sin;
+        rotation[5] = cos;
+    }
+
+    rotateX(angle) {
+        const cos = Math.cos(angle);
+        const sin = Math.sin(angle);
+        return new Float32Array([
+            1, 0, 0, 0,
+            0, cos, -sin, 0,
+            0, sin, cos, 0,
+            0, 0, 0, 1
+        ]);
+    }
+
+    updateRotationX(rotation, angle) {
+        const sin = Math.sin(angle);
+        const cos = Math.cos(angle);
+        rotation[5] = cos;
+        rotation[6] = -sin;
+        rotation[9] = sin;
+        rotation[10] = cos;
+    }
+
+    rotateY(angle) {
+        const cos = Math.cos(angle);
+        const sin = Math.sin(angle);
+        return new Float32Array([
+            cos, 0, -sin, 0,
+            0, 1, 0, 0,
+            sin, 0, cos, 0,
+            0, 0, 0, 1
+        ]);
+    }
+
+    updateRotationY(rotation, angle) {
+        const sin = Math.sin(angle);
+        const cos = Math.cos(angle);
+        rotation[0] = cos;
+        rotation[2] = -sin;
+        rotation[8] = sin;
+        rotation[10] = cos;
+    }
+
     // compose multiple matrices into a single matrix
     // should be applied in reverse order
     compose(matrices) {

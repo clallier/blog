@@ -48,21 +48,27 @@ document.getElementsByTagName('head')[0].appendChild(link);
 
 // store the rectangle points in an array
 const shape = [
-    new Float32Array([-2, -2, 0, 1]),
-    new Float32Array([2, -2, 0, 1]),
-    new Float32Array([2, 2, 0, 1]),
-    new Float32Array([-2, 2, 0, 1]),
-    new Float32Array([-2, -2, 0, 1])
+    new Float32Array([-.5, -.5, -.5, 1]),
+    new Float32Array([.5, -.5, -.5, 1]),
+    new Float32Array([.5, .5, -.5, 1]),
+    new Float32Array([-.5, .5, -.5, 1]),
+    new Float32Array([-.5, -.5, .5, 1]),
+    new Float32Array([.5, -.5, .5, 1]),
+    new Float32Array([.5, .5, .5, 1]),
+    new Float32Array([-.5, .5, .5, 1]),
 ];
 
-const translation = mtx.translate(8, 12, 0);
-const scale = mtx.scale(2, 2, 1);
-const rotation = mtx.rotateZ(Math.PI / 6);
+const translation = mtx.translate(8, 8, 0);
+const scale = mtx.scale(8, 8, 8);
+const rotationZ = mtx.rotateZ(Math.PI / 6);
+const rotationY = mtx.rotateY(Math.PI / 6);
+const rotationX = mtx.rotateX(Math.PI / 6);
 
 // apply a transform matrix to the points
 let angle = 0;// Math.PI;
 let timeMs = 0, dtMs = 0, lastTimeMs = 0;
 let timeSinceLastUpdateMs = 0;
+let start = 0, end = 0;
 
 const update = (ms) => {
     // time vars
@@ -74,10 +80,13 @@ const update = (ms) => {
 
     // we cant update the favicon too fast
     timeSinceLastUpdateMs += dtMs;
-    if (timeSinceLastUpdateMs < 300) {
+    if (timeSinceLastUpdateMs < 100) {
         return requestAnimationFrame(update);
     }
     timeSinceLastUpdateMs = 0;
+
+    // start precision timer
+    start = performance.now();
 
     // clear the canvas
     ctx.fillStyle = "#fff";
@@ -85,24 +94,26 @@ const update = (ms) => {
     ctx.fill();
 
     // draw the time
-    ctx.fillStyle = "#f00";
-    ctx.fillRect(0, 0, 16, 7);
-    ctx.fillStyle = '#fff';
-    ctx.textRendering = "optimizeSpeed";
-    ctx.font = '10px sans-serif';
-    ctx.fillText((timeMs * .001).toFixed(1), 0, 7);
+    // ctx.fillStyle = "#f00";
+    // ctx.fillRect(0, 0, 16, 7);
+    // ctx.fillStyle = '#fff';
+    // ctx.textRendering = "optimizeSpeed";
+    // ctx.font = '10px sans-serif';
+    // ctx.fillText((timeMs * .001).toFixed(1), 0, 7);
 
 
     // update transformation matrix
-    // rotation
-    rotation[0] = Math.cos(.4 * time);
-    rotation[1] = -Math.sin(.4 * time);
-    rotation[4] = Math.sin(.4 * time);
-    rotation[5] = Math.cos(.4 * time);
+    angle = .2 * time;
+    // rotations
+    mtx.updateRotationZ(rotationZ, angle);
+    mtx.updateRotationY(rotationY, angle);
+    mtx.updateRotationX(rotationX, angle);
     const transformation = mtx.compose([
         translation,
         scale, 
-        rotation,
+        rotationX,
+        rotationY,
+        rotationZ,
     ]);
 
     // y position (sin wave)
@@ -116,25 +127,37 @@ const update = (ms) => {
     const transformed = shape.map(point => mtx.mat4xvec4(transformation, point));
     // console.table("shape", shape);
     // console.table("shape transformed", transformed);
+
+
     // draw the shape from the points in a loop
-    ctx.beginPath();
+
+    // ctx.beginPath();
+    ctx.fillStyle = '#00f';
 
     ctx.moveTo(transformed[0][0], transformed[0][1]);
-    for (let i = 1; i < transformed.length; i++) {
-        ctx.lineTo(transformed[i][0], transformed[i][1]);
+    for (let i = 0; i < transformed.length; i++) {
+        // draw dots istead of lines
+        ctx.fillRect(transformed[i][0]-1, transformed[i][1]-1, 2, 2);
+        // ctx.lineTo(transformed[i][0], transformed[i][1]);
     }
 
     // ctx.fillStyle = '#00f';
     // ctx.fill();
-    ctx.strokeStyle = '#00f';
-    ctx.lineWidth = 1;
-    ctx.stroke();
-    ctx.closePath();
+    //ctx.strokeStyle = '#00f';
+    //ctx.lineWidth = 1;
+    //ctx.stroke();
+    //ctx.closePath();
 
 
     // end of the draw loop
     // set the favicon
-    link.href = canvas.toDataURL();
+    link.href = '';
+    link.href = canvas.toDataURL('image/x-icon', 1);
+
+    // end precision timer
+    end = performance.now();
+    // console.log('update time:', end - start, 'ms');
+
     // request another frame
     requestAnimationFrame(update);
 }
