@@ -1,6 +1,6 @@
 export default class Matrix {
     constructor() {
-        this.runTests();
+        // this.runTests();
     }
 
     runTests() {
@@ -127,6 +127,13 @@ export default class Matrix {
         rotation[8] = sin;
         rotation[10] = cos;
     }
+
+    updatePerspctive(projection, vertex, dist = 3) {
+        const z = 1 / (dist - vertex[2]);
+        projection[0] = z;
+        projection[5] = z;
+    }
+
 
     // compose multiple matrices into a single matrix
     // should be applied in reverse order

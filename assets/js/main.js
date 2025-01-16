@@ -58,8 +58,9 @@ const shape = [
     new Float32Array([-.5, .5, .5, 1]),
 ];
 
+const projection = mtx.scale(1, 1, 1);
 const translation = mtx.translate(8, 8, 0);
-const scale = mtx.scale(8, 8, 8);
+const scale = mtx.scale(25, 25, 1);
 const rotationZ = mtx.rotateZ(Math.PI / 6);
 const rotationY = mtx.rotateY(Math.PI / 6);
 const rotationX = mtx.rotateX(Math.PI / 6);
@@ -108,14 +109,6 @@ const update = (ms) => {
     mtx.updateRotationZ(rotationZ, angle);
     mtx.updateRotationY(rotationY, angle);
     mtx.updateRotationX(rotationX, angle);
-    const transformation = mtx.compose([
-        translation,
-        scale, 
-        rotationX,
-        rotationY,
-        rotationZ,
-    ]);
-
     // y position (sin wave)
     // transformation[1][3] = 8 + Math.sin(.5 * time) * 4;
 
@@ -124,29 +117,61 @@ const update = (ms) => {
     // transformation[0][0] = transformation[1][1] = 1 + Math.sin(scale * 1.57) * .5; // between 0.5 and 1.5
 
     // apply the transformation matrix to the points
-    const transformed = shape.map(point => mtx.mat4xvec4(transformation, point));
+    const transformed = shape
+        .map(point => {
+            const rotations = mtx.compose([
+                rotationX,
+                rotationY,
+                // rotationZ,
+            ]);
+
+            // apply the rotations to the point
+            point = mtx.mat4xvec4(rotations, point)
+
+            // update projection matrix based on z value
+            mtx.updatePerspctive(projection, point, 3);
+
+            const transformation = mtx.compose([
+                translation,
+                scale,
+                projection
+            ]);
+
+            return mtx.mat4xvec4(transformation, point)
+        })
+
     // console.table("shape", shape);
     // console.table("shape transformed", transformed);
 
 
     // draw the shape from the points in a loop
 
-    // ctx.beginPath();
-    ctx.fillStyle = '#00f';
+    ctx.fillStyle = '#00fc';
+    ctx.strokeStyle = '#ffc0cbcc';
+    ctx.lineWidth = 1;
 
     ctx.moveTo(transformed[0][0], transformed[0][1]);
     for (let i = 0; i < transformed.length; i++) {
-        // draw dots istead of lines
-        ctx.fillRect(transformed[i][0]-1, transformed[i][1]-1, 2, 2);
-        // ctx.lineTo(transformed[i][0], transformed[i][1]);
+        // draw dots at the points
+        ctx.fillRect(transformed[i][0] - 1, transformed[i][1] - 1, 2, 2);
     }
 
-    // ctx.fillStyle = '#00f';
-    // ctx.fill();
-    //ctx.strokeStyle = '#00f';
-    //ctx.lineWidth = 1;
-    //ctx.stroke();
-    //ctx.closePath();
+    // bottom face
+    drawLine(transformed, 0, 1);
+    drawLine(transformed, 1, 2);
+    drawLine(transformed, 2, 3);
+    drawLine(transformed, 3, 0);
+    // top face
+    drawLine(transformed, 4, 5);
+    drawLine(transformed, 5, 6);
+    drawLine(transformed, 6, 7);
+    drawLine(transformed, 7, 4);
+    // sides
+    drawLine(transformed, 0, 4);
+    drawLine(transformed, 1, 5);
+    drawLine(transformed, 2, 6);
+    drawLine(transformed, 3, 7);
+
 
 
     // end of the draw loop
@@ -162,6 +187,13 @@ const update = (ms) => {
     requestAnimationFrame(update);
 }
 
-
-
 requestAnimationFrame(update);
+
+function drawLine(transformed, i, j) {
+    ctx.beginPath();
+    ctx.moveTo(transformed[i][0], transformed[i][1]);
+    ctx.lineTo(transformed[j][0], transformed[j][1]);
+    ctx.stroke();
+    ctx.closePath();
+}
+
