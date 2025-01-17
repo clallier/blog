@@ -1,6 +1,8 @@
 export default class Matrix {
     constructor() {
-        // this.runTests();
+        this.outputVec4 = new Array(4);
+        this.outputMat4 = new Array(16);
+        this.runTests();
     }
 
     runTests() {
@@ -147,24 +149,22 @@ export default class Matrix {
     }
 
     mat4xvec4(matrix, p) {
-        return [
-            matrix[0] * p[0] + matrix[1] * p[1] + matrix[2] * p[2] + matrix[3] * p[3],
-            matrix[4] * p[0] + matrix[5] * p[1] + matrix[6] * p[2] + matrix[7] * p[3],
-            matrix[8] * p[0] + matrix[9] * p[1] + matrix[10] * p[2] + matrix[11] * p[3],
-            matrix[12] * p[0] + matrix[13] * p[1] + matrix[14] * p[2] + matrix[15] * p[3]
-        ];
+        this.outputVec4[0] = matrix[0] * p[0] + matrix[1] * p[1] + matrix[2] * p[2] + matrix[3] * p[3];
+        this.outputVec4[1] = matrix[4] * p[0] + matrix[5] * p[1] + matrix[6] * p[2] + matrix[7] * p[3];
+        this.outputVec4[2] = matrix[8] * p[0] + matrix[9] * p[1] + matrix[10] * p[2] + matrix[11] * p[3];
+        this.outputVec4[3] = matrix[12] * p[0] + matrix[13] * p[1] + matrix[14] * p[2] + matrix[15] * p[3];
+        return this.outputVec4;
     }
 
     mat4xmat4(matrix1, matrix2) {
-        const result = new Array(16);
         for (let i = 0; i < 4; i++) {
             for (let j = 0; j < 4; j++) {
-                result[i * 4 + j] = 0;
+                this.outputMat4[i * 4 + j] = 0;
                 for (let k = 0; k < 4; k++) {
-                    result[i * 4 + j] += matrix1[i * 4 + k] * matrix2[k * 4 + j];
+                    this.outputMat4[i * 4 + j] += matrix1[i * 4 + k] * matrix2[k * 4 + j];
                 }
             }
         }
-        return result;
+        return this.outputMat4;
     }
 }
