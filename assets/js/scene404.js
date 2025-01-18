@@ -21,7 +21,7 @@ class Scene404 {
         this.transformation = this.mtx.identity()
         this.camTranslation = this.mtx.translate(this.width / 2, this.height / 2);
         this.translation = this.mtx.translate(0, 0, 1.2);
-        this.scale = this.mtx.scale(this.height, this.height);
+        this.scale = this.mtx.scale(this.height, this.height, 1);
         this.angle = Math.PI / 2
         this.rotY = this.mtx.rotateY(this.angle)
         this.rotZ = this.mtx.rotateZ(this.angle)
@@ -105,7 +105,7 @@ class Scene404 {
         let index = 0;
         for (let y = 0; y < height; y++) {
             for (let x = 0; x < width; x++) {
-                const z = (Math.sin(x * 0.1) + Math.sin(y * 0.1)) * .5 + .5;
+                const z = (Math.sin(x * 0.5) + Math.sin(y * 0.5)) * .5;
                 // normalize x and y to range [-1, 1]
                 vertices[index++] = x / width - .5;
                 vertices[index++] = y / height - .5;
