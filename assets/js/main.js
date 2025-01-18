@@ -184,10 +184,10 @@ const update = (ms) => {
     // console.log('update time:', end - start, 'ms');
 
     // request another frame
-    requestAnimationFrame(update);
+    // requestAnimationFrame(update);
 }
 
-// requestAnimationFrame(update);
+requestAnimationFrame(update);
 
 function drawLine(transformed, i, j) {
     ctx.beginPath();

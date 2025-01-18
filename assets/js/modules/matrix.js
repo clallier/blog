@@ -1,7 +1,5 @@
 export default class Matrix {
     constructor() {
-        this.outputVec4 = new Array(4);
-        this.outputMat4 = new Array(16);
         this.runTests();
     }
 
@@ -15,44 +13,62 @@ export default class Matrix {
 
         // This is a rotation matrix
         const rot = this.rotateZ(Math.PI / 6);
+        let out_mat = this.identity()
+        let compose_mat = this.identity()
+
 
         // This is a vector
-        const vec = new Float32Array([2, 2, 0, 1]);
+        const vec = new Float32Array([
+            2, 2, 1, 1,
+            3, 3, 1, 1,
+            4, 4, 1, 1
+        ]);
+        let out_vec = new Float32Array(vec)
 
-        let result = [];
         let start = 0, end = 0;
         // start precision timer
         start = performance.now();
 
         // apply position (mat2) then rotation (mat3)
         for (let i = 0; i < 1_000_000; i++) {
-            result = this.mat4xmat4(pos, rot);
+            out_mat = this.mat4xmat4(pos, rot);
         }
         end = performance.now();
-        console.table('matxmat result:', result);
+        console.table('matxmat result:', out_mat);
         console.log('matxmat time:', end - start, 'ms');
 
         start = performance.now();
         // apply translation (mat2) to the vector (vec)
         for (let i = 0; i < 1_000_000; i++) {
-            result = this.mat4xvec4(pos, vec);
+            out_vec = this.mat4xvec4(pos, vec);
         }
         end = performance.now();
-        console.table('matxvec result:', result);
+        console.table('matxvec result:', out_vec);
         console.log('matxvec time:', end - start, 'ms');
 
         start = performance.now();
         // apply rotation (mat3), then scaling (mat1), then translation (mat2)
         // then reverse transform (should return the identity matrix)
-        for (let i = 0; i < 10_000; i++) {
-            result = this.compose([rot, size, pos, this.translate(-8, -12, 0), this.scale(1 / 6, 1 / 6, 1), this.rotateZ(-Math.PI / 6)]);
+        for (let i = 0; i < 100_000; i++) {
+            compose_mat = this.compose([rot, size, pos, this.translate(-8, -12, 0), this.scale(1 / 6, 1 / 6, 1), this.rotateZ(-Math.PI / 6)]);
         }
         end = performance.now();
-        console.table('compose result:', result);
+        console.table('compose result:', compose_mat);
+        console.log("assert: compose matrix should be (0.866, -0.5, 0, 0.928, 0.5, 0.866, 0, 14.392, 0, 0, 1, 0, 0, 0, 0, 1) ")
+
         console.log('compose time:', end - start, 'ms');
     }
 
-    translate(x, y, z) {
+    identity() {
+        return new Float32Array([
+            1, 1, 1, 1,
+            1, 1, 1, 1,
+            1, 1, 1, 1,
+            1, 1, 1, 1
+        ]);
+    }
+
+    translate(x, y, z = 0) {
         return new Float32Array([
             1, 0, 0, x,
             0, 1, 0, y,
@@ -61,7 +77,13 @@ export default class Matrix {
         ]);
     }
 
-    scale(x, y, z) {
+    updateTranslate(translate, x, y, z = 0) {
+        translate[0] = x
+        translate[5] = y
+        translate[10] = z
+    }
+
+    scale(x, y, z = 1) {
         return new Float32Array([
             x, 0, 0, 0,
             0, y, 0, 0,
@@ -136,35 +158,47 @@ export default class Matrix {
         projection[5] = z;
     }
 
-
     // compose multiple matrices into a single matrix
     // should be applied in reverse order
     compose(matrices) {
-        if (matrices.length === 0) return null;
-        let result = matrices[0];
+        if (matrices.length <= 0) { return null };
+        let out_mat = new Float32Array(matrices[0])
         for (let i = 1; i < matrices.length; i++) {
-            result = this.mat4xmat4(result, matrices[i]);
+            out_mat = this.mat4xmat4(out_mat, matrices[i]);
         }
-        return result;
+        return out_mat;
     }
 
-    mat4xvec4(matrix, p) {
-        this.outputVec4[0] = matrix[0] * p[0] + matrix[1] * p[1] + matrix[2] * p[2] + matrix[3] * p[3];
-        this.outputVec4[1] = matrix[4] * p[0] + matrix[5] * p[1] + matrix[6] * p[2] + matrix[7] * p[3];
-        this.outputVec4[2] = matrix[8] * p[0] + matrix[9] * p[1] + matrix[10] * p[2] + matrix[11] * p[3];
-        this.outputVec4[3] = matrix[12] * p[0] + matrix[13] * p[1] + matrix[14] * p[2] + matrix[15] * p[3];
-        return this.outputVec4;
+    mat4xvec4(matrix, points) {
+        const out_pts = new Float32Array(points.length)
+        const numPoints = points.length / 4;
+        const m0 = matrix[0], m1 = matrix[1], m2 = matrix[2], m3 = matrix[3];
+        const m4 = matrix[4], m5 = matrix[5], m6 = matrix[6], m7 = matrix[7];
+        const m8 = matrix[8], m9 = matrix[9], m10 = matrix[10], m11 = matrix[11];
+        const m12 = matrix[12], m13 = matrix[13], m14 = matrix[14], m15 = matrix[15];
+
+        for (let i = 0; i < numPoints; i++) {
+            const index = i * 4;
+            const x = points[index], y = points[index + 1], z = points[index + 2], w = points[index + 3];
+            out_pts[index] = m0 * x + m1 * y + m2 * z + m3 * w;
+            out_pts[index + 1] = m4 * x + m5 * y + m6 * z + m7 * w;
+            out_pts[index + 2] = m8 * x + m9 * y + m10 * z + m11 * w;
+            out_pts[index + 3] = m12 * x + m13 * y + m14 * z + m15 * w;
+        }
+
+        return out_pts;
     }
 
     mat4xmat4(matrix1, matrix2) {
+        const out_mat = new Float32Array(16)
         for (let i = 0; i < 4; i++) {
             for (let j = 0; j < 4; j++) {
-                this.outputMat4[i * 4 + j] = 0;
+                out_mat[i * 4 + j] = 0
                 for (let k = 0; k < 4; k++) {
-                    this.outputMat4[i * 4 + j] += matrix1[i * 4 + k] * matrix2[k * 4 + j];
+                    out_mat[i * 4 + j] += matrix1[i * 4 + k] * matrix2[k * 4 + j];
                 }
             }
         }
-        return this.outputMat4;
+        return out_mat;
     }
 }
