@@ -152,10 +152,29 @@ export default class Matrix {
         rotation[10] = cos;
     }
 
+    // TODO to be removed, and use applySimplePerspective instead
     updatePerspctive(projection, vertex, dist = 3) {
         const z = 1 / (dist - vertex[2]);
         projection[0] = z;
         projection[5] = z;
+    }
+
+    // Apply perspective transformation
+    applySimplePerspective(points, camTranslation, dist = 3) {
+        const epsilon = 1e-6; // Small value to avoid division by zero
+        let p = 0
+        for (let i = 0; i < points.length; i += 4) {
+            const z = points[i + 2];
+
+            // Calculate the perspective factor with epsilon to avoid division by zero
+            p = 1 / (dist - z + epsilon);
+
+            // Apply the perspective factor to x and y
+            points[i] *= p;
+            points[i + 1] *= p;
+        }
+        points = this.mat4xvec4(camTranslation, points)
+        return points
     }
 
     // compose multiple matrices into a single matrix

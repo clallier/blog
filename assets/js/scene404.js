@@ -14,6 +14,7 @@ class Scene404 {
         this.end = 0;
         this.width = this.ctx.canvas.width;
         this.height = this.ctx.canvas.height;
+        this.mouseX = this.mouseY = 0;
 
         this.terrain = this.createTerrain(100, 100);
         this.transformedTerrain = new Float32Array(this.terrain)
@@ -22,9 +23,22 @@ class Scene404 {
         this.camTranslation = this.mtx.translate(this.width / 2, this.height / 2);
         this.translation = this.mtx.translate(0, 0, 1.2);
         this.scale = this.mtx.scale(this.height, this.height, 1);
-        this.angle = Math.PI / 2
-        this.rotY = this.mtx.rotateY(this.angle)
-        this.rotZ = this.mtx.rotateZ(this.angle)
+        this.angleY = Math.PI / 2
+        this.angleZ = Math.PI / 2
+        this.rotY = this.mtx.rotateY(this.angleY)
+        this.rotZ = this.mtx.rotateZ(this.angleZ)
+
+        this.registerListeners()
+    }
+
+    registerListeners() {
+        this.canvas.addEventListener('pointermove', (event) => {
+            this.mouseX = event.offsetX;
+            this.mouseY = event.offsetY;
+        });
+        this.canvas.addEventListener("pointerleave", () => {
+            this.mouseX = this.mouseY = 0;
+        });
     }
 
     update = (ms) => {
@@ -34,30 +48,41 @@ class Scene404 {
         this.lastTimeMs = this.timeMs;
         this.time = this.timeMs * 0.001;
 
-        // start precision timer
+        // start timer
         this.start = performance.now();
 
         this.ctx.clearRect(0, 0, this.width, this.height);
 
+        this.updateTransformations()
         this.updateTerrain()
         this.drawTerrain(this.transformedTerrain)
-        // this.terrain = this.transformedTerrain
 
-        // end precision timer
+        // end timer
         this.end = performance.now();
-        console.log('update time:', this.end - this.start, 'ms');
+        // console.log('update time:', this.end - this.start, 'ms');
         // console.log('this.angle:', this.angle);
 
         // request another frame
         requestAnimationFrame(this.update);
     }
 
-    updateTerrain() {
-        this.angle += 0.01
-        this.mtx.updateRotationY(this.rotY, this.angle)
-        this.mtx.updateRotationZ(this.rotZ, this.angle / 8)
-        // this.mtx.updateTranslate(this.translation, 0, 0, this.angle)
+    updateTransformations() {
+        if (this.mouseX && this.mouseY) {
+            this.angleY += 0.02 * ((this.mouseX / this.width) - 0.5);
+            this.angleZ += 0.02 * ((this.mouseY / this.height) - 0.5);
 
+        } else {
+            this.angleY += 0.01
+            this.angleZ += 0.01
+        }
+
+        this.mtx.updateRotationY(this.rotY, this.angleY)
+        this.mtx.updateRotationZ(this.rotZ, this.angleZ)
+        // this.mtx.updateTranslate(this.translation, 0, 0, this.angle)
+    }
+
+
+    updateTerrain() {
         this.transformation = this.mtx.compose([
             this.translation,
             this.scale,
@@ -65,21 +90,7 @@ class Scene404 {
             this.rotY,
         ])
         this.transformedTerrain = this.mtx.mat4xvec4(this.transformation, this.terrain);
-
-        // Apply perspective transformation
-        const dist = 3.0; // You can adjust this value as needed
-        const epsilon = 1e-6; // Small value to avoid division by zero
-        for (let i = 0; i < this.transformedTerrain.length; i += 4) {
-            const z = this.transformedTerrain[i + 2];
-
-            // Calculate the perspective factor with epsilon to avoid division by zero
-            const p = 1 / (dist - z + epsilon);
-
-            // Apply the perspective factor to x and y
-            this.transformedTerrain[i] *= p;
-            this.transformedTerrain[i + 1] *= p;
-        }
-        this.transformedTerrain = this.mtx.mat4xvec4(this.camTranslation, this.transformedTerrain)
+        this.transformedTerrain = this.mtx.applySimplePerspective(this.transformedTerrain, this.camTranslation)
     }
 
     drawTerrain(terrain) {
@@ -105,7 +116,7 @@ class Scene404 {
         let index = 0;
         for (let y = 0; y < height; y++) {
             for (let x = 0; x < width; x++) {
-                const z = (Math.sin(x * 0.5) + Math.sin(y * 0.5)) * .5;
+                const z = 0.5 * ((Math.sin(x * 0.5) + Math.sin(y * 0.5)) * .5);
                 // normalize x and y to range [-1, 1]
                 vertices[index++] = x / width - .5;
                 vertices[index++] = y / height - .5;
@@ -113,6 +124,7 @@ class Scene404 {
                 vertices[index++] = 1;
             }
         }
+
 
         return vertices;
     }
