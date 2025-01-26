@@ -9,9 +9,62 @@
     {%- seo -%}
 
     <!-- css -->
-    <link rel="stylesheet" href="{{ '/assets/main.css' | relative_url }}">
-
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
     <style>
+        /* List of posts on front page */
+        .post-list {
+            margin-left: 0;
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .post-item {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: background-color 0.05s;
+
+            &:hover {
+                background-color: rgba(0, 0, 0, 0.1);
+            }
+        }
+
+        a.post-card {
+            text-decoration: none;
+        }
+
+        .post-card {
+            display: flex;
+            align-items: center;
+            padding: 1em;
+            min-height: 100px;
+        }
+
+        .post-img {
+            width: 100%;
+            max-width: 100px;
+            height: 64px;
+            margin-right: 10px;
+            object-fit: contain;
+        }
+
+        @media (max-width: 700px) {
+            .post-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .post-meta {
+            font-size: 0.8rem;
+        }
+
+        .post-group {
+            font-weight: bold;
+        }
+
+
         /* Centered images and captions  */
         .post-content img {
             display: block;
@@ -63,6 +116,24 @@
             text-align: justify;
         }
     </style>
+
+    <script async src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?version=4.8.0&features=es6"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script async id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@4.0.0-beta.3/tex-mml-chtml.js"></script>
+    <script async src="{{ '/assets/js/modules/matrix.js' | relative_url }}" type="module"></script>
+    <script async src="{{ '/assets/js/main.js' | relative_url }}" type="module"></script>
+
+
     {%- feed_meta -%}
     {%- if jekyll.environment == 'production' and site.google_analytics -%}
     {%- include google-analytics.html -%}

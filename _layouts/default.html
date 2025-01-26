@@ -16,21 +16,4 @@
     {%- include footer.html -%}
 
 </body>
-
-<script async src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?version=4.8.0&features=es6"></script>
-<script>
-    window.MathJax = {
-        tex: {
-            inlineMath: [['$', '$'], ['\\(', '\\)']],
-            displayMath: [['$$', '$$'], ['\\[', '\\]']],
-        },
-        svg: {
-            fontCache: 'global'
-        }
-    };
-</script>
-<script async id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@4.0.0-beta.3/tex-mml-chtml.js"></script>
-<script async src="{{ '/assets/js/modules/matrix.js' | relative_url }}" type="module"></script>
-<script async src="{{ '/assets/js/main.js' | relative_url }}" type="module"></script>
-
 </html>
