@@ -49,7 +49,7 @@ This integration streamlines the process of managing various game states and int
 Reflecting on the use of ECS, I find APE to be superior to ECSY, with a clearer API and better performance.
 
 That's all for the quick overview of the technical side of my project. 
-I've enjoyed learning and using technologies like Three.js for graphics, developing a particle system, and delving into coroutines and ECS for game logic management.
+I've enjoyed learning and using technologies like Three.js for graphics, developing a particle system, and go into coroutines and ECS for game logic management.
 
 One last feature to mention is the mini-console.
 It's a handy tool that displays `console.log` messages directly on the game screen.

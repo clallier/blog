@@ -110,7 +110,7 @@ In each snippet, I've included comments to guide you through the process.
 As you can see it's quite straitforward, the tricky part is really the canvas part.
 If you want to modify a texture, for instance with bullets impacts, dust, or other effects, you have to write the texture first on a canvas then alter it using the canvas API.
 
-Next times, we'll delve into how we set up the physics with Cannon.js and the entity logic with Ecsy for these elements.
+Next times, we'll dive into how we set up the physics with Cannon.js and the entity logic with Ecsy for these elements.
 
 So see you [in the next article]({{ site.baseurl }}{% post_url 2020-05-06-metkis-game_part_2 %}) to see how to integrate our 3D physics engine into the game!
 
