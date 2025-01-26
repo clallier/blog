@@ -38,29 +38,32 @@ class Scene404 {
 
     registerListeners() {
         this.canvas.addEventListener('pointermove', (event) => {
-            this.updateCoordinates(event.offsetX, event.offsetY);
+            this.updateCoordinates(event.clientX, event.clientY, 'm');
         }, { passive: true });
+        this.canvas.addEventListener('touchstart', (event) => {
+            event.preventDefault();
+            const touch = event.touches[0];
+            this.updateCoordinates(touch.clientX, touch.clientY, 't');
+        }, { passive: false });
         this.canvas.addEventListener('touchmove', (event) => {
             event.preventDefault();
             const touch = event.touches[0];
-            const rect = this.canvas.getBoundingClientRect();
-            this.updateCoordinates(
-                touch.clientX - rect.left,
-                touch.clientY - rect.top
-            );
+            this.updateCoordinates(touch.clientX, touch.clientY, 'tm');
         }, { passive: false });
 
         this.canvas.addEventListener("pointerleave", () => {
             this.mouseX = this.mouseY = 0;
         }, { passive: true });
         this.canvas.addEventListener('touchend', () => {
-            this.updateCoordinates(0, 0);
+            this.mouseX = this.mouseY = 0;
         }, { passive: true });
     }
 
-    updateCoordinates(x, y) {
-        this.mouseX = x;
-        this.mouseY = y;
+    updateCoordinates(x, y, m) {
+        console.log(m, x, y)
+        const rect = this.canvas.getBoundingClientRect();
+        this.mouseX = (x - rect.left) / rect.width;
+        this.mouseY = (y - rect.top) / rect.height;
     }
 
     update = (ms) => {
@@ -90,8 +93,8 @@ class Scene404 {
 
     updateTransformations() {
         if (this.mouseX && this.mouseY) {
-            this.angleY += 0.02 * ((this.mouseX / this.width) - 0.5);
-            this.angleZ += 0.02 * ((this.mouseY / this.height) - 0.5);
+            this.angleY += 0.02 * ((this.mouseX) - 0.5);
+            this.angleZ += 0.02 * ((this.mouseY) - 0.5);
 
         } else {
             this.angleY += 0.01
