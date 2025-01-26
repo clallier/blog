@@ -4,7 +4,7 @@ class Scene404 {
     constructor() {
         this.canvas = document.getElementById('terrainCanvas');
         this.ctx = this.canvas.getContext('2d');
-        this.ctx.strokeStyle = "#333c"
+        this.ctx.strokeStyle = this.setColorScheme();
         this.mtx = new Matrix();
         this.timeMs = 0;
         this.dtMs = 0;
@@ -31,14 +31,36 @@ class Scene404 {
         this.registerListeners()
     }
 
+    setColorScheme() {
+        const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        this.ctx.strokeStyle = isDarkMode ? "#fffc" : "#333c";
+    }
+
     registerListeners() {
         this.canvas.addEventListener('pointermove', (event) => {
-            this.mouseX = event.offsetX;
-            this.mouseY = event.offsetY;
-        });
+            this.updateCoordinates(event.offsetX, event.offsetY);
+        }, { passive: true });
+        this.canvas.addEventListener('touchmove', (event) => {
+            event.preventDefault();
+            const touch = event.touches[0];
+            const rect = this.canvas.getBoundingClientRect();
+            this.updateCoordinates(
+                touch.clientX - rect.left,
+                touch.clientY - rect.top
+            );
+        }, { passive: false });
+
         this.canvas.addEventListener("pointerleave", () => {
             this.mouseX = this.mouseY = 0;
-        });
+        }, { passive: true });
+        this.canvas.addEventListener('touchend', () => {
+            this.updateCoordinates(0, 0);
+        }, { passive: true });
+    }
+
+    updateCoordinates(x, y) {
+        this.mouseX = x;
+        this.mouseY = y;
     }
 
     update = (ms) => {
