@@ -21,7 +21,7 @@ class Scene404 {
 
         this.transformation = this.mtx.identity()
         this.camTranslation = this.mtx.translate(this.width / 2, this.height / 2);
-        this.translation = this.mtx.translate(0, 0, 1.2);
+        this.translation = this.mtx.translate(0, -.5, 1.2);
         this.scale = this.mtx.scale(this.height, this.height, 1);
         this.angleX = 0
         this.angleY = 0
@@ -39,30 +39,31 @@ class Scene404 {
     }
 
     registerListeners() {
+        // mouse events
         this.canvas.addEventListener('pointermove', (event) => {
-            this.updateCoordinates(event.clientX, event.clientY, 'm');
+            this.updateCoordinates(event.clientX, event.clientY);
         }, { passive: true });
+        this.canvas.addEventListener("pointerleave", () => {
+            this.mouseX = this.mouseY = 0;
+        }, { passive: true });
+
+        // touch events
         this.canvas.addEventListener('touchstart', (event) => {
             event.preventDefault();
             const touch = event.touches[0];
-            this.updateCoordinates(touch.clientX, touch.clientY, 't');
+            this.updateCoordinates(touch.clientX, touch.clientY);
         }, { passive: false });
         this.canvas.addEventListener('touchmove', (event) => {
             event.preventDefault();
             const touch = event.touches[0];
-            this.updateCoordinates(touch.clientX, touch.clientY, 'tm');
+            this.updateCoordinates(touch.clientX, touch.clientY);
         }, { passive: false });
-
-        this.canvas.addEventListener("pointerleave", () => {
-            this.mouseX = this.mouseY = 0;
-        }, { passive: true });
         this.canvas.addEventListener('touchend', () => {
             this.mouseX = this.mouseY = 0;
         }, { passive: true });
     }
 
     updateCoordinates(x, y, m) {
-        console.log(m, x, y)
         const rect = this.canvas.getBoundingClientRect();
         this.mouseX = (x - rect.left) / rect.width;
         this.mouseY = (y - rect.top) / rect.height;
@@ -108,15 +109,15 @@ class Scene404 {
         this.mtx.updateRotationX(this.rotX, this.angleX)
         this.mtx.updateRotationY(this.rotY, this.angleY)
         this.mtx.updateRotationZ(this.rotZ, this.angleZ)
-        // this.mtx.updateTranslate(this.translation, 0, 0, this.angle)
+        this.mtx.updateTranslateAdd(this.translation, 0, Math.cos(this.time) * .2, 0)
     }
 
 
     updateTerrain() {
-        const t = this.time + 66;
+        const t = this.time + 35;
         const a = 0.2 + Math.sin(t) * 0.3;
         let b = 0
-        console.log(this.terrain[0])
+        // console.log(this.terrain[0])
         for (let i = 0; i < this.terrain.length; i += 4) {
             const x = this.terrain[i + 0]
             const y = this.terrain[i + 1]
