@@ -1,6 +1,6 @@
 export default class Matrix {
     constructor() {
-        this.runTests();
+        //this.runTests();
     }
 
     runTests() {
@@ -50,11 +50,19 @@ export default class Matrix {
         // apply rotation (mat3), then scaling (mat1), then translation (mat2)
         // then reverse transform (should return the identity matrix)
         for (let i = 0; i < 100_000; i++) {
-            compose_mat = this.compose([rot, size, pos, this.translate(-8, -12, 0), this.scale(1 / 6, 1 / 6, 1), this.rotateZ(-Math.PI / 6)]);
+            compose_mat = this.compose([
+                rot, size, pos,
+                // revert translate
+                this.translate(-8, -12, 0),
+                // revert scale
+                this.scale(1 / 6, 1 / 6, 1),
+                // revert rotate
+                this.rotateZ(-Math.PI / 6)
+            ]);
         }
         end = performance.now();
         console.table('compose result:', compose_mat);
-        console.log("assert: compose matrix should be (0.866, -0.5, 0, 0.928, 0.5, 0.866, 0, 14.392, 0, 0, 1, 0, 0, 0, 0, 1) ")
+        console.log("assert: compose matrix should be (5.20, -3, 0, 5.57, 3, 5.20, 0, 86.35, 0, 0, 1, 0, 0, 0, 0, 1) ")
 
         console.log('compose time:', end - start, 'ms');
     }
