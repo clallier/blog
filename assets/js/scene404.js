@@ -23,8 +23,10 @@ class Scene404 {
         this.camTranslation = this.mtx.translate(this.width / 2, this.height / 2);
         this.translation = this.mtx.translate(0, 0, 1.2);
         this.scale = this.mtx.scale(this.height, this.height, 1);
-        this.angleY = Math.PI / 2
-        this.angleZ = Math.PI / 2
+        this.angleX = 0
+        this.angleY = 0
+        this.angleZ = 0
+        this.rotX = this.mtx.rotateX(this.angleX)
         this.rotY = this.mtx.rotateY(this.angleY)
         this.rotZ = this.mtx.rotateZ(this.angleZ)
 
@@ -94,13 +96,16 @@ class Scene404 {
     updateTransformations() {
         if (this.mouseX && this.mouseY) {
             this.angleY += 0.02 * ((this.mouseX) - 0.5);
-            this.angleZ += 0.02 * ((this.mouseY) - 0.5);
-
+            this.angleY %= Math.PI * 2
+            this.angleX += 0.02 * ((this.mouseY) - 0.5);
+            this.angleX %= Math.PI * 2
         } else {
-            this.angleY += 0.01
-            this.angleZ += 0.01
+            this.angleX *= 0.97
+            this.angleY *= 0.97
+            this.angleZ *= 0.97
         }
 
+        this.mtx.updateRotationX(this.rotX, this.angleX)
         this.mtx.updateRotationY(this.rotY, this.angleY)
         this.mtx.updateRotationZ(this.rotZ, this.angleZ)
         // this.mtx.updateTranslate(this.translation, 0, 0, this.angle)
@@ -108,11 +113,22 @@ class Scene404 {
 
 
     updateTerrain() {
+        const t = this.time + 66;
+        const a = 0.2 + Math.sin(t) * 0.3;
+        let b = 0
+        console.log(this.terrain[0])
+        for (let i = 0; i < this.terrain.length; i += 4) {
+            const x = this.terrain[i + 0]
+            const y = this.terrain[i + 1]
+            this.terrain[i + 2] = 0.25 * (Math.sin(x * t) + Math.sin(y * t));
+        }
+
         this.transformation = this.mtx.compose([
             this.translation,
             this.scale,
             this.rotZ,
             this.rotY,
+            this.rotX,
         ])
         this.transformedTerrain = this.mtx.mat4xvec4(this.transformation, this.terrain);
         this.transformedTerrain = this.mtx.applySimplePerspective(this.transformedTerrain, this.camTranslation)
@@ -141,7 +157,7 @@ class Scene404 {
         let index = 0;
         for (let y = 0; y < height; y++) {
             for (let x = 0; x < width; x++) {
-                const z = 0.5 * ((Math.sin(x * 0.5) + Math.sin(y * 0.5)) * .5);
+                const z = 0.25 * (Math.sin(x * 0.5) + Math.sin(y * 0.5));
                 // normalize x and y to range [-1, 1]
                 vertices[index++] = x / width - .5;
                 vertices[index++] = y / height - .5;
