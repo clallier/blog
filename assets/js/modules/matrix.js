@@ -78,9 +78,15 @@ export default class Matrix {
     }
 
     updateTranslate(translate, x, y, z = 0) {
-        translate[0] = x
-        translate[5] = y
-        translate[10] = z
+        translate[3] = x
+        translate[7] = y
+        translate[11] = z
+    }
+
+    updateTranslateAdd(translate, x = 0, y = 0, z = 0) {
+        if (x != 0) translate[3] += x
+        if (y != 0) translate[7] += y
+        if (z != 0) translate[11] += z
     }
 
     scale(x, y, z = 1) {
