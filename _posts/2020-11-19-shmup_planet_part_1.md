@@ -9,10 +9,10 @@ image: "/assets/img/shmup_planet_player.png"
 
 This article is part of a series, here are the other articles:
 
-- Part 0: [Introduction]({{ site.baseurl }}{% post_url 2020-11-14-shmup_planet_part_0 %})
-- Part 1: [Shaders: displacement map and Bloom]({{ site.baseurl }}{% post_url 2020-11-19-shmup_planet_part_1 %}) ⬅️
-- Part 2: [Making a Small Library for particles animation]({{ site.baseurl }}{% post_url 2020-11-27-shmup_planet_part_2 %})
-- Part 3: [Making Things Easier with Coroutines ]({{ site.baseurl }}{% post_url 2020-12-05-shmup_planet_part_3 %})
+- Part 0: [Introduction]({% post_url 2020-11-14-shmup_planet_part_0 %})
+- Part 1: [Shaders: displacement map and Bloom]({% post_url 2020-11-19-shmup_planet_part_1 %}) ⬅️
+- Part 2: [Making a Small Library for particles animation]({% post_url 2020-11-27-shmup_planet_part_2 %})
+- Part 3: [Making Things Easier with Coroutines ]({% post_url 2020-12-05-shmup_planet_part_3 %})
 
 ---
 
@@ -108,7 +108,7 @@ The main goal was to make the sphere look good without being too complicated.
 I aimed for it to be visually appealing yet simple.
 
 That's all for this article!
-See you soon for the [next one]({{ site.baseurl }}{% post_url 2020-11-27-shmup_planet_part_2 %}); where I'll talk about particles and the small library I created to control them.
+See you soon for the [next one]({% post_url 2020-11-27-shmup_planet_part_2 %}); where I'll talk about particles and the small library I created to control them.
 
 [^2]: Implementation is from Stefan Gustavson: [github.com/stegu/webgl-noise](https://github.com/stegu/webgl-noise)
 

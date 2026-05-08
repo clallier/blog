@@ -8,10 +8,10 @@ image: "/assets/img/metkis_player.png"
 ---
 
 This article is about texture drawing, it is a part of a series, composed of: 
-- Part 0: [Introduction]({{ site.baseurl }}{% post_url 2020-04-19-metkis-game_part_0 %})
+- Part 0: [Introduction]({% post_url 2020-04-19-metkis-game_part_0 %})
 - Part 1: Dynamic texture drawing ⬅️ You are here.
-- Part 2: [3D physics for the mobile web]({{ site.baseurl }}{% post_url 2020-05-06-metkis-game_part_2 %})
-- Part 3: [Gluing all together with ECS (Entity-Component-System)]({{ site.baseurl }}{% post_url 2020-05-15-metkis-game_part_3 %})
+- Part 2: [3D physics for the mobile web]({% post_url 2020-05-06-metkis-game_part_2 %})
+- Part 3: [Gluing all together with ECS (Entity-Component-System)]({% post_url 2020-05-15-metkis-game_part_3 %})
 
 ---
 
@@ -112,5 +112,5 @@ If you want to modify a texture, for instance with bullets impacts, dust, or oth
 
 Next times, we'll dive into how we set up the physics with Cannon.js and the entity logic with Ecsy for these elements.
 
-So see you [in the next article]({{ site.baseurl }}{% post_url 2020-05-06-metkis-game_part_2 %}) to see how to integrate our 3D physics engine into the game!
+So see you [in the next article]({% post_url 2020-05-06-metkis-game_part_2 %}) to see how to integrate our 3D physics engine into the game!
 

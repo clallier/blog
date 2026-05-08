@@ -45,9 +45,9 @@ To develop 'Metkis', I used the following technologies:
 
 Everything is pretty standard for a 3D game but here are some specificities, that we'll explore in the next articles: 
 
-- Part 1: [Dynamic texture drawing]({{ site.baseurl }}{% post_url 2020-04-28-metkis-game_part_1 %})
-- Part 2: [3D physics for the mobile web]({{ site.baseurl }}{% post_url 2020-05-06-metkis-game_part_2 %})
-- Part 3: [Gluing all together with ECS (Entity-Component-System)]({{ site.baseurl }}{% post_url 2020-05-15-metkis-game_part_3 %})
+- Part 1: [Dynamic texture drawing]({% post_url 2020-04-28-metkis-game_part_1 %})
+- Part 2: [3D physics for the mobile web]({% post_url 2020-05-06-metkis-game_part_2 %})
+- Part 3: [Gluing all together with ECS (Entity-Component-System)]({% post_url 2020-05-15-metkis-game_part_3 %})
 
 
 ## References: 

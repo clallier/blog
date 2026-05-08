@@ -8,10 +8,10 @@ image: "/assets/img/metkis_player.png"
 ---
 
 This article is a part of a series, composed of: 
-- Part 0: [Introduction]({{ site.baseurl }}{% post_url 2020-04-19-metkis-game_part_0 %})
-- Part 1: [Dynamic texture drawing]({{ site.baseurl }}{% post_url 2020-04-28-metkis-game_part_1 %})
+- Part 0: [Introduction]({% post_url 2020-04-19-metkis-game_part_0 %})
+- Part 1: [Dynamic texture drawing]({% post_url 2020-04-28-metkis-game_part_1 %})
 - Part 2: 3D physics for the mobile web ⬅️ You are here.
-- Part 3: [Gluing all together with ECS (Entity-Component-System)]({{ site.baseurl }}{% post_url 2020-05-15-metkis-game_part_3 %})
+- Part 3: [Gluing all together with ECS (Entity-Component-System)]({% post_url 2020-05-15-metkis-game_part_3 %})
 
 ---
 
@@ -170,7 +170,7 @@ This process guarantees that the physical interactions are reflected in the visu
 That's it for now. Congratulations on making it through this detailed technical article!
 
 Next time, we'll explore how to make everything work smoothly together using our ECS. 
-[See you here!]({{ site.baseurl }}{% post_url 2020-05-15-metkis-game_part_3 %})
+[See you here!]({% post_url 2020-05-15-metkis-game_part_3 %})
 
 Stay tuned for more in the series!
 

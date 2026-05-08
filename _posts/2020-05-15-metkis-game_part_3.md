@@ -8,9 +8,9 @@ image: "/assets/img/metkis_player.png"
 ---
 
 This article is a part of a series, composed of: 
-- Part 0: [Introduction]({{ site.baseurl }}{% post_url 2020-04-19-metkis-game_part_0 %})
-- Part 1: [Dynamic texture drawing]({{ site.baseurl }}{% post_url 2020-04-28-metkis-game_part_1 %})
-- Part 2: [3D physics for the mobile web]({{ site.baseurl }}{% post_url 2020-05-06-metkis-game_part_2 %})
+- Part 0: [Introduction]({% post_url 2020-04-19-metkis-game_part_0 %})
+- Part 1: [Dynamic texture drawing]({% post_url 2020-04-28-metkis-game_part_1 %})
+- Part 2: [3D physics for the mobile web]({% post_url 2020-05-06-metkis-game_part_2 %})
 - Part 3: Gluing all together with ECS (Entity-Component-System) ⬅️ You are here.
 
 <!-- https://giphy.com/embed/NT7BKluIkiw7kxnle5 -->

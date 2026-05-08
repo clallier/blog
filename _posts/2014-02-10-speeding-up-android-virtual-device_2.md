@@ -12,7 +12,7 @@ This mini series talks about two tools to improve the speed of the Android Virtu
 The first one is the now well-known [Genymotion](http://www.genymotion.com/), and the second is the [Intel HAXM](http://software.intel.com/en-us/android/articles/intel-hardware-accelerated-execution-manager).
 
 You can find the first article here:
-- **Part 1: Genymotion**: the [previous article]({{ site.baseurl }}{% post_url 2014-02-03-speeding-up-android-virtual-device_1 %}).
+- **Part 1: Genymotion**: the [previous article]({% post_url 2014-02-03-speeding-up-android-virtual-device_1 %}).
 - **Part 2: Intel HAXM**: this article.
 
 **_NOTE:_** In this tutorial, we'll use the official Android ADT Studio that you can find [here](http://developer.android.com/sdk/index.html).

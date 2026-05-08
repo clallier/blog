@@ -10,10 +10,10 @@ image: "/assets/img/shmup_planet_player.png"
 
 This article is part of a series, here are all the other articles:
 
-- Part 0: [Introduction]({{ site.baseurl }}{% post_url 2020-11-14-shmup_planet_part_0 %})
-- Part 1: [Shaders: displacement map and Bloom]({{ site.baseurl }}{% post_url 2020-11-19-shmup_planet_part_1 %})
-- Part 2: [Making a Small Library for particles animation]({{ site.baseurl }}{% post_url 2020-11-27-shmup_planet_part_2 %}) ⬅️
-- Part 3: [Making Things Easier with Coroutines]({{ site.baseurl }}{% post_url 2020-12-05-shmup_planet_part_3 %})
+- Part 0: [Introduction]({% post_url 2020-11-14-shmup_planet_part_0 %})
+- Part 1: [Shaders: displacement map and Bloom]({% post_url 2020-11-19-shmup_planet_part_1 %})
+- Part 2: [Making a Small Library for particles animation]({% post_url 2020-11-27-shmup_planet_part_2 %}) ⬅️
+- Part 3: [Making Things Easier with Coroutines]({% post_url 2020-12-05-shmup_planet_part_3 %})
 
 ---
 
@@ -87,7 +87,7 @@ This approach allowed me to create dynamic, visually appealing particle effects 
 
 ![Particles example]({{ site.url }}{{ site.baseurl }}/assets/img/shmup_planet_particles.png)
 
-In the [next article]({{ site.baseurl }}{% post_url 2020-12-05-shmup_planet_part_3 %}) I'll talk about coroutines, and how to use them in a game. 
+In the [next article]({% post_url 2020-12-05-shmup_planet_part_3 %}) I'll talk about coroutines, and how to use them in a game. 
 Thanks for reading and see you! 
 
 [^4]: We use [Ape ECS](https://github.com/fritzy/ape-ecs)

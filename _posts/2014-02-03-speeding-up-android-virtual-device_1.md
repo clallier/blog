@@ -23,7 +23,7 @@ Provoking a phenomenon called, the "diapositive mode".
 
 This mini series will talk about two tools to improve the speed of the Android Virtual Devices (AVD):
 - **Part 1: Genymotion**: this is the current article
-- **Part 2: Intel HAXM**: the next article [here]({{ site.baseurl }}{% post_url 2014-02-10-speeding-up-android-virtual-device_2 %}).
+- **Part 2: Intel HAXM**: the next article [here]({% post_url 2014-02-10-speeding-up-android-virtual-device_2 %}).
 
 ![AVD]({{ site.url }}{{ site.baseurl }}/assets/img/AVD.png)
 
@@ -102,7 +102,7 @@ Now you are nearly ready. Select your Android project and run it. It should be d
 To finish with Genymotion you can find all these instructions and more on their [documentation](https://cloud.genymotion.com/page/doc/) page.
 
 That's all for today. 
-Expecting you enjoyed this tutorials, in the [next article]({{ site.baseurl }}{% post_url 2014-02-10-speeding-up-android-virtual-device_2 %}) we'll se how Intel HAXM compares. 
+Expecting you enjoyed this tutorials, in the [next article]({% post_url 2014-02-10-speeding-up-android-virtual-device_2 %}) we'll se how Intel HAXM compares. 
 Feel free to reach me to give your opinion on this piece of advice.
 
 See you.
