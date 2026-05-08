@@ -32,9 +32,12 @@ Creative and technical exploration. This repository contains the source code for
 
 ## Resume Sync (Typst Pipeline)
 Keep `resume.md` and Typst files in lockstep:
-1.  Update source in Typst.
-2.  Export English/French PDFs (`./scripts/export_cv.sh`).
-3.  Place PDFs in `assets/pdf/resume_corentin_lallier_en.pdf` (and `_fr.pdf`).
+1.  Update source in `assets/cv/modules_*`.
+2.  Export English/French PDFs:
+    ```bash
+    cd assets/cv && ./build_cv.sh
+    ```
+3.  The script automatically places PDFs in `assets/pdf/`.
 4.  Update `resume.md` text content with latest Typst changes.
 
 ---
