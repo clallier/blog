@@ -4,7 +4,7 @@
 
 #cv-skill(
   type: [Projets Personnels],
-  info: [#link("https://clallier.github.io/blog/")[Blog Tech] : Insights sur la Data Science, l'IA et les Shaders. Implémentation de "The Nature of Code". #link("https://github.com/clallier/")[GitHub] | #link("https://scholar.google.com/citations?user=Y4a3nFAAAAAJ")[Google Scholar].]
+  info: [#link("https://clallier.github.io/blog/")[Blog Tech] : Insights sur la Data Science, l'IA et les Shaders. Implémentation de "The Nature of Code". #link("https://github.com/clallier/")[GitHub] | #link("https://scholar.google.com/citations?user=73Tg-wkAAAAJ")[Google Scholar].]
 )
 
 #cv-skill(

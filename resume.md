@@ -93,6 +93,6 @@ Passionate about the convergence of neural networks, industrial research, and da
 
 ## Skills & Interests
 
-- **Personal Projects:** [Personal Tech Blog](https://clallier.github.io/blog/) (Data Science, AI, Shaders). [GitHub](https://github.com/clallier/) \| [Google Scholar](https://scholar.google.com/citations?user=Y4a3nFAAAAAJ).
+- **Personal Projects:** [Personal Tech Blog](https://clallier.github.io/blog/) (Data Science, AI, Shaders). [GitHub](https://github.com/clallier/) \| [Google Scholar](https://scholar.google.com/citations?user=73Tg-wkAAAAJ).
 - **Languages:** French (Native), English (Full Professional).
 - **Interests:** Sports (Crossfit, Running 10k & Half-marathon, Surfing, Hiking), Video games.
