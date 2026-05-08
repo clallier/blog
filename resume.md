@@ -4,104 +4,95 @@ title: Resume
 permalink: /resume/
 ---
 
-[Download PDF Version](/assets/resume.pdf)
+[Download PDF Version: **English**](/assets/pdf/Corentin_Lallier_CV_EN.pdf) | [**French**](/assets/pdf/Corentin_Lallier_CV_FR.pdf)
 
-## Professional Summary
-Ph.D. in AI with expertise in data science and data engineering. Passionate about neural networks, industrial research, and innovative solutions. Skilled in developing LLM applications, graph neural networks, and cloud-based data pipelines. Currently working as a Senior Data Scientist at Mindflow, focusing on generative AI and task orchestration in cybersecurity.
+## Profile
 
-## Experience
-### Data Scientist | Mindflow
-*April 2023 - Present*
-- Creating no-code automation solutions using generative AI for cybersecurity
-- Implementing LLM and Langchain for operations orchestration
-- Leading team recruitment and delivering internal AI presentations
+Passionate about the convergence of neural networks, industrial research, and data engineering, I enjoy designing innovative and high-performance solutions. Currently Senior Data Scientist at Mindflow specializing in agentic systems, spanning academic research and production engineering. My background combines a PhD in Graph Machine Learning with expertise in cloud data engineering (Kafka, Spark, Scala). I value collaborative work, driven by curiosity and the resolution of complex industrial challenges.
 
-### Data Scientist, PhD Student | Lectra
-*October 2019 - April 2023*
-- Developed graph neural networks for material consumption optimization
-- Enhanced sections planning algorithm efficiency using GPU-accelerated computing
-- Published multiple research papers on graph neural networks and nesting efficiency
+## Professional Experience
 
-### Data & Cloud Engineer | Lectra
-*September 2017 - August 2020*
-- Built data processing pipelines for IoT devices and industrial systems
-- Implemented solutions using Apache Kafka, Kafka Streams, and Apache Spark
-- Deployed applications using Docker and Kubernetes in Azure cloud
+### Senior Data Scientist | [Mindflow](https://mindflow.io/)
+*Apr 2023 - Present | Paris / Remote*
 
-### Freelance Software Engineer
-*May 2013 - August 2021*
-- Delivered data science solutions using Python, AWS SageMaker, and Google BigQuery
-- Developed web and mobile applications using React, Canvas API, and WebRTC
-- Created video games using Android SDK, Unity3D, and LibGDX
-- Won Android Codefest in Berlin 2013
+- **Agentic Orchestration:** Architected a custom agentic layer for a no-code cybersecurity platform, implementing long-term memory, context-aware reasoning, LLM Observability, and hallucination mitigation.
+- **Adaptive Orchestration Engine:** Engineered an adaptive engine utilizing RAG and tool calls for reliable execution across multiple providers (OpenAI, Bedrock, Gemini, Mistral, LiteLLM).
+- **Mentorship:** Mentored a talented AI team and shared expertise company-wide on agentic systems, RAG, and search optimization.
+- **Drift Monitoring:** Developed an LLM drift monitoring framework (multi-route scenarios, parallel tool usage). Optimized internal search performance via a robust evaluation suite (MRR, F1, and NDCG).
+- **Business Impact:** Scaled from €0 to €1.5M ARR since joining; delivered AI solutions for major accounts (Thales, LVMH, Auchan, Doctolib, Hermès, Cloudguard, Savencia, Fast Retailing, Heetch, etc.).
+- **Tech Stack:** LiteLLM, Langchain, LangGraph, RAG, tool calls, Bedrock, GPT, Gemini, Claude, Mistral, AWS Cloud.
 
-### Data Scientist Consultant | 2B Consulting
-*November 2016 - September 2017*
-- Developed counterfeit detection algorithms using NLP at Cdiscount
-- Implemented deep vision learning algorithms for clothing pattern recognition
-- Created data processing pipelines using Hadoop, Hive, and Spark
+### Data Scientist (PhD) & Cloud Data Engineer | [Lectra](https://www.lectra.com/en)
+*Sept 2017 - Apr 2023 | Bordeaux*
 
-### Project Manager & Software Engineer | GROUPE CYBERTEK
-*March 2014 - November 2016*
-- Optimized order preparation processes by integrating multiple marketplace APIs
-- Redesigned company's online store with SEO and intelligent features
-- Developed order tracking system and improved ERP/CRM systems
+- **PhD Research (2020-2023):** Enhanced "sections planning" algorithm by developing graph-oriented heuristics (Attention-based Deep Learning on Graphs) to minimize material waste. Trained models on 100,000+ real nestings using Azure ML, exceeding human expert precision. Now a live web service for industrial customers.
+- **Data Engineering (2017-2020):** Designed and implemented large data pipelines (1000+ events/sec) for massive IoT fleet (Lectra cutters) using Kafka, Spark and Scala. CI/CD workflows on Kubernetes (Docker, Jenkins).
+- **Impact:** One of the first Data Engineers hired at Lectra, supporting company revenue growth from €350M to €500M+ within a 500-person R&D department.
+- **Tech Stack:** Python, Scala, PyTorch, GNN, Azure ML, Apache Kafka, Spark, Kubernetes, Docker, IoT.
 
-### Software Engineer | NEXEYA
-*October 2012 - April 2013*
-- Developed multi-user, multi-sensor data fusion platform for naval defense
-- Implemented C++/Qt modules for data acquisition and processing
-- Created technical documentation for defense systems
+### Data Scientist - Consultant | [2B Softeam Data & AI](https://www.linkedin.com/company/2b-softeam-data/)
+*Nov 2016 - Sept 2017 | Bordeaux*
 
-### Software Engineer | LaBRI
-*October 2011 - September 2012*
-- Created web services for image and algorithm sharing across research teams
-- Developed multi-language APIs (C++/Qt, C#, Java) and JavaScript web application
-- Provided platform training for doctoral students and drafted ANR technical specifications
+- **Cdiscount:** Developed counterfeit detection algorithms using NLP and Hadoop (Hive/Spark) to secure the marketplace. Collaborated with the legal team to ensure regulatory compliance.
+- **Lectra:** Architected clothing pattern recognition tools using Deep Vision and initiated new large-scale data processing pipelines.
+- **Tech Stack:** NLP, Computer Vision, Hadoop, Hive, Spark, Java, Scala.
 
-### PhD Student & Software Engineer | Foxstream
-*September 2009 - August 2011*
-- Implemented and compared background-extraction and tracking algorithms
-- Developed video analysis software with Winforms and MFC interfaces
-- Published research on background subtraction algorithms for intrusion detection
-- Enhanced network video stream processing using OpenCV and Winsockets
+### Software Engineer (Freelance) | [Independent](https://github.com/clallier/)
+*May 2013 - Aug 2021 | Bordeaux / Remote*
 
-### Research Intern | Inserm
-*January 2009 - June 2009*
-- Developed robotic learning system using C++, TCL, and Bayesian statistics
-- Implemented demonstration-based learning using Markov networks
-- Created statistical models for robotic rule learning
+- **Data Science:** Implemented cloud-native analytics solutions using Python, AWS SageMaker and Google BigQuery for diverse industrial clients (Cibler, Cdiscount).
+- **Full-Stack Development:** Developed high-performance web/mobile apps using React, Canvas API, WebRTC and Haxe.
+- **Game Development:** Engineered 2D/3D games using Unity3D (C#) and LibGDX. Winner of the Android Codefest 2013. Showcased at Mobile World Congress (MWC) 2014 in Barcelona on the Intel booth.
+- **Tech Stack:** AWS, BigQuery, React, Unity3D, C#, Javascript, WebRTC.
 
-### Research Intern | EMC Lab
-*February 2008 - July 2008*
-- Simulated neural-astrocyte network models for epilepsy study using Java
-- Using Runge-Kutta (RK4) solver for differential equations
-- Published research on neurons-astrocyte network modeling in epilepsy
+### Project Manager & Software Engineer | [Cybertek](https://www.linkedin.com/company/cybertech-computer/)
+*Mar 2014 - Nov 2016 | Bordeaux*
 
-## Technical Skills
-- Languages: Python, Scala, JavaScript, SQL
-- AI/ML: PyTorch, Deep Graph Library (DGL), Langchain, Deep Learning
-- Cloud: AWS, Azure, Azure Machine Learning, Google BigQuery
-- Tools: Pandas, Power BI, D3.js, Docker, Kubernetes
+- **Marketplace & Logistics:** Integrated marketplaces (Amazon, Fnac) and optimized logistics by automating shipping workflows using carrier APIs (UPS, Chronopost). Redesigned the e-commerce platform (responsive design, fuzzy search, SEO), increasing sales by 100%+.
+- **ERP/CRM:** Enhanced internal systems and data-driven communication strategies to optimize customer retention.
+- **Tech Stack:** C#, SQL Server, .NET, ERP, CRM, SEO, Marketplace APIs.
+
+### Software Engineer | [Nexeya - Now Aero Contact](https://www.aerocontact.com/entreprise-aeronautique/societe-nexeya-3566/presentation)
+*Oct 2012 - Apr 2013 | Bordeaux*
+
+- **Naval Defense:** Developed LYNCEA, a multi-sensor data fusion platform. Integrated data acquisition modules and co-developed the high-performance network layer.
+- **Tech Stack:** C++, Qt, Network Engineering, Embedded Systems.
+
+### Research Engineer | [LaBRI (Research Laboratory)](https://www.labri.fr/)
+*Oct 2011 - Sep 2012 | Bordeaux*
+
+- **Web Services:** Created Java JEE web services for research sharing and developed cross-language APIs (C++, C#, Java) with a real-time web application.
+- **Tech Stack:** Java JEE, C++, C#, Javascript, Web Services.
+
+### PhD Researcher & Software Engineer | [Foxstream](https://www.foxstream.fr/)
+*Sep 2009 - Aug 2011 | Lyon*
+
+- **Video Analysis:** Object tracking and classification algorithms for video surveillance. Developed video analysis software using C++, Winforms, and MFC in an Agile environment.
+- **Tech Stack:** C++, OpenCV, Winforms, MFC, Agile, Winsockets.
+
+---
 
 ## Education
-**Ph.D. in Mathematics and Computer Science**
-Université de Bordeaux | 2019 - 2022
 
-**Master 2, Cognitive Science**
-Université Lumière (Lyon II) | 2008 - 2009
+### PhD in Computer Science (Maths-Info)
+*2019 - 2022 | Université de Bordeaux*
+- Thesis: Graph Deep Learning for 2D-Nesting Efficiency Prediction.
+
+### Master 2 Research in Cognitive Science
+*2008 - 2009 | Université de Lyon*
+
+---
 
 ## Publications
-- Graph neural network comparison for 2D nesting efficiency estimation
-- Réseaux profonds basés graphes pour la prédiction d'efficience de placements 2D
-- A neurons-astrocyte network model: from synaptic boosting to epilepsy
 
-## Languages
-- French (Native)
-- English (Full Professional)
-- Russian (Elementary)
+- **Graph Neural Network Comparison for 2D-Nesting Efficiency Estimation** (2023) | Journal of Intelligent Manufacturing, Springer Nature. [DOI: 10.1007/s10845-023-02084-6](https://doi.org/10.1007/s10845-023-02084-6)
+- **Réseaux profonds basés graphes pour la prédiction d'efficience de placements 2D** (2022) | PhD Thesis, Université de Bordeaux. [theses.fr](https://theses.fr/2022BORD0421)
+- **A Neurons-Astrocyte Network Model: From Synaptic Boosting to Epilepsy** (2010) | NeuroComp'10. [HAL Science](https://hal.science/hal-00553451/)
 
-## Contact
-- Email: REDACTED
-- LinkedIn: linkedin.com/in/corentin-lallier-7b6a1469
-- Portfolio: clallier.github.io/blog/
+---
+
+## Skills & Interests
+
+- **Personal Projects:** [Personal Tech Blog](https://clallier.github.io/blog/) (Data Science, AI, Shaders). [GitHub](https://github.com/clallier/) | [Google Scholar](https://scholar.google.com/citations?user=Y4a3nFAAAAAJ).
+- **Languages:** French (Native), English (Full Professional).
+- **Interests:** Sports (Crossfit, Running 10k & Half-marathon, Surfing, Hiking), Video games.
