@@ -5,7 +5,8 @@
     <div class="footer-grid">
       <!-- Left Column: Description -->
       <div class="footer-description">
-        <p>{{ site.description | replace: "🛸", '<a href="/404.html" class="footer-icon">🛸</a>' }}</p>
+        {% assign secret_url = '/404.html' | relative_url %}
+        <p>{{ site.description | replace: "🛸", '<a href="' | append: secret_url | append: '" class="footer-icon">🛸</a>' }}</p>
       </div>
 
       <!-- Right Column: Name & RSS -->
