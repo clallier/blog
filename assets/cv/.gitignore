@@ -1,0 +1,6 @@
+# Typst artifacts
+fonts/
+*.pdf
+
+# DS_Store
+.DS_Store
