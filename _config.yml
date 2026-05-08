@@ -26,14 +26,25 @@ baseurl: "/blog" # the subpath of your site, e.g. /blog
 url: "https://clallier.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 permalink: /:year/:month/:title/
 
+lang: en
 github_username: clallier
 linkedin_username: corentin-lallier-7b6a1469
 twitter_username: gooodjam
 
+author:
+  name: Corentin Lallier
+  twitter: gooodjam
+  github: clallier
+
 # Build settings
 plugins:
-  - jekyll-remote-theme # to allow having minima v3 (see https://github.com/jekyll/minima/issues/419#issuecomment-558693485)
+  - jekyll-remote-theme
   - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-gist
+  - jekyll-titles-from-headings
+  - jemoji
 
 # to allow having minima v3 (see https://github.com/jekyll/minima/issues/419#issuecomment-558693485)
 theme: null  # Remove or comment out if exists
