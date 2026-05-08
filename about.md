@@ -9,7 +9,7 @@ permalink: /about/
 ## Welcome!
 
 Hello there!
-My name is Corentin, and I am a Datamancer (half data scientist, half software engineer) with over a decade of experience (with a PhD in the field of deep learning on graphs!).
+My name is Corentin, and I am a Datamancer (half data scientist, half data engineer) with over a decade of experience (with a PhD in the field of deep learning on graphs!).
 I like to talk about computer science, math, algorithms, and all things STEM.
 
 I am continually learning and exploring new techniques and technologies, convinced that the best way to truly understand something is to get hands-on experience and try it myself.

@@ -115,6 +115,40 @@
         p {
             text-align: justify;
         }
+
+        /* navigation links spacing */
+        .site-nav .page-link {
+            margin-left: 20px;
+        }
+
+        @media screen and (max-width: 600px) {
+            .site-nav .trigger {
+                display: none;
+            }
+            .site-nav .nav-trigger:checked ~ .trigger {
+                display: block;
+                padding-bottom: 5px;
+            }
+            .site-nav .page-link {
+                display: block;
+                padding: 10px 0;
+                margin-left: 0;
+                text-align: right;
+            }
+        }
+
+        /* flexbox navigation (desktop only) */
+        @media screen and (min-width: 600px) {
+            .site-nav .trigger {
+                display: flex;
+                gap: 20px;
+                justify-content: flex-end;
+            }
+
+            .site-nav .page-link {
+                margin-left: 0 !important;
+            }
+        }
     </style>
 
     <script async src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?version=4.8.0&features=es6"></script>

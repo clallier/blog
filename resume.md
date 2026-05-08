@@ -4,7 +4,7 @@ title: Resume
 permalink: /resume/
 ---
 
-[Download PDF Version: **English**](/assets/pdf/Corentin_Lallier_CV_EN.pdf) | [**French**](/assets/pdf/Corentin_Lallier_CV_FR.pdf)
+Download PDF: [English](/assets/pdf/Corentin_Lallier_CV_EN.pdf) \| [French](/assets/pdf/Corentin_Lallier_CV_FR.pdf)
 
 ## Profile
 
@@ -85,14 +85,14 @@ Passionate about the convergence of neural networks, industrial research, and da
 
 ## Publications
 
-- **Graph Neural Network Comparison for 2D-Nesting Efficiency Estimation** (2023) | Journal of Intelligent Manufacturing, Springer Nature. [DOI: 10.1007/s10845-023-02084-6](https://doi.org/10.1007/s10845-023-02084-6)
-- **Réseaux profonds basés graphes pour la prédiction d'efficience de placements 2D** (2022) | PhD Thesis, Université de Bordeaux. [theses.fr](https://theses.fr/2022BORD0421)
-- **A Neurons-Astrocyte Network Model: From Synaptic Boosting to Epilepsy** (2010) | NeuroComp'10. [HAL Science](https://hal.science/hal-00553451/)
+- **Graph Neural Network Comparison for 2D-Nesting Efficiency Estimation** (2023) \| Journal of Intelligent Manufacturing, Springer Nature. [DOI: 10.1007/s10845-023-02084-6](https://doi.org/10.1007/s10845-023-02084-6)
+- **Réseaux profonds basés graphes pour la prédiction d'efficience de placements 2D** (2022) \| PhD Thesis, Université de Bordeaux. [theses.fr](https://theses.fr/2022BORD0421)
+- **A Neurons-Astrocyte Network Model: From Synaptic Boosting to Epilepsy** (2010) \| NeuroComp'10. [HAL Science](https://hal.science/hal-00553451/)
 
 ---
 
 ## Skills & Interests
 
-- **Personal Projects:** [Personal Tech Blog](https://clallier.github.io/blog/) (Data Science, AI, Shaders). [GitHub](https://github.com/clallier/) | [Google Scholar](https://scholar.google.com/citations?user=Y4a3nFAAAAAJ).
+- **Personal Projects:** [Personal Tech Blog](https://clallier.github.io/blog/) (Data Science, AI, Shaders). [GitHub](https://github.com/clallier/) \| [Google Scholar](https://scholar.google.com/citations?user=Y4a3nFAAAAAJ).
 - **Languages:** French (Native), English (Full Professional).
 - **Interests:** Sports (Crossfit, Running 10k & Half-marathon, Surfing, Hiking), Video games.
