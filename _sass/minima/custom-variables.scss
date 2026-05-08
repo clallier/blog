@@ -1,43 +1,43 @@
 :root {
-    --minima-brand-color: #7c8073;
-    --minima-brand-color-light: #fff4b3;
-    --minima-brand-color-dark: #ccac00;
-    --minima-site-title-color: #424242;
-    --minima-text-color: #111111;
-    --minima-background-color: #fdfdfd;
-    --minima-code-background-color: #f5f5f5;
-    --minima-link-base-color: #088cc8;
-    --minima-link-visited-color: #007fb9;
-    --minima-link-hover-color: #111111;
-    --minima-border-color-01: #eaff91;
-    --minima-border-color-02: #dbdbdb;
-    --minima-border-color-03: #424242;
-    --minima-table-text-color: #3f3f3f;
-    --minima-table-zebra-color: #f7f7f7;
-    --minima-table-header-bg-color: #f0f0f0;
-    --minima-table-header-border: #e0e0e0;
-    --minima-table-border-color: #e8e8e8;
+    --minima-brand-color: #333333;
+    --minima-brand-color-light: #f5f5f5;
+    --minima-brand-color-dark: #111111;
+    --minima-site-title-color: #222222;
+    --minima-text-color: #1a1a1a;
+    --minima-background-color: #ffffff;
+    --minima-code-background-color: #f8f9fa;
+    --minima-link-base-color: #333333;
+    --minima-link-visited-color: #555555;
+    --minima-link-hover-color: #000000;
+    --minima-border-color-01: #dddddd;
+    --minima-border-color-02: #eeeeee;
+    --minima-border-color-03: #333333;
+    --minima-table-text-color: #333333;
+    --minima-table-zebra-color: #fafafa;
+    --minima-table-header-bg-color: #f1f1f1;
+    --minima-table-header-border: #dddddd;
+    --minima-table-border-color: #eeeeee;
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --minima-brand-color: #01cdfe;
-        --minima-brand-color-light: #ff71ce;
-        --minima-brand-color-dark: #b300b3;
-        --minima-site-title-color: #e0e0e0;
-        --minima-text-color: #d1d1d1;
-        --minima-background-color: #1a1a2e;
-        --minima-code-background-color: #1a141e;
-        --minima-link-base-color: #01cdfe;
-        --minima-link-visited-color: #b967ff;
-        --minima-link-hover-color: #05ffa1;
-        --minima-border-color-01: #b35ce2;
-        --minima-border-color-02: #b967ff;
-        --minima-border-color-03: #ff00ff;
-        --minima-table-text-color: #ff71ce;
-        --minima-table-zebra-color: #2d1b2e;
-        --minima-table-header-bg-color: #1a1a2e;
-        --minima-table-header-border: #ff71ce;
-        --minima-table-border-color: #01cdfe;
+        --minima-brand-color: #00f2ff;
+        --minima-brand-color-light: #ff00ff;
+        --minima-brand-color-dark: #7000ff;
+        --minima-site-title-color: #ffffff;
+        --minima-text-color: #e0e0e0;
+        --minima-background-color: #0d1117;
+        --minima-code-background-color: #161b22;
+        --minima-link-base-color: #00f2ff;
+        --minima-link-visited-color: #bd00ff;
+        --minima-link-hover-color: #39ff14;
+        --minima-border-color-01: #30363d;
+        --minima-border-color-02: #21262d;
+        --minima-border-color-03: #00f2ff;
+        --minima-table-text-color: #e0e0e0;
+        --minima-table-zebra-color: #161b22;
+        --minima-table-header-bg-color: #0d1117;
+        --minima-table-header-border: #30363d;
+        --minima-table-border-color: #30363d;
     }
 }

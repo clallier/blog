@@ -13,26 +13,22 @@ layout: default
     <ul class="post-list">
         {%- for post in site.posts -%}
         <li class="post-item">
-
             <a class="post-card" href="{{ post.url | relative_url }}">
-                {% if post.image %}
-                <img class="post-img" src="{{ post.image | prepend: site.baseurl }}" alt="{{ post.title }}">
-                {% endif %}
-                <div>
-                    {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-                    <div class="post-meta">{{ post.date | date: date_format }}</div>
-                    <div class="post-meta post-group">{{ post.group | escape }}</div>
-                    <h3>{{ post.title | escape }}</h3>
+                <div class="post-card-content">
+                    {% if post.image %}
+                    <img class="post-img" src="{{ post.image | prepend: site.baseurl }}" alt="{{ post.title }}">
+                    {% endif %}
+                    <div class="post-text">
+                        {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+                        <span class="post-meta">{{ post.date | date: date_format }} • {{ post.group | escape }}</span>
+                        <h3 class="post-title">{{ post.title | escape }}</h3>
+                    </div>
                 </div>
             </a>
-            {%- if site.show_excerpts -%}
-            {{ post.excerpt }}
-            {%- endif -%}
         </li>
         {%- endfor -%}
     </ul>
 
-    <p class="rss-subscribe">subscribe <a href="{{ '/feed.xml' | relative_url }}">via RSS</a></p>
     {%- endif -%}
 
 </div>
