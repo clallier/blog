@@ -1,79 +1,50 @@
-# Corentin Lallier
+# Corentin Lallier | Blog & Resume
 
-## Live version
+Creative and technical exploration. This repository contains the source code for my personal blog and portfolio, built with Jekyll 4.3 and the Minima 3.0 theme.
 
-https://clallier.github.io/blog/
+## Live Version
+[https://clallier.github.io/blog/](https://clallier.github.io/blog/)
 
-## Quickstart Guide
+---
 
-### Setup
+## 🛠 Local Ops
 
-1. **Clone the repository:**
+### 1. Setup
+- Check **Ruby 3.2+** is installed (`rbenv` recommended).
+- **Activate rbenv**: Run `eval "$(rbenv init -)"` in your terminal.
+- **Lock version**: Run `rbenv local 3.2.4` inside this folder.
+- Run `bundle install` to grab dependencies.
 
-```sh
-git clone https://github.com/clallier/blog.git
-cd blog
-```
+### 2. Multi-Platform Support (Mandatory)
+- **Always** run these if you update gems on Mac (prevents GH Action failure):
+  - `bundle lock --add-platform x86_64-linux`
+  - `bundle lock --add-platform aarch64-linux`
 
-2. **Installation**
+### 3. Dev & Preview
+- Run `bundle exec jekyll serve --livereload` to launch locally.
+- Check `http://127.0.0.1:4000/blog/`.
 
-2.1. **Install Bundler and dependencies**
-This project use Ruby's Bundler to manage dependencies.
-Make sure to have it installed (see https://bundler.io/guides/getting_started.html for more details).
+### 4. Deploy
+- Push to `main` to trigger the **GitHub Action**.
+- Watch status here: [Actions tab](https://github.com/clallier/blog/actions).
 
-Summary:
+---
 
-- First, install `Bundler` if missing (run `bundle -v` to check if it's installed)
+## Resume Sync (Typst Pipeline)
+Keep `resume.md` and Typst files in lockstep:
+1.  Update source in Typst.
+2.  Export English/French PDFs (`./scripts/export_cv.sh`).
+3.  Place PDFs in `assets/pdf/resume_corentin_lallier_en.pdf` (and `_fr.pdf`).
+4.  Update `resume.md` text content with latest Typst changes.
 
-```sh
-gem install bundler
-```
+---
 
-- Next, Check that the bundler version in the Gemfile.lock (generaly the last line of Gemfile.lock) is up-to-date with the current bundler version
+## Tech Stack
+- **Engine**: Jekyll 4.3.4
+- **Theme**: Minima 3.0 (Remote)
+- **Plugins**: `seo-tag`, `sitemap`, `feed`, `titles-from-headings`, `jemoji`.
 
-- Finally, install all the project dependencies, using:
-
-```sh
-bundle install
-```
-
-- Yay! 🎉
-
-3. **Build and serve locally**
-
-```sh
-bundle exec jekyll serve
-```
-
-4. **Deploy**
-
-```sh
-git push # trigger the 'pages-build-deployment' github action
-```
-
-### Troubleshot
-
-#### Setup
-
-See: [GitHub Pages with Jekyll](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/creating-a-github-pages-site-with-jekyll)
-
-#### Out of the box fixes:
-
-- In the `_config.yml`:
-  - Set the `baseurl: ""` to point to the URL subpath of the site, e.g., `/blog`
-- In the Gemfile:
-  - Comment out `# gem "jekyll", "~> 4.3.2"` (line 10)
-  - Uncomment `gem "github-pages", "~> 228", group: :jekyll_plugins` with the version of GitHub Pages (Dependency versions)
-
-#### Fix some missing dependencies:
-
-```sh
-bundle add webrick
-bundle add csv
-```
-
-#### Update github pages gem
-
-```sh
-bundle update github-pages
-```
+## Design Notes
+- **Dark Mode**: Cyberpunk palette in `_sass/minima/custom-variables.scss`.
+- **Post Cards**: Glassmorphism + Elastic Wobble in `_includes/custom-head.html`.
+- **Modular**: `header.html` & `footer.html` use native Minima 3 logic + `custom-head.html`.

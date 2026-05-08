@@ -40,17 +40,19 @@
     }
 
     .post-item {
-        background: var(--minima-background-color);
-        border: 1px solid var(--minima-border-color-01);
+        background: var(--minima-card-bg) !important;
+        backdrop-filter: blur(12px) !important;
+        border: 1px solid var(--minima-card-border) !important;
         border-radius: 12px;
         overflow: hidden;
         transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 
         &:hover {
+            background: var(--minima-card-bg-hover) !important;
             animation: elastic-wobble 0.3s cubic-bezier(0.2, 0.88, 0.25, 1);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-            border-color: var(--minima-brand-color);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+            border-color: var(--minima-brand-color) !important;
         }
     }
 
@@ -107,9 +109,17 @@
         font-weight: 700;
         line-height: 1.3;
         margin: 0;
-        color: var(--minima-brand-color);
+        color: var(--minima-site-title-color) !important;
     }
 
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: var(--minima-site-title-color) !important;
+    }
 
     /* Centered images and captions  */
     .post-content img {
@@ -129,7 +139,7 @@
         margin-bottom: 2rem;
     }
 
-    /* Code blocks (and pre with highlight class) word wrap */
+    /* Code blocks word wrap */
     mjx-math,
     code,
     pre.highlight {
@@ -137,6 +147,13 @@
         word-wrap: break-word;
         overflow-wrap: break-word;
         font-size: 13px;
+    }
+
+    /* MathJax Colorbox Readability Fix */
+    mjx-container [style*="background-color"] {
+        color: var(--math-box-text) !important;
+        padding: 2px 4px;
+        border-radius: 4px;
     }
 
     /* Youtube wrapper */
@@ -157,22 +174,68 @@
         border: 0;
     }
 
-    /* justify text */
-    p {
+    .post-content p {
         text-align: justify;
     }
 
-    /* flexbox navigation (desktop only) - Updated for Minima 3 */
     @media screen and (min-width: 600px) {
         .site-nav .nav-items {
             display: flex;
             gap: 20px;
             justify-content: flex-end;
+            align-items: center;
         }
 
         .site-nav .nav-item {
             margin-left: 0 !important;
         }
+    }
+
+    /* Fix z-index for mobile menu dropdown */
+    @media screen and (max-width: 600px) {
+        .site-nav {
+            z-index: 9999 !important;
+            /* position: relative; */
+        }
+    }
+
+    /* --- MINIMAL FLEX FOOTER --- */
+    .footer-grid {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding: 30px 0;
+    }
+
+    @media screen and (max-width: 600px) {
+        .footer-grid {
+            flex-direction: column;
+            text-align: center;
+        }
+    }
+
+    .footer-description p {
+        margin: 0;
+        opacity: 0.8;
+    }
+
+    .footer-contact p {
+        margin: 0;
+        /* display: inline-block; */
+        font-weight: bold;
+    }
+
+    .footer-icon {
+        text-decoration: none;
+        transition: transform 0.08s ease;
+        display: inline-block;
+    }
+
+    .footer-icon:hover {
+        text-decoration: none;
+        transform: scale(1.4) rotate(15deg) translate(5px, -5px);
     }
 </style>
 
@@ -183,9 +246,7 @@
             inlineMath: [['$', '$'], ['\\(', '\\)']],
             displayMath: [['$$', '$$'], ['\\[', '\\]']],
         },
-        svg: {
-            fontCache: 'global'
-        }
+        svg: { fontCache: 'global' }
     };
 </script>
 <script async id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@4.0.0-beta.3/tex-mml-chtml.js"></script>
