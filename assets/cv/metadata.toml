@@ -47,9 +47,9 @@ language = "en"
 [lang.en]
     header_quote = "PhD in Graph Deep Learning | Senior Data Scientist | Data & Cloud Engineer"
     cv_footer = ""
-    letter_footer = "Cover letter"
+    letter_footer = ""
 
 [lang.fr]
     header_quote = "PhD in Graph Deep Learning | Senior Data Scientist | Data & Cloud Engineer"
     cv_footer = ""
-    letter_footer = "Lettre de motivation"
+    letter_footer = ""
