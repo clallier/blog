@@ -4,7 +4,7 @@ title: Resume
 permalink: /resume/
 ---
 
-Download PDF: [English](/assets/pdf/Corentin_Lallier_CV_EN.pdf) \| [French](/assets/pdf/Corentin_Lallier_CV_FR.pdf)
+Download PDF: [English](/assets/pdf/Corentin_Lallier_CV_EN_Public.pdf) | [French](/assets/pdf/Corentin_Lallier_CV_FR_Public.pdf)
 
 ## Profile
 

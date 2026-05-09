@@ -1,6 +1,6 @@
 #import "@preview/brilliant-cv:3.3.0": cv-section, cv-entry
 
-#cv-section("Research Internship")
+#cv-section("Research Internships")
 
 #cv-entry(
   title: [Research Intern],

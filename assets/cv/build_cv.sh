@@ -24,7 +24,14 @@ mkdir -p "$OUTPUT_DIR"
 # Compile both versions
 echo "Generating PDFs..."
 # We use the local fonts folder to ensure portability
+
+# --- Private Versions (Full details) ---
 typst compile cv.typ --font-path "$FONT_DIR" --input language=fr "$OUTPUT_DIR/Corentin_Lallier_CV_FR.pdf"
 typst compile cv.typ --font-path "$FONT_DIR" --input language=en "$OUTPUT_DIR/Corentin_Lallier_CV_EN.pdf"
+typst compile letter.typ --font-path "$FONT_DIR" "$OUTPUT_DIR/Corentin_Lallier_Letter_PhantomBuster.pdf"
+
+# --- Public Versions (Privacy Masked) ---
+typst compile cv.typ --font-path "$FONT_DIR" --input language=fr --input privacy=true "$OUTPUT_DIR/Corentin_Lallier_CV_FR_Public.pdf"
+typst compile cv.typ --font-path "$FONT_DIR" --input language=en --input privacy=true "$OUTPUT_DIR/Corentin_Lallier_CV_EN_Public.pdf"
 
 echo "Done! Check your pdf directory ($OUTPUT_DIR)."

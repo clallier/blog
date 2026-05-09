@@ -2,8 +2,16 @@
 #import "@preview/brilliant-cv:3.3.0": cv
 #let metadata = toml("./metadata.toml")
 #let cv-language = sys.inputs.at("language", default: none)
+#let privacy = sys.inputs.at("privacy", default: "false") == "true"
 #let metadata = if cv-language != none {
   metadata + (language: cv-language)
+} else {
+  metadata
+}
+#let metadata = if privacy {
+  let new-personal-info = metadata.personal.info + (phone: "", location: "")
+  let new-personal = metadata.personal + (info: new-personal-info)
+  metadata + (personal: new-personal)
 } else {
   metadata
 }

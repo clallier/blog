@@ -2,41 +2,47 @@
 #import "@preview/brilliant-cv:3.3.0": letter
 #let metadata = toml("./metadata.toml")
 #let letter-language = sys.inputs.at("language", default: none)
+#let privacy = sys.inputs.at("privacy", default: "false") == "true"
 #let metadata = if letter-language != none {
   metadata + (language: letter-language)
 } else {
   metadata
 }
-
+#let metadata = if privacy {
+  let new-personal-info = metadata.personal.info + (phone: "", location: "")
+  let new-personal = metadata.personal + (info: new-personal-info)
+  metadata + (personal: new-personal)
+} else {
+  metadata
+}
 
 #show: letter.with(
   metadata,
-  // sender-address defaults to metadata.personal.address if set, or override here:
-  sender-address: "123 Main St" + "\n" + "San Francisco, CA 94102",
-  recipient-name: "Company Name Here",
-  // Supports multiline addresses:
-  recipient-address: "456 Market St" + "\n" + "New York, NY 10001",
-  // date defaults to today; pass a string to override:
+  sender-address: metadata.personal.info.location,
+  recipient-name: "Diane & the PhantomBuster Hiring Team",
+  recipient-address: "Paris, France / Remote",
   date: datetime.today().display(),
-  subject: "Subject: Hey!",
-  signature: image("assets/signature.png"),
-  // address-style: "normal",  // use "normal" to disable smallcaps on addresses
+  subject: "Application: Senior ML Engineer - AI Platform & Agents",
+  signature: v(-1.5em) + image("assets/signature.png"),
 )
 
-Dear Hiring Manager,
+#set par(justify: true)
 
-I am excited to submit my application for the Senior Data Analyst position at ABC Company. With over 5 years of experience in data analysis and a demonstrated track record of success, I am confident in my ability to make a valuable contribution to your team.
+Dear Diane,
 
-In my current role as a Data Analyst at XYZ Company, I have gained extensive experience in data mining, quantitative analysis, and data visualization. Through my work, I have developed a deep understanding of statistical concepts and have become adept at using tools such as SQL, Python, and R to extract insights from complex datasets. I have also gained valuable experience in presenting complex data in a visually appealing and easily accessible manner to stakeholders across all levels of an organization.
+Following my recent contact with Mateja, I've been interested in PhantomBuster’s development. I am now writing to express my interest in the Senior ML Engineer position for AI Platform & Agents, as this role aligns with my current professional focus. With a PhD in Graph Deep Learning and experience as a Senior Data Scientist and Cloud Engineer, I have spent the last few years developing and deploying agentic systems designed to orchestrate very large sets of tools.
 
-I believe that my experience in data analysis makes me an ideal candidate for the Senior Data Analyst position at ABC Company. I am particularly excited about the opportunity to apply my skills to support your organization's mission and drive impactful insights. Your focus on driving innovative solutions to complex problems aligns closely with my own passion for using data analysis to drive positive change in organizations.
+The balance between infrastructure engineering and agent orchestration in this role is particularly interesting. In my current role at Mindflow, I am architecting multi-agent workflows using frameworks inspired by LangChain and LangGraph, specifically adapted to the constraints of isolated, serverless architectures, specializing in large external APIs/MCP orchestration as well as LLM usage for data enrichment.
 
-In my current role, I have been responsible for leading data projects from initiation to completion. I work closely with cross-functional teams to identify business problems and use data to develop solutions that drive business outcomes. I have a proven track record of delivering high-quality work on time and within budget.
+My technical experience seems to align with your current requirements:
+- *Data Relationships & Pragmatic RAG:* My technical background allows me to take a pragmatic approach to managing complex data relationships across SQL, NoSQL, and Graph structures. I focus on navigating the trade-offs between semantic RAG complexity (latency and cost) and the high-precision retrieval required for large-scale, reliable agentic systems.
+- *Security & Reliability:* Experience navigating the trade-offs of multi-agent reproducibility versus adaptability. I prioritize security-first orchestration, addressing challenges like prompt injection, secure MCP tool-calling, and human-in-the-loop safeguards.
+- *Architectural Abstraction & Observability:* Dedicated to building internal API layers that abstract model provider complexity and implementing traceability systems to monitor drift and visualize multi-turn interaction trees at scale.
 
-Furthermore, I have extensive experience in developing and implementing data-driven solutions that improve business operations. For example, I have implemented predictive models that have improved sales forecasting accuracy by 10%, resulting in significant cost savings. I have also developed dashboards that provide real-time insights into business performance, enabling stakeholders to make more informed decisions.
+I recognize that LLMs are not a silver bullet; depending on the task, a fine-tuned Small Language Model (SLM) or more traditional models can often be more efficient for speed and accuracy. I place a high value on the process of training custom models and curating datasets required to solve specific business problems. I also believe that complex concepts must be clearly explainable to be valuable.
 
-As a highly motivated and detail-oriented individual, I am confident that I would thrive in the fast-paced and dynamic environment at ABC Company. I am excited about the opportunity to work with a talented team of professionals and to continue developing my skills in data analysis.
-
-Thank you for considering my application. I look forward to the opportunity to discuss my qualifications further.
+I am eager to bring my research background and engineering experience to your team to contribute to the next iteration of your AI platform. Thank you for your time and consideration. I look forward to the possibility of discussing how my experience with agentic systems can support PhantomBuster’s objectives.
 
 Sincerely,
+
+Corentin Lallier
