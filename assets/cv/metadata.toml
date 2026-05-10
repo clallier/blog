@@ -45,11 +45,11 @@ language = "en"
         homepage = "clallier.github.io/blog/"
         location = "REDACTED"
 [lang.en]
-    header_quote = "PhD in Graph Deep Learning | Senior Data Scientist | Data & Cloud Engineer"
+    header_quote = "PhD in Graph Deep Learning | Senior ML Engineer | Agentic Systems & Cloud Engineering"
     cv_footer = ""
     letter_footer = ""
 
 [lang.fr]
-    header_quote = "PhD in Graph Deep Learning | Senior Data Scientist | Data & Cloud Engineer"
+    header_quote = "PhD in Graph Deep Learning | Senior ML Engineer | Systèmes Agentiques | Cloud Engineering"
     cv_footer = ""
     letter_footer = ""

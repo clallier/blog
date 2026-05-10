@@ -98,7 +98,7 @@
 
 #cv-entry(
   title: [PhD Researcher & Software Engineer],
-  society: link("https://www.foxstream.fr/")[Foxstream],
+  society: link("https://www.foxstream.us.com/")[Foxstream],
   logo: image("../assets/logos/foxstream_logo.jpeg"),
   date: [Sep 2009 - Aug 2011],
   location: [Lyon],

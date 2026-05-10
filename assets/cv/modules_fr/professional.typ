@@ -98,7 +98,7 @@
 
 #cv-entry(
   title: [Chercheur Doctorant & Ingénieur Logiciel],
-  society: link("https://www.foxstream.fr/")[Foxstream],
+  society: link("https://www.foxstream.us.com/")[Foxstream],
   logo: image("../assets/logos/foxstream_logo.jpeg"),
   date: [Sep 2009 - Août 2011],
   location: [Lyon],

@@ -22,6 +22,7 @@ Creative and technical exploration. This repository contains the source code for
 
 ### 3. Dev & Preview
 - Run `bundle exec jekyll serve --livereload` to launch locally.
+- Or single line: `clear && eval "$(rbenv init -)" && bundle exec jekyll serve --livereload`
 - Check `http://127.0.0.1:4000/blog/`.
 
 ### 4. Deploy
