@@ -1,6 +1,13 @@
 // Imports
 #import "@preview/brilliant-cv:3.3.0": cv
-#let metadata = toml("./metadata.toml")
+#import "./typ.typ": s
+#let raw-metadata = toml("./metadata.toml")
+#let info = raw-metadata.personal.info + (
+  phone: s(raw-metadata.personal.info.phone),
+  email: s(raw-metadata.personal.info.email),
+  location: s(raw-metadata.personal.info.location)
+)
+#let metadata = raw-metadata + (personal: raw-metadata.personal + (info: info))
 #let cv-language = sys.inputs.at("language", default: none)
 #let privacy = sys.inputs.at("privacy", default: "false") == "true"
 #let metadata = if cv-language != none {
