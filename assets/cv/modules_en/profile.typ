@@ -2,4 +2,4 @@
 
 #cv-section("Profile")
 
-Passionate about the convergence of neural networks, industrial research, and data engineering, I enjoy designing innovative and high-performance solutions. Currently Senior Data Scientist at Mindflow specializing in agentic systems, spanning academic research and production engineering. My background combines a PhD in Graph Machine Learning with expertise in cloud data engineering (Kafka, Spark, Scala). I value collaborative work, driven by curiosity and the resolution of complex industrial challenges.
+I am a full-stack data problem solver with solid experience across data engineering, data science, and LLM-based agentic systems. Combining a practical engineering approach with a PhD in Graph Deep Learning, I focus on turning experimental AI harnesses into robust, enterprise-ready services. Lately, my focus has been dedicated to LLM security, testing injection vectors, and building high-performance guardrail defenses.
