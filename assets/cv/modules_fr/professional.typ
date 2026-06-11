@@ -6,13 +6,13 @@
   title: [Senior Data Scientist],
   society: link("https://mindflow.io/")[Mindflow],
   logo: image("../assets/logos/mindflow.png"),
-  date: [Avr 2023 - Présent],
+  date: [Avr 2023 - Juin 2026],
   location: [Paris / Remote],
   description: list(
     [Conception d’une couche agentique sur mesure pour une plateforme no-code orientée cybersécurité, incluant la gestion de mémoire, du contexte, de l'observabilité LLM et de la mitigation d'hallucinations. Développement d’un moteur d’orchestration avec tool-calls, pour une exécution multi-fournisseurs (OpenAI, Bedrock, Gemini, Mistral, LiteLLM).],
     [Mentorat d'une équipe IA et partage d'expertise sur les systèmes agentiques, le RAG et l'optimisation de recherche. Support technique des CSEs et Solution Designers.],
     [Création d'un framework de test de monitoring de drift LLM (scénarios multi-routes, usage d'outils en parallèles). Optimisation de la recherche interne via un framework d'évaluation robuste (MRR, F1, NDCG).],
-    [Croissance de 0 à 1,5 M€ d'ARR ; déploiement de solutions IA pour clients majeurs (Thales, LVMH, Doctolib, Hermès, Cloudguard, Savencia, etc.). #link("https://www.linkedin.com/company/mindflow/")[Mindflow LinkedIn page].],
+    [Croissance de 0 à 1,5 M€ d'ARR ; déploiement de solutions IA pour clients majeurs (Thales, LVMH, Doctolib, Hermès, Cloudguard, Savencia, etc.). #link("https://www.linkedin.com/company/mindflow/")[page LinkedIn Mindflow].],
     [*Tech Stack:* LiteLLM, Langchain, LangGraph, RAG, tool-calls, Bedrock, GPT, Gemini, Claude, Mistral, AWS Cloud]
   )
 )
@@ -33,7 +33,7 @@
 
 #cv-entry(
   title: [Data Scientist - Consultant],
-  society: link("https://www.linkedin.com/company/2b-softeam-data/")[2B Softeam Data & AI],
+  society: link("https://www.linkedin.com/company/2b-softeam-data/")[2B Softeam Data & AI - Groupe Docaposte],
   logo: image("../assets/logos/2bconsulting.jpeg"),
   date: [Nov 2016 - Sept 2017],
   location: [Bordeaux],
@@ -66,7 +66,7 @@
   date: [Mar 2014 - Nov 2016],
   location: [Bordeaux],
   description: list(
-    [Intégration de plusieurs marketplaces (Amazon, Fnac) et optimisation de la logistique par l'automatisation des workflows via des APIs transporteurs (UPS, Chronopost). Refonte de la plateforme e-commerce (responsive, fuzzy search, SEO), entraînant une augmentation des ventes de plus de 100%.],
+    [Intégration de plusieurs marketplaces (Amazon, Fnac) et optimisation de la logistique par l'automatisation des workflows via des APIs transporteurs (UPS, Chronopost). Refonte de la #link("https://www.cybertek.fr/")[plateforme e-commerce] (responsive, fuzzy search, SEO), entraînant une augmentation des ventes de plus de 100%.],
     [Amélioration de l'ERP/CRM interne et stratégies de communication data-driven pour optimiser la fidélisation client.],
     [*Tech Stack :* C\#, SQL Server, .NET, ERP, CRM, SEO, Marketplace APIs]
   )
@@ -74,7 +74,7 @@
 
 #cv-entry(
   title: [Ingénieur Logiciel],
-  society: link("https://www.aerocontact.com/entreprise-aeronautique/societe-nexeya-3566/presentation")[Nexeya - Now Aero Contact],
+  society: link("https://www.aerocontact.com/entreprise-aeronautique/societe-nexeya-3566/presentation")[Nexeya - Groupe Aero Contact],
   logo: image("../assets/logos/groupe_nexeya_logo.jpeg"),
   date: [Oct 2012 - Avr 2013],
   location: [Bordeaux],

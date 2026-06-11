@@ -2,10 +2,14 @@ _site
 .sass-cache
 .jekyll-cache
 .jekyll-metadata
+
 vendor
 .DS_Store
 node_modules/
 presentations/
+fonts/
+__pycache__/
+assets/cv/fontawesome.zip
 
 # CV Privacy
 assets/pdf/*.pdf

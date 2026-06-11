@@ -6,7 +6,7 @@
   title: [Senior Data Scientist],
   society: link("https://mindflow.io/")[Mindflow],
   logo: image("../assets/logos/mindflow.png"),
-  date: [Apr 2023 - Present],
+  date: [Apr 2023 - Juin 2026],
   location: [Paris / Remote],
   description: list(
     [Architected a custom agentic layer for a no-code cybersecurity platform, implementing long-term memory, context-aware reasoning, LLM Observability, and hallucination mitigation. Engineered an adaptive orchestration engine utilizing RAG and tool calls for reliable execution across multiple providers (OpenAI, Bedrock, Gemini, Mistral, LiteLLM).],
@@ -33,7 +33,7 @@
 
 #cv-entry(
   title: [Data Scientist - Consultant],
-  society: link("https://www.linkedin.com/company/2b-softeam-data/")[2B Softeam Data & AI],
+  society: link("https://www.linkedin.com/company/2b-softeam-data/")[2B Softeam Data & AI - Docaposte Group],
   logo: image("../assets/logos/2bconsulting.jpeg"),
   date: [Nov 2016 - Sept 2017],
   location: [Bordeaux],
@@ -66,7 +66,7 @@
   date: [Mar 2014 - Nov 2016],
   location: [Bordeaux],
   description: list(
-    [Integrated several marketplaces (Amazon, Fnac) and optimized logistics by automating shipping workflows using carrier APIs (UPS, Chronopost). Redesigned the e-commerce platform with responsive design, fuzzy search, and SEO optimization, increasing store visibility and sales by 100%+],
+    [Integrated several marketplaces (Amazon, Fnac) and optimized logistics by automating shipping workflows using carrier APIs (UPS, Chronopost). Redesigned the #link("https://www.cybertek.fr/")[e-commerce platform] with responsive design, fuzzy search, and SEO optimization, increasing store visibility and sales by 100%+],
     [Enhanced internal ERP/CRM and data-driven communication strategies to optimize customer retention.],
     [*Tech Stack:* C\#, SQL Server, .NET, ERP, CRM, SEO, Marketplace APIs]
   )
@@ -74,7 +74,7 @@
 
 #cv-entry(
   title: [Software Engineer],
-  society: link("https://www.aerocontact.com/entreprise-aeronautique/societe-nexeya-3566/presentation")[Nexeya - Now Aero Contact],
+  society: link("https://www.aerocontact.com/entreprise-aeronautique/societe-nexeya-3566/presentation")[Nexeya - Aero Contact Group],
   logo: image("../assets/logos/groupe_nexeya_logo.jpeg"),
   date: [Oct 2012 - Apr 2013],
   location: [Bordeaux],
