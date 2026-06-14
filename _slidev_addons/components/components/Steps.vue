@@ -1,14 +1,28 @@
 <script setup>
 defineProps({
   steps: {
-    type: Array
+    type: Array,
+    required: true
   }
 })
 </script>
 
 <template>
   <div class="grid gap-4 items-start" :style="{ gridTemplateColumns: `repeat(${steps.length}, minmax(0, 1fr))` }">
-    <div v-for="(step, index) in steps" :key="index" v-click="index > 0" class="flex flex-col">
+    <div v-for="(step, index) in steps" :key="index" v-click="index > 0" class="flex flex-col"
+      v-motion
+      :initial="{ opacity: 0, y: 40, scale: 0.95 }"
+      :enter="{ 
+        opacity: 1, 
+        y: 0, 
+        scale: 1,
+        transition: {
+          type: 'spring',
+          stiffness: 250,
+          damping: 25,
+          mass: 0.5
+        }
+      }">
       <div class="flex items-center w-full h-8">
         <!-- Number Bubble Badge -->
         <div

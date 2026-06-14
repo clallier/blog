@@ -40,7 +40,7 @@ const gradientStyle = computed(() => {
 
   const hue = props.idx * 60
 
-  const grad = `linear-gradient(${orientation}, hsla(${hue}deg, 16%, 22%, 0.1) 30%, hsla(${hue}deg, 56%, 91%, 0.2) 100%)`
+  const grad = `linear-gradient(${orientation}, hsla(${hue}deg, 16%, 22%, 0.1) 30%, hsla(${hue}deg, 56%, 91%, 0.1) 100%)`
   console.log(grad)
 
   return {
@@ -49,12 +49,12 @@ const gradientStyle = computed(() => {
 })
 const renderedBody = computed(() => {
   let text = props.body || ''
-  
-  // Handle escaped characters (e.g. \* or \()
+
+  // Handle escaped characters (e.g. \* or \)
   text = text.replace(/\\([*_(~`[\]()])/g, '$1')
-  
+
   let html = text
-  
+
   // Bold: **text**
   html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
   // Italic: *text*
@@ -63,7 +63,7 @@ const renderedBody = computed(() => {
   html = html.replace(/_([^_]+)_/g, '<em>$1</em>')
   // Inline Code: `text`
   html = html.replace(/`([^`]+)`/g, '<code class="px-1 py-0.5 bg-black/15 dark:bg-white/15 rounded font-mono text-[10px]">$1</code>')
-  
+
   return html
 })
 </script>

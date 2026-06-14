@@ -1,16 +1,20 @@
 #!/bin/bash
 set -e
 
-echo "Building LLM Fundamentals & Limitations Slides..."
-npx @slidev/cli build _slides/llm-fundamentals/slides.md --out ../../presentations/llm-fundamentals --base ./
+# Dynamically resolve script directory
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-echo "Building Vector Search & Embeddings 101 Slides..."
-npx @slidev/cli build _slides/vector-search-101/slides.md --out ../../presentations/vector-search-101 --base ./
-
-echo "Building RAG & Advanced Retrieval Techniques Slides..."
-npx @slidev/cli build _slides/rag-advanced/slides.md --out ../../presentations/rag-advanced --base ./
-
-echo "Building Building Agentic Systems Slides..."
-npx @slidev/cli build _slides/augmented-llms-agents/slides.md --out ../../presentations/augmented-llms-agents --base ./
+echo "Building Slidev presentations..."
+for dir in "$SCRIPT_DIR"/*; do
+  if [ -d "$dir" ] && [ -f "$dir/slides.md" ]; then
+    name=$(basename "$dir")
+    # Skip any non-presentation directories if needed
+    if [ "$name" = "_slidev_addons" ] || [ "$name" = "__pycache__" ]; then
+      continue
+    fi
+    echo "Building Slidev presentation: $name"
+    npx @slidev/cli build "$dir/slides.md" --out "$SCRIPT_DIR/../presentations/$name" --base "./"
+  fi
+done
 
 echo "All slide builds completed successfully!"

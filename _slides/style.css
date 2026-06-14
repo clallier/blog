@@ -1,0 +1,99 @@
+/* Custom Slidev Layout Padding Override for Tighter Margins */
+.slidev-page,
+.slidev-layout {
+  padding: 1rem !important;
+}
+
+.shadow-md {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.3) !important;
+}
+
+.slidev-layout.two-cols,
+.slidev-layout.two-cols-header {
+  gap: 1rem !important;
+}
+
+.markdown-alert {
+  border-radius: 1rem;
+  box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Table Styling */
+table {
+  width: 100%;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px #0000004d, 0 2px 4px -2px #0000004d !important
+}
+
+table th {
+  font-weight: 800 !important;
+  background-color: rgba(0, 0, 0, 0.35) !important;
+}
+
+th:first-of-type {
+  border-top-left-radius: 0.5rem;
+}
+
+th:last-of-type {
+  border-top-right-radius: 0.5rem;
+}
+
+tr:last-of-type td:first-of-type {
+  border-bottom-left-radius: 0.5rem;
+}
+
+tr:last-of-type td:last-of-type {
+  border-bottom-right-radius: 0.5rem;
+}
+
+table tbody tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+table tbody tr:last-child {
+  border-bottom: none;
+}
+
+/* Dynamic Strong/Accent Text Colors matching current slide theme */
+strong,
+.strong {
+  color: var(--current-slide-color) !important;
+}
+
+/* Color all headers and hover links in all layouts (except cover) matching current slide theme */
+.slidev-page:not(.cover) h1,
+.slidev-layout:not(.cover) h1,
+.slidev-page:not(.cover) h2,
+.slidev-layout:not(.cover) h2,
+.slidev-page:not(.cover) h3,
+.slidev-layout:not(.cover) h3,
+.slidev-page a:hover,
+.slidev-layout a:hover {
+  color: var(--current-slide-color) !important;
+}
+
+/* Table of Contents Centering & List Style Fix */
+.slidev-toc {
+  display: inline-block;
+  text-align: left;
+}
+
+.slidev-toc li {
+  display: list-item !important;
+  list-style-type: decimal !important;
+}
+
+.slidev-toc li a {
+  text-decoration: none !important;
+  border-bottom: none !important;
+}
+
+/* Global Bouncy Transition for v-click / Steps */
+.slidev-vclick-target {
+  transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.slidev-vclick-hidden {
+  opacity: 0 !important;
+  transform: translateY(15px) scale(0.98) !important;
+}

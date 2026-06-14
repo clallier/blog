@@ -1,41 +1,54 @@
 ---
 theme: "@ktym4a/slidev-theme-ktym4a"
 themeConfig:
+  # baseColor Options: rosewater (default), flamingo, pink, mauve, red, maroon, peach, yellow, green, teal, sky, sapphire, blue, lavender
+  baseColor: 'peach'
   colorPattern: 'rotation'
-  primary: 'orange'
-background: https://cover.sli.dev
-title: RAG & Advanced Retrieval Techniques
+title: 📙 RAG & Advanced Retrieval Techniques
 titleTemplate: '%s'
 info: |
   ## RAG & Advanced Retrieval Techniques
   An introduction to advanced RAG concepts, chunking, and rerankers.
+author: Corentin Lallier
 class: text-center
 drawings:
   persist: false
 transition: slide-left
+mdc: true
 comark: true
 routerMode: hash
 favicon: /blog/assets/img/favicon.png
-css: ./style.css
+addons:
+  - ../_slidev_addons/components
+keywords:
+  - RAG
+  - advanced retrieval
+  - hybrid search
+  - RRF
+  - cross-encoders
+  - chunking strategies
 ---
 
-# RAG & Advanced Retrieval Techniques 📙
+<global-bottom />
+
+# 📙 RAG & Advanced Retrieval Techniques
 From simple pipelines to high-precision architectures
 
-<div class="author-block">
-  Corentin Lallier
-</div>
+Corentin Lallier
 
 ---
 layout: center
-class: plan-slide
 ---
 
-# Plan
+# Table of content
+
+<div class="slidev-toc">
 
 1. **What is RAG?** (Retrieval-Augmented Generation)
 2. **Retrieval recap** (Dense Vector representation)
 3. **Advanced Retrieval Techniques** (Hybrid, Reranker, Chunking)
+
+</div>
 
 ---
 layout: section
@@ -47,7 +60,7 @@ layout: section
 layout: two-cols-header
 ---
 
-# Retrieval-Augmented Generation (RAG)
+## Retrieval-Augmented Generation (RAG)
 
 ::left::
 
@@ -80,7 +93,7 @@ layout: section
 layout: two-cols-header
 ---
 
-# 2.1 Quick Recap: Semantic Vector Search
+## 2.1 Quick Recap: Semantic Vector Search
 
 ::left::
 
@@ -104,7 +117,7 @@ layout: section
 layout: two-cols-header
 ---
 
-# 3.1 Dense vs. Sparse representations
+## 3.1 Dense vs. Sparse representations
 
 ::left::
 
@@ -119,13 +132,9 @@ layout: two-cols-header
 
 ::right::
 
-::div{.callout-amber.p-4}
-
-Hybrid Search (RRF):
+::Card{title="Hybrid Search (RRF)" color="success"}
 
 $$ \text{Score}(d) = \sum_{m \in M} \frac{1}{k + r_m(d)} $$
-
-::
 
 For combining Lexical and Vector search:
 $$ \text{Score}(d) = \frac{1}{60 + r_{\text{lexical}}(d)} + \frac{1}{60 + r_{\text{vector}}(d)} $$
@@ -135,12 +144,13 @@ Where:
 - $r_m(d)$: The **rank** of document $d$ in system $m$ (1st, 2nd, etc.).
 - $k = 60$: `Smoothing parameter`, a constant that prevents high ranks from dominating the score.
 
+::
 
 ---
 layout: two-cols-header
 ---
 
-# 3.2 Bi-Encoder vs. Cross-Encoder
+## 3.2 Bi-Encoder vs. Cross-Encoder
 
 ::left::
 
@@ -157,12 +167,9 @@ layout: two-cols-header
 
 ::right::
 
-::div{.callout-amber.p-1}
-
-**Reranker Concept:**
+::Card{title="Reranker Concept" color="success"}
 
 `[Query + Doc]` $\rightarrow$ `[Transformer]` $\rightarrow$ `[Score]`
-::
 
 ```python
 from sentence_transformers import CrossEncoder
@@ -181,30 +188,31 @@ print(scores)  # [ 7.625 -11.375]
 
 rankings = model.rank(query, documents)
 ```
+::
 
 ---
 layout: two-cols-header
 ---
 
-# 3.3 The Chunking Challenge
+## 3.3 The Chunking Challenge
 
 ::left::
+
+<div class="text-sm">
 
 - **Why do we chunk:**
   - LLMs have token limits (typically 4k - 128k tokens).
   - Embedding models too have token limits (typically 512 - 8192 tokens).
   - Long text dilutes the semantic focus of embeddings.
-
-
 - **Chunking parameters:**
   - **Chunk Size:** Small chunks (precise but lose context) vs. Large chunks (rich context but diluted representation).
   - **Overlap:** Repeating tokens between consecutive chunks to avoid cutting off key sentences.
 
+</div>
+
 ::right::
 
-::div{.callout-amber.p-4.mt-10}
-
-**Strategies:**
+::Card{title="Strategies" color="info"}
 
 - **Metadata-based:** Prepending metadata to chunks for better context.
 - **Hierarchical chunking:** Keep "parent-chain" context from higher-level sections (titles, sub-titles, current section summary, etc. for each paragraph).
@@ -213,17 +221,14 @@ layout: two-cols-header
 ::
 
 ---
-layout: center
+layout: default
 ---
 
-# Conclusion: The Production RAG Pipeline
+## Conclusion: The Production RAG Pipeline
 
 1. **Preparation (Smart Chunking):** Split source text into chunks (Overlapping / Hierarchical / Semantic) to preserve context.
-
 2. **Retrieval (Sparse + Dense Hybrid):** Combine **Vector Search** (conceptual intent) + **BM25** (exact matches) and merge with **RRF**.
-
 3. **Reranking (Precision Filtering):** Pass top candidates through a **Cross-Encoder Reranker** to isolate the top-5 absolute best contexts.
-
 4. **Generation (Context Augmentation):** Embed the top-5 passages into the LLM prompt context to generate more accurate answers.
 
 
@@ -239,6 +244,10 @@ layout: two-cols-header
 - **Embeddings:** [Critique by Nils Reimers](https://medium.com/@nils_reimers/openai-gpt-3-text-embeddings-really-a-new-state-of-the-art-in-dense-text-embeddings-6571fe3ec9d9)
 - **Sentence Transformers:** [Hugging Face ST Hub](https://huggingface.co/sentence-transformers)
 
+## 🚀 Thanks!
+
+<a href="/blog/presentations/">Back to Presentations</a>
+
 ::right::
 
 **Embeddings for Everything**
@@ -247,18 +256,4 @@ Lecture by **Dan Gillick** (Google)
 
 ::youtube{id="JGHVJXP9NHw"}
 
-Thanks!
-
-
----
-layout: center
-class: text-center
----
-
-# Thanks! 🚀
-
-<br>
-<br>
-
-<a href="/blog/presentations/" class="btn-blue">Back to Presentations</a>
 

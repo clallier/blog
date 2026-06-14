@@ -1,53 +1,61 @@
 ---
 theme: "@ktym4a/slidev-theme-ktym4a"
 themeConfig:
+  # baseColor Options: rosewater (default), flamingo, pink, mauve, red, maroon, peach, yellow, green, teal, sky, sapphire, blue, lavender
+  baseColor: 'sapphire'
   colorPattern: 'rotation'
-  primary: 'green'
-background: https://cover.sli.dev
-title: Vector Search & Embeddings 101
+title: 🔍 Vector Search & Embeddings 101
 titleTemplate: '%s'
 info: |
   ## Vector Search & Embeddings 101
   An introduction to vector databases and embeddings.
+author: Corentin Lallier
 class: text-center
 drawings:
   persist: false
 transition: slide-left
+mdc: true
 comark: true
 routerMode: hash
 favicon: /blog/assets/img/favicon.png
-css: ./style.css
+addons:
+  - ../_slidev_addons/components
+keywords:
+  - vector search
+  - embeddings
+  - vector databases
+  - cosine similarity
+  - semantic search
+  - BERT
+hideInToc: true
 ---
 
-# Vector Search & Embeddings 101 🔍
+<global-bottom />
+
+# 🔍 Vector Search & Embeddings 101
 An introduction to vector databases and embeddings
 
-<div class="author-block">
-  Corentin Lallier
-</div>
+Corentin Lallier
 
 ---
 layout: center
-class: plan-slide
+hideInToc: true
 ---
+# Table of Content
 
-# Plan
-
-1. **Vector Search vs. Keyword/Fuzzy Search**
-2. **Embeddings & Sentence Transformers**
-3. **Vector Databases & SDK Demos**
+<Toc maxDepth="1"/>
 
 ---
 layout: section
 ---
 
-# 1. Vector Search vs. Keyword/Fuzzy Search
+#  Vector Search vs. Keyword/Fuzzy Search
 
 ---
 layout: two-cols-header
 ---
 
-# 1.1 Search 101
+## 1.1 Search 101
 
 ::left::
 
@@ -61,15 +69,18 @@ For a search engine we need 3 functions:
 - $f_2(x)$: A text to query function
 - $f_3(x)$: A _"ranking"_ function
 
-::div{.callout-amber.p-4.mt-10}
-**A universal challenge:** Shared by Wikipedia, Google, Spotify, and any modern retrieval system.
+
+::Card{title="A universal challenge" color="note" v-click="+1" class="mt-4"}
+Shared by :badge[Wikipedia], :badge[Google], :badge[Spotify], and any modern retrieval system.
 ::
+
 
 ---
 layout: two-cols-header
+class: text-sm
 ---
 
-# 1.2 Keyword and Fuzzy Search
+## 1.2 Keyword and Fuzzy Search
 
 ::left::
 
@@ -81,19 +92,17 @@ layout: two-cols-header
 - **$f_2(x)$ (Query parsing):** Tokenizes the query text into terms.
 - **$f_3(x)$ (Comparison & Ranking):** Computes match scores using exact keyword matching, Jaccard similarity, or Levenshtein distance (for fuzzy search).
 
-::div{.callout-amber.p-4.mt-10}
 
-**Limitations:** 
+::Card{title="Limitations" color="warning" v-click="+1"}
 - Searching multiple words requires complex set union/intersection operations.
 - **Language is complex:** synonyms, word variations (tense, gender, plural,...), polysemy, etc.
-
 ::
 
 ---
 layout: two-cols-header
 ---
 
-# 1.3 Vector Search
+## 1.3 Vector Search
 
 ::left::
 
@@ -104,13 +113,11 @@ layout: two-cols-header
 
 - $f_1(x)$ and $f_2(x)$ are the **same**: a neural network that computes high-dimensional embeddings from strings.
 
-::div{.callout-amber.p-4.mb-10} 
-Don't worry! We will dive deep into this in the next section!
+::Card{title="Don't worry!" color="important"}
+We will dive deep into this in the next section!
 ::
 
-- $f_3(x)$ is a similarity function. 
-
-The most used in practice is the **cosine similarity**:
+- $f_3(x)$ is a similarity function. The most used in practice is the **cosine similarity**:
 
 $$ \text{similarity} = \cos(\theta) = \frac{\vec{A} \cdot \vec{B}}{\|\vec{A}\| \|\vec{B}\|} $$
 
@@ -119,23 +126,27 @@ $$ \text{similarity} = \cos(\theta) = \frac{\vec{A} \cdot \vec{B}}{\|\vec{A}\| \
 layout: section
 ---
 
-# 2. Embeddings & Sentence Transformers
+# Embeddings & Sentence Transformers
 
 ---
 layout: two-cols-header
 ---
 
-# 2.1 What is an embedding?
+## 2.1 What is an embedding?
 
 ::left::
 
-- Feature vector **extracted** from a neural network model to **represent input data**.
-- Can represent words, sentences, documents, images, etc.
-- Captures relationships between input data (**representational learning**).
+<div class="text-sm">
 
-::div{.callout-amber.p-4.mb-10}
+- **Numerical representation** of a text, image, audio, etc,
+- As a vector of floating-point numbers.
+- Projects high-dimensional data into a lower-dimensional space 
+- where **semantic meaning is encoded geometrically**. 
 
-**Example:** VirusTotal - Scan IP to get report:
+</div>
+
+::Card{title="Example" color="success"}
+`VirusTotal - Scan IP to get report`
 
 Vector representation:
 
@@ -144,7 +155,6 @@ Vector representation:
 ```
 
 Image representation:
-
 <img src="./public/vector0.png" class="w-full rounded shadow" />
 
 ::
@@ -158,7 +168,7 @@ Embeddings in 3 mins:
 layout: two-cols-header
 ---
 
-# 2.2 Representational Learning: Example with Words
+## 2.2 Representational Learning: Example with Words
 
 ::left::
 
@@ -176,27 +186,29 @@ layout: two-cols-header
 layout: default
 ---
 
-# 2.3 Vector Similarities
+## 2.3 Vector Similarities
 
 <img src="./public/embeddings_pair_similarities.png" class="w-full rounded shadow" alt="Embeddings pair similarities"/>
 
 
 ---
 layout: default
+class: text-center
 ---
 
-# 2.4 Interactive Similarity Graph
+## 2.4 Interactive Similarity Graph
 
-<iframe src="./similarities.html" class="w-full h-8/10 rounded shadow" />
+Zoom/Pan to interact. 120 textual descriptions. Edges are drawn if similarity &gt; 0.78.
 
-Zoom/Pan/Interact with the Similarity Graph. 120 descriptions. Edges are drawn if similarity &gt; 0.78.
-<a href="./similarities.html" target="_blank" class="btn-blue">Open fullscreen</a>
+<iframe src="./similarities.html" class="h-75 w-full rounded shadow" />
+
+<a href="./similarities.html" target="_blank" class="mx-auto">Open fullscreen</a>
 
 ---
 layout: two-cols-header
 ---
 
-# 2.5 The Baseline: What is BERT?
+## 2.5 The Baseline: What is BERT?
 
 ::left:: 
 
@@ -219,15 +231,14 @@ nltk.word_tokenize("At eight o'clock on Thursday morning
 //  'morning', 'Arthur', 'did', "n't", 'feel',
 //  'very', 'good', '.']
 ```
-<a href="https://huggingface.co/blog/bert-101" target="_blank" class="btn-blue mt-10">🤗 BERT 101 on Hugging Face</a>
+<a href="https://huggingface.co/blog/bert-101" target="_blank" class="mt-10">🤗 BERT 101 on Hugging Face</a>
 
 
 ---
-layout: center
+layout: default
 ---
 
-# 2.6 From BERT to Sentence Transformers
-
+## 2.6 From BERT to Sentence Transformers
 
 - **BERT Limitation:** Vanilla BERT yields poor sentence embeddings directly (requires fine-tuning or pooling).
 
@@ -239,8 +250,7 @@ layout: center
   - OpenAI (`text-embedding-3-small`), Cohere Embed, Voyage AI.
   - Return high-quality, dense vectors with minimal setup.
 
-
-<a href="https://huggingface.co/sentence-transformers" target="_blank" class="btn-blue mt-10">
+<a href="https://huggingface.co/sentence-transformers" target="_blank" class="mx-auto mt-8">
   🤗 Hugging Face Sentence Transformers
 </a>
 
@@ -248,20 +258,20 @@ layout: center
 layout: section
 ---
 
-# 3. Vector Databases & SDK Demos
+# Vector Databases & SDK Demos
 
 ---
 layout: two-cols-header
 ---
 
-# 3.1 Vector Databases & Pinecone
+## 3.1 Vector Databases & Pinecone
 
 ::left::
 
 - **Store & Index:** High-dimensional embeddings.
 - **Query & Similarity:** Compare query vectors using Cosine distance.
 - **Retrieve:** Return top-k closest matches to augment LLM context.
-- **Popular options**: `Pinecone`, `Qdrant`, `Milvus`, `ChromaDB`, `PGVector`, `Weaviate`.
+- Popular options: :badge[Pinecone], :badge[Qdrant], :badge[Milvus], :badge[ChromaDB], :badge[PGVector], :badge[Weaviate].
 
 ::right::
 
@@ -271,10 +281,10 @@ Pinecone interface example:
 
 
 ---
-layout: center
+layout: default
 ---
 
-# 3.2 Demo: Compute embeddings
+## 3.2 Demo: Compute embeddings
 
 ```python
 from sentence_transformers import SentenceTransformer
@@ -295,11 +305,11 @@ embedding = model.encode([
 layout: two-cols-header
 ---
 
-# 3.3 Demo: Pinecone - Fill the DB
+## 3.3 Demo: Pinecone - Fill the DB
 
 ::left::
 
-## 1. Create Index
+1. Create Index
 
 ```python
 from pinecone import (
@@ -321,7 +331,7 @@ pc.create_index(
 
 ::right::
 
-## 2. Upsert Data
+2. Upsert Data
 
 ```python
 index = pc.Index('operations-id')
@@ -345,11 +355,11 @@ index.upsert(vectors=vectors)
 layout: two-cols-header
 ---
 
-# 3.4 Demo: Pinecone - Query against an embedding
+## 3.4 Demo: Pinecone - Query against an embedding
 
 ::left::
 
-## 3. Create the query embedding
+3. Create the query embedding
 
 ```js
 import { Pinecone } from
@@ -368,7 +378,7 @@ const vector = await getEmbedding(
 
 ::right::
 
-## 4. Search & Response
+4. Search & Response
 
 ```js
 const response = await index.query({
@@ -388,10 +398,18 @@ layout: center
 class: text-center
 ---
 
-# Thanks! 🚀
+# 🚀 Thanks!
+
+<div class="max-w-lg mx-auto text-left mt-6 text-sm leading-relaxed">
+
+- :badge[Semantic Search] Matches conceptual meaning over exact keywords.
+- :badge[Embeddings] Numerical vectors representing semantic concepts geometrically.
+- :badge[Vector Databases] Index and retrieve nearest-neighbors at scale.
+
+</div>
 
 <br>
 <br>
 
-<a href="/blog/presentations/" class="btn-blue">Back to Presentations</a>
+<a href="/blog/presentations/">Back to Presentations</a>
 

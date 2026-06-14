@@ -1,0 +1,6 @@
+{
+  "name": "slidev-addon-common",
+  "version": "1.0.0",
+  "type": "module",
+  "slidev": {}
+}
