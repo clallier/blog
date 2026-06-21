@@ -62,15 +62,21 @@ layout: two-cols-header
 
 ## Retrieval-Augmented Generation (RAG)
 
+
 ::left::
+
+<v-clicks>
 
 - **LLM Limitations:** LLMs lack private, real-time, or domain-specific context. They hallucinate when they don't know the answer.
 - **The RAG Solution:**
   1. **Retrieve:** Find relevant context in an external database.
   2. **Augment:** Paste that context into the LLM prompt.
   3. **Generate:** Ask the LLM to answer using only the provided context.
+</v-clicks>
 
 ::right::
+
+<div v-click="3">
 
 **Concept Prompt:**
 
@@ -78,10 +84,13 @@ layout: two-cols-header
 Answer based ONLY on the context below:
 ------
 Context:
-- MS Teams: 'Create messages in a channel'
+- MS Teams API Endpoint: 'create_messages_in_a_channel'
+- Slack API Endpoint: 'send_message'
 ------
 Question: How to write on Teams?
 ```
+</div>
+
 
 ---
 layout: section
@@ -121,18 +130,23 @@ layout: two-cols-header
 
 ::left::
 
+<div v-click="1">
+
 - **Dense Vector Search:**
   - Represents concepts & synonyms (e.g. "how to write" $\rightarrow$ `create message`).
   - *Failure case:* Exact words, serial numbers, SKU IDs, or function names (e.g. `OPER-93a0`).
+</div>
+<div v-click="2">
 
 - **Sparse Lexical Search (BM25):**
   - Matches exact character sequences (TF-IDF based).
   - *Failure case:* Conceptual variations and synonyms.
-- **Hybrid Search:** Query both and merge results using **RRF (Reciprocal Rank Fusion)**.
+
+</div>
 
 ::right::
 
-::Card{title="Hybrid Search (RRF)" color="success"}
+::Card{title="Hybrid Search using Reciprocal Rank Fusion (RRF)" color="success" v-click="3"}
 
 $$ \text{Score}(d) = \sum_{m \in M} \frac{1}{k + r_m(d)} $$
 
@@ -148,26 +162,32 @@ Where:
 
 ---
 layout: two-cols-header
+class: text-sm
 ---
 
 ## 3.2 Bi-Encoder vs. Cross-Encoder
 
 ::left::
 
+<div v-click="1">
+
 - **Bi-Encoder (Vector DB style):**
   - Computes query & document embeddings *independently*.
   - *Pros:* Fast and scalable - $O(1)$ query time using index search.
   - *Cons:* Lacks token-to-token attention.
+</div>
   
+<div v-click="2">
 
 - **Cross-Encoder (Reranker style):**
   - Processes query & document *together*.
   - *Pros:* Highly accurate - full self-attention across query & doc.
   - *Cons:* Extremely slow for database scale - $O(N)$.
+</div>
 
 ::right::
 
-::Card{title="Reranker Concept" color="success"}
+::Card{title="Reranker Concept" color="success" v-click="3"}
 
 `[Query + Doc]` $\rightarrow$ `[Transformer]` $\rightarrow$ `[Score]`
 
@@ -192,27 +212,31 @@ rankings = model.rank(query, documents)
 
 ---
 layout: two-cols-header
+class: text-sm
 ---
 
 ## 3.3 The Chunking Challenge
 
 ::left::
 
-<div class="text-sm">
+<div v-click="1">
 
 - **Why do we chunk:**
   - LLMs have token limits (typically 4k - 128k tokens).
   - Embedding models too have token limits (typically 512 - 8192 tokens).
   - Long text dilutes the semantic focus of embeddings.
+</div>
+
+<div v-click="2">
+
 - **Chunking parameters:**
   - **Chunk Size:** Small chunks (precise but lose context) vs. Large chunks (rich context but diluted representation).
   - **Overlap:** Repeating tokens between consecutive chunks to avoid cutting off key sentences.
-
 </div>
 
 ::right::
 
-::Card{title="Strategies" color="info"}
+::Card{title="Strategies" color="info" v-click="3"}
 
 - **Metadata-based:** Prepending metadata to chunks for better context.
 - **Hierarchical chunking:** Keep "parent-chain" context from higher-level sections (titles, sub-titles, current section summary, etc. for each paragraph).

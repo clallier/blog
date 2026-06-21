@@ -1,0 +1,34 @@
+/* ==========================================================================
+   Syntax Highlighting Colors
+   Responsive: Monokai (Dark Mode) / High-Contrast Light (Light Mode)
+   ========================================================================== */
+
+/* --- DARK MODE (Default) --- */
+.highlight {
+    background: var(--minima-code-background-color);
+    color: var(--minima-text-color);
+}
+.highlight .c, .highlight .cm, .highlight .c1, .highlight .cs { color: #75715e; font-style: italic; } /* Comments */
+.highlight .err { color: #960050; background-color: #1e0010; } /* Errors */
+.highlight .k, .highlight .o, .highlight .ow, .highlight .nt { color: #f92672; font-weight: bold; } /* Keywords & Operators & Tags */
+.highlight .l, .highlight .ld, .highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .mo, .highlight .il { color: #ae81ff; } /* Numbers & Literals */
+.highlight .n, .highlight .p, .highlight .w { color: #f8f8f2; } /* Normal Text / Punctuation */
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .se, .highlight .sh, .highlight .si, .highlight .sx, .highlight .sr, .highlight .s1, .highlight .ss { color: #e6db74; } /* Strings */
+.highlight .na, .highlight .nc, .highlight .nd, .highlight .ne, .highlight .nf, .highlight .nx { color: #a6e22e; } /* Functions & Classes & Attributes */
+.highlight .nb, .highlight .bp, .highlight .no, .highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi { color: #66d9ef; } /* Builtins & Variables & Constants */
+.highlight .gd { color: #f92672; background-color: rgba(249, 38, 114, 0.15); } /* Deleted */
+.highlight .gi { color: #a6e22e; background-color: rgba(166, 226, 46, 0.15); } /* Inserted */
+
+/* --- LIGHT MODE --- */
+@media (prefers-color-scheme: light) {
+    .highlight .c, .highlight .cm, .highlight .c1, .highlight .cs { color: #7a7a8a; font-style: italic; } /* Comments */
+    .highlight .err { color: #a61717; background-color: #e3d2d2; } /* Errors */
+    .highlight .k, .highlight .o, .highlight .ow, .highlight .nt { color: #ff3399; font-weight: bold; } /* Keywords & Operators & Tags (Tinacious Pink) */
+    .highlight .l, .highlight .ld, .highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .mo, .highlight .il { color: #9933ff; } /* Numbers & Literals (Tinacious Purple) */
+    .highlight .n, .highlight .p, .highlight .w { color: #1d1e2c; } /* Normal Text / Punctuation */
+    .highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .se, .highlight .sh, .highlight .si, .highlight .sx, .highlight .sr, .highlight .s1, .highlight .ss { color: #00a352; } /* Strings (Tinacious Green) */
+    .highlight .na, .highlight .nc, .highlight .nd, .highlight .ne, .highlight .nf, .highlight .nx { color: #0088cc; font-weight: bold; } /* Functions & Classes (Tinacious Cyan/Blue) */
+    .highlight .nb, .highlight .bp, .highlight .no, .highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi { color: #e65c00; } /* Builtins & Variables (Tinacious Orange) */
+    .highlight .gd { color: #b31d28; background-color: #ffeef0; } /* Deleted */
+    .highlight .gi { color: #22863a; background-color: #f0fff4; } /* Inserted */
+}

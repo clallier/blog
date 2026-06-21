@@ -1,0 +1,9 @@
+<details class="custom-collapsible">
+  <summary class="custom-collapsible-summary">
+    <span class="custom-collapsible-title">{{ include.title }}</span>
+    <span class="custom-collapsible-icon"></span>
+  </summary>
+  <div class="custom-collapsible-content">
+    {{ include.content | markdownify }}
+  </div>
+</details>

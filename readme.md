@@ -22,7 +22,7 @@ Creative and technical exploration. This repository contains the source code for
 
 ### 3. Dev & Preview
 - Run `bundle exec jekyll serve --livereload` to launch locally.
-- Or single line: `clear && eval "$(rbenv init -)" && bundle exec jekyll serve --livereload`
+- Or single line: `clear && eval "$(rbenv init -)" && bundle exec jekyll serve`
 - Check `http://127.0.0.1:4000/blog/`.
 
 ### 4. Deploy
@@ -48,7 +48,3 @@ Keep `resume.md` and Typst files in lockstep:
 - **Theme**: Minima 3.0 (Remote)
 - **Plugins**: `seo-tag`, `sitemap`, `feed`, `titles-from-headings`, `jemoji`.
 
-## Design Notes
-- **Dark Mode**: Cyberpunk palette in `_sass/minima/custom-variables.scss`.
-- **Post Cards**: Glassmorphism + Elastic Wobble in `_includes/custom-head.html`.
-- **Modular**: `header.html` & `footer.html` use native Minima 3 logic + `custom-head.html`.

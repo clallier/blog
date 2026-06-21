@@ -1,22 +1,23 @@
 :root {
-    --minima-brand-color: #01cdfe;
-    --minima-brand-color-light: #ff71ce;
-    --minima-brand-color-dark: #b300b3;
-    --minima-site-title-color: #ffffff;
-    --minima-text-color: #d4d1d1;
-    --minima-background-color: #1a1a2e;
-    --minima-code-background-color: #1a141e;
-    --minima-link-base-color: #01cdfe;
-    --minima-link-visited-color: #b967ff;
-    --minima-link-hover-color: #05ffa1;
-    --minima-border-color-01: #424950;
-    --minima-border-color-02: #21262d;
-    --minima-border-color-03: #ff71ce;
-    --minima-table-text-color: #e0e0e0;
-    --minima-table-zebra-color: #161b22;
-    --minima-table-header-bg-color: #0d1117;
-    --minima-table-header-border: #30363d;
-    --minima-table-border-color: #30363d;
+    --minima-brand-color: #00bfffff;
+    --minima-brand-color-dimmed: #b2b2b2ff;
+    --minima-brand-color-light: #ff3399ff;
+    --minima-brand-color-dark: #cc66ffff;
+    --minima-site-title-color: #fcfcfaff;
+    --minima-text-color: #fcfcfaff;
+    --minima-background-color: #1a1a2eff;
+    --minima-code-background-color: #1919194d;
+    --minima-link-base-color: #00bfffff;
+    --minima-link-visited-color: #cc66ffff;
+    --minima-link-hover-color: #00d364ff;
+    --minima-border-color-01: #3d3e4cff;
+    --minima-border-color-02: #282936ff;
+    --minima-border-color-03: #ff3399ff;
+    --minima-table-text-color: #fcfcfaff;
+    --minima-table-zebra-color: #282936ff;
+    --minima-table-header-bg-color: #181824ff;
+    --minima-table-header-border: #3d3e4cff;
+    --minima-table-border-color: #3d3e4cff;
 
     /* Card System */
     --minima-card-bg: rgba(255, 255, 255, 0.05);
@@ -24,37 +25,32 @@
     --minima-card-border: rgba(255, 255, 255, 0.1);
 
     /* Math Highlights */
-    --math-box-text: #000000;
+    --math-box-text: #000000ff;
 }
 
 @media (prefers-color-scheme: light) {
     :root {
-        --minima-brand-color: #333333;
-        --minima-brand-color-light: #f5f5f5;
-        --minima-brand-color-dark: #111111;
-        --minima-site-title-color: #222222;
-        --minima-text-color: #1a1a1a;
-        --minima-background-color: #ffffff !important;
-        --minima-code-background-color: #f8f9fa;
-        --minima-link-base-color: #333333;
-        --minima-link-visited-color: #555555;
-        --minima-link-hover-color: #000000;
-        --minima-border-color-01: #dddddd;
-        --minima-border-color-02: #eeeeee;
-        --minima-border-color-03: #333333;
-        --minima-table-text-color: #333333;
-        --minima-table-zebra-color: #fafafa;
-        --minima-table-header-bg-color: #f1f1f1;
-        --minima-table-header-border: #dddddd;
-        --minima-table-border-color: #eeeeee;
+        --minima-brand-color-dimmed: #2b2b2bff;
+        --minima-site-title-color: #1d1e2cff;
+        --minima-text-color: #1d1e2cff;
+        --minima-background-color: #fcfcfaff;
+        --minima-code-background-color: #e1e4e833;
+        --minima-border-color-01: #ddddddff;
+        --minima-border-color-02: #eeeeeeff;
+        --minima-table-text-color: #1d1e2cff;
+        --minima-table-zebra-color: #f5f5f3ff;
+        --minima-table-header-bg-color: #e9e9e7ff;
+        --minima-table-header-border: #ddddddff;
+        --minima-table-border-color: #ddddddff;
 
-        /* Light Mode Cards */
-        --minima-card-bg: #ffffff;
-        --minima-card-bg-hover: #fdfdfd;
-        --minima-card-border: #dddddd;
+        /* Card System */
+        --minima-card-bg: rgba(0, 0, 0, 0.03);
+        --minima-card-bg-hover: rgba(0, 0, 0, 0.05);
+        --minima-card-border: rgba(0, 0, 0, 0.2);
+
 
         /* Light Mode Math */
-        --math-box-text: #111111;
+        --math-box-text: #1d1e2cff;
     }
 }
 
