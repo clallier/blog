@@ -199,12 +199,17 @@ export class HtmlGraphConnector {
     if (el.hasAttribute('step')) {
       options.hide = true;
     }
+
+    const text = options.middleLabel
+    options.middleLabel = undefined
+
     try {
       const line = new window.LeaderLine(options);
+      line.middleLabel = text
       this.lines.push(line);
       return line;
     } catch (e) {
-      console.warn(`Failed to connect:`, e);
+      console.warn(`Failed to connect:`, e, `options:`, options);
       return null;
     }
   }
@@ -236,6 +241,7 @@ export class HtmlGraphConnector {
     indicator.className = 'step-indicator';
     const btnNext = document.createElement('button');
     btnNext.innerHTML = 'Next &gt;';
+
     controls.appendChild(btnPrev);
     controls.appendChild(indicator);
     controls.appendChild(btnNext);
@@ -342,10 +348,10 @@ export class HtmlGraphConnector {
     if (Object.keys(descriptions).length > 0) {
       const wrapper = document.createElement('div');
       wrapper.className = 'graph-step-description-wrapper';
-      
+
       descriptionPanel = document.createElement('div');
       descriptionPanel.className = 'graph-step-description';
-      
+
       wrapper.appendChild(descriptionPanel);
       graphEl.appendChild(wrapper);
     }
@@ -390,7 +396,7 @@ export class HtmlGraphConnector {
         if (!line.start || !line.end) return;
 
         const isHiddenByParent = line.start.closest('details:not([open])') !== null ||
-                                 line.start.getBoundingClientRect().width === 0;
+          line.start.getBoundingClientRect().width === 0;
 
         // A line is allowed to be visible if it is not hidden by a closed details parent,
         // and it is the active step (or has no step controls)
