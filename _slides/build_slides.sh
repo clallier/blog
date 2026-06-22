@@ -12,7 +12,8 @@ for dir in "$SCRIPT_DIR"/*; do
     if [ "$name" = "_slidev_addons" ] || [ "$name" = "__pycache__" ]; then
       continue
     fi
-    echo "Building Slidev presentation: $name"
+    echo ">>> Cleaning and building Slidev presentation: $name"
+    rm -rf "$SCRIPT_DIR/../presentations/$name"
     npx @slidev/cli build "$dir/slides.md" --out "$SCRIPT_DIR/../presentations/$name" --base "./"
   fi
 done

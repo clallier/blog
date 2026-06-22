@@ -62,17 +62,22 @@ layout: two-cols-header
 
 ## Retrieval-Augmented Generation (RAG)
 
-
 ::left::
 
-<v-clicks>
+<div v-click="1">
 
 - **LLM Limitations:** LLMs lack private, real-time, or domain-specific context. They hallucinate when they don't know the answer.
+
+</div>
+
+<div v-click="2">
+
 - **The RAG Solution:**
   1. **Retrieve:** Find relevant context in an external database.
   2. **Augment:** Paste that context into the LLM prompt.
   3. **Generate:** Ask the LLM to answer using only the provided context.
-</v-clicks>
+
+</div>
 
 ::right::
 
@@ -89,8 +94,8 @@ Context:
 ------
 Question: How to write on Teams?
 ```
-</div>
 
+</div>
 
 ---
 layout: section
@@ -135,7 +140,9 @@ layout: two-cols-header
 - **Dense Vector Search:**
   - Represents concepts & synonyms (e.g. "how to write" $\rightarrow$ `create message`).
   - *Failure case:* Exact words, serial numbers, SKU IDs, or function names (e.g. `OPER-93a0`).
+
 </div>
+
 <div v-click="2">
 
 - **Sparse Lexical Search (BM25):**
@@ -175,6 +182,7 @@ class: text-sm
   - Computes query & document embeddings *independently*.
   - *Pros:* Fast and scalable - $O(1)$ query time using index search.
   - *Cons:* Lacks token-to-token attention.
+
 </div>
   
 <div v-click="2">
@@ -183,6 +191,7 @@ class: text-sm
   - Processes query & document *together*.
   - *Pros:* Highly accurate - full self-attention across query & doc.
   - *Cons:* Extremely slow for database scale - $O(N)$.
+
 </div>
 
 ::right::
@@ -225,6 +234,7 @@ class: text-sm
   - LLMs have token limits (typically 4k - 128k tokens).
   - Embedding models too have token limits (typically 512 - 8192 tokens).
   - Long text dilutes the semantic focus of embeddings.
+
 </div>
 
 <div v-click="2">
@@ -232,6 +242,7 @@ class: text-sm
 - **Chunking parameters:**
   - **Chunk Size:** Small chunks (precise but lose context) vs. Large chunks (rich context but diluted representation).
   - **Overlap:** Repeating tokens between consecutive chunks to avoid cutting off key sentences.
+
 </div>
 
 ::right::

@@ -287,9 +287,14 @@
         padding: 0.4rem 1rem;
         user-select: none;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        z-index: 20 !important;
+        position: relative;
+        flex-shrink: 0;
     }
 
     .graph-controls button {
+        -webkit-appearance: none;
+        appearance: none;
         background: transparent;
         border: none;
         color: var(--minima-brand-color-light);
@@ -346,6 +351,9 @@
         min-height: 6rem;
         display: flex;
         align-items: flex-start;
+        flex-shrink: 0;
+        z-index: 20 !important;
+        position: relative;
     }
 
     .graph-step-description {

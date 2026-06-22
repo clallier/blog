@@ -43,6 +43,18 @@ Keep `resume.md` and Typst files in lockstep:
 
 ---
 
+## Build presentations locally
+Add a new presentation:
+1.  Add a new folder in `_slides`.
+2.  Add a `slides.md` file in the folder.
+3.  Run the build script:
+    ```bash
+    cd _slides && ./build_slides.sh
+    ```
+3.  The script automatically build sli.dev presentations in `presentions/`.
+
+---
+
 ## Tech Stack
 - **Engine**: Jekyll 4.3.4
 - **Theme**: Minima 3.0 (Remote)
