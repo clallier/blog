@@ -8,7 +8,7 @@ image: /assets/img/maddpg.png
 
 # Exploring Swarm Dynamics with Multi-Agent Reinforcement Learning
 
-![Multi-Agent Environment](https://github.com/clallier/multi-agent-circle-sandbox/raw/main/docs/gifs/experiment_5.gif)
+![Multi-Agent Environment](https://github.com/clallier/multi-agent-circle-sandbox/raw/main/docs/gifs/experiment_11.gif)
 
 During my internship in Computational Neuroscience for my Master 2 at Inserm, I worked on Human-Robot Cooperation (HRC) under the supervision of [Pr. Peter Ford Dominey](https://u1093.ube.fr/author/peter-dominey/), where a human and a robot were agents cooperating toward a common goal.
 
@@ -23,7 +23,7 @@ In this post, we'll apply this algorithm on a small sandbox environment and expl
 1. **The Theory**: The core concepts of MADDPG (Centralized Training, Decentralized Execution).
 2. **The Environment**: The underlying Multi-Agent Particle Environment.
 3. **The Implementation**: A deep dive into the code (MLP architectures, Gumbel-Softmax differentiable sampling, and stable Bellman updates via Target Networks).
-4. **The Experiments**: A summary of our 10 incremental scenarios, accompanied by animations of the learned behaviors.
+4. **The Experiments**: A summary of our 11 incremental scenarios, accompanied by animations of the learned behaviors.
 5. **Learnings & Conclusion**: Our key takeaways, mathematical insights on reward shaping, and macOS Apple Silicon compatibility adjustments.
 
 ## 1. The Theory: How MADDPG Works
@@ -1040,6 +1040,36 @@ This final phase addresses the instabilities and issues observed in previous exp
   1. The Critic Loss (`q_loss`) moved from `0.18` to `0.24`, a bit higher than in Exp. 9, likely due to the increased complexity introduced by considering other agents' positions and velocities.
   2. The rewards are very comparable (`199` vs `197`), meaning both setups achieve similar tracking performance.
   3. The Policy Loss (`p_loss`) drops faster early on and converges to a more negative value in Exp. 10 (`-14.35` vs `-13.95`). Since the policy loss represents the negative expected Q-value ($-Q$), this indicates that having access to neighbors' positions and velocities allows the Actor to find high-value coordination strategies faster, with the Critic predicting higher long-term expected returns due to reduced collision interference! 🎉
+  
+  * **Next step**: * To improve the cohesion of our agents and avoid collisions, we could give them the whole picture of the positions and velocities of all other agents. However, introducing this global information directly into the local observation space of each agent brings major theoretical and practical issues:
+  1. **Loss of CTDE Benefits**: Since all agents share the same complete view of every other agent's state, there is no longer a meaningful distinction between what the local Actor sees and what the Centralized Critic sees. This negates the primary benefit of the Centralized Training with Decentralized Execution (CTDE) paradigm in MADDPG.
+  2. **Linear State-Space Explosion**: If we add more agents, the size of the local observation vectors grows linearly with the size of the flock, meaning this approach cannot scale to large swarms.
+  3. **Unrealistic Sensing Assumptions**: Having access to the real-time exact positions and velocities of the entire flock is impractical under real conditions (e.g., deployed physical drones, which only have local sensors or limited communication).
+  4. **Ineffective Collision Avoidance**: Empirically, even when given all the other agents' data, the agents still suffer from frequent, severe collisions, even after a very long training run of 100,000 episodes.
+
+  Let's try to improve our boids approach of our agents and give them only local information of the positions and velocities of their neighbors.
+
+### 4.5. Experiment 11: Scaled Boids Swarm with Local Neighborhood Averages
+
+* **Goal**: Scale up to 10 agents (1 leader and 9 followers) to evaluate true flocking dynamics. To prevent state-space explosion, we compress neighbor observations into local neighborhood averages and formulate a Boids-style reward function to encourage alignment, cohesion, and separation.
+* **Observation Space** (13 dimensions):
+  * Self velocity: `vx, vy`
+  * Relative offset to target (active landmark or leader): `dx_target, dy_target`
+  * Goal active state: `lm_act`
+  * Relative offset and velocity difference (angle and magnitude) to the leader: `dx_leader, dy_leader, dl_angle, dl_mag`
+  * Compressed local neighbor average relative position and average velocity differences (angle and magnitude): `n_pos_x, n_pos_y, n_angle, n_mag`
+* **Reward**:
+  * Tracking reward: $0.4 \times e^{-d/\sigma_{\text{dist}}}$
+  * Coherence reward: $0.3 \times e^{-d_{\text{avg}}/\sigma_{\text{cohere}}}$
+  * Additive velocity alignment reward: $0.15 \times e^{-|n_{\text{angle}}|/\sigma_{\text{angle}}} + 0.15 \times e^{-|n_{\text{mag}}|/\sigma_{\text{mag}}}$
+  * Separation penalty: $-1.0 \times e^{-d_{\text{avg}}/\sigma_{\text{separate}}}$ if $d_{\text{avg}} < \text{SEPARATION\_RADIUS}$
+* **Results**:
+
+  ![Experiment 11 Behavior](https://github.com/clallier/multi-agent-circle-sandbox/raw/main/docs/gifs/experiment_11.gif)
+
+  ![Exp. 10 vs Exp. 11 Comparison]({{ "/assets/img/maddpg/exp_10_vs_exp_11.png" | relative_url }})
+
+  Despite scaling the swarm to 9 agents, the state compression allowed training to converge efficiently in just 20k episodes, achieving an accumulated reward of **544.0** (representing about 60% of the maximum theoretical reward per agent). Exposing only average local metrics proved highly robust, and the swarm learned cohesive flocking behavior with almost zero inter-agent collisions.
 
 ### 4.5. Experiment Summary & Results
 
@@ -1055,106 +1085,99 @@ This final phase addresses the instabilities and issues observed in previous exp
 | **8** | Chain of 3 followers + 3 goals + shared active goal | Local velocity + active goal offset & state | Same as Exp. 6 | 100k | 349 | <img src="https://github.com/clallier/multi-agent-circle-sandbox/raw/main/docs/gifs/experiment_8.gif" width="180" /> |
 | **9** | Chain of 3 followers + 3 goals + Bounded Exponential Decay rewards | Relative velocity (angle/magnitude) + target & active goal offsets | Weighted: $0.7 \cdot e^{-d/\sigma_d}$ + $0.3 \cdot \text{angle\_difference}$ | 100k | 197 | <img src="https://github.com/clallier/multi-agent-circle-sandbox/raw/main/docs/gifs/experiment_9.gif" width="180" /> |
 | **10** | Chain of 3 followers + 3 goals + mutual agent collision awareness | Same as Exp. 9 + other agents' relative offsets & velocities | Same as Exp. 9 | 100k | 199 | <img src="https://github.com/clallier/multi-agent-circle-sandbox/raw/main/docs/gifs/experiment_10.gif" width="180" /> |
+| **11** | 10-agent boids swarm (1 leader + 9 followers) | Target relative position, leader metrics, average neighbor relative pos/alignment/speed | 40% target tracking, 15% neighbor angle alignment, 15% neighbor speed alignment, 30% coherence, separation penalty | 20k | 544 | <img src="https://github.com/clallier/multi-agent-circle-sandbox/raw/main/docs/gifs/experiment_11.gif" width="180" /> |
 
 > * **target**: the leader or the previous agent in the chain.
 > * **dx, dy**: target position - agent position.
 > * **Acc. Reward**: shows the accumulated rewards for all agents (which can be divided by the number of agents to get the average accumulated reward per agent).
-> * **Max Theoretical Reward**: Unbounded for log-based reward functions (Experiments 1–8) since $-\ln(d) \to +\infty$ as $d \to 0$. For Exp. 9 & 10, the reward function is bounded between 0 and 1 per step per agent, giving a strict maximum of $1.0 \times 100 \text{ steps} \times 3 \text{ followers} = 300.0$.
+> * **Max Theoretical Reward**: Unbounded for log-based reward functions (Experiments 1–8) since $-\ln(d) \to +\infty$ as $d \to 0$. For Exp. 9 & 10, the reward function is bounded between 0 and 1 per step per agent, giving a strict maximum of $1.0 \times 100 \text{ steps} \times 3 \text{ followers} = 300.0$. For Exp. 11, with 9 followers, the strict maximum is $9.0 \times 100 = 900.0$.
 
 
 ### 4.6 Under the Hood: Observations and Rewards
 Crafting the observation space and the reward function is where the real RL magic (and frustration) happens.
 
-For observations, each agent needs to know the relative distance to its target (d_pos), the difference in their velocities (dv_angle, dv_mag), and the state of their specific landmark. Here is a snippet from my 10th experiment:
+For observations, each agent needs to know the relative distance to its target (d_pos), the difference in their velocities (dv_angle, dv_mag), and the state of their specific landmark. Here is a snippet from my 11th experiment:
 
 ```python
 """Builds local observation representation for an agent."""
-d_pos, lm_d_pos = (
-    np.array([0, 0]),
-    np.array([0, 0]),
-)
-dv_mag, dv_angle, lm_act = 0, 0, 0
-
-# current agent velocity
-vx = agent.state.p_vel[0]
-vy = agent.state.p_vel[1]
-
-# target distance
-target_id = agent.id - 1
-target = self.find_agent_by_id(world, target_id)
-if target:
-    self.fix_agent_vel(target)
-    # delta x/y
-    d_pos = target.state.p_pos - agent.state.p_pos
-    # delta vel (signed angle and magnitude)
-    dv_angle, dv_mag = self.get_angle_signed_and_mag(
-        target.state.p_vel, agent.state.p_vel
-    )
-
-# active landmark
+# Gathers velocities, landmark relative position/activation,
+# leader relative position/velocity matching parameters, and
+# neighbor average position/velocity matching parameters.
 lm = self.get_last_active_landmark(world)
-if lm:
-    lm_d_pos = lm.state.p_pos - agent.state.p_pos
-    lm_act = int(lm.activate)
+lm_d_pos = lm.state.p_pos - agent.state.p_pos if lm else np.zeros(2)
+lm_act = int(lm.activate) if lm else 0
 
-# relative positions of other agents (excluding leader and target agent)
-other_d_pos = []
-other_d_vel = []
-for other in world.agents:
-    if other.id == 0 or other.id == agent.id or other.id == target_id:
-        continue
-    other_d_pos.append(other.state.p_pos - agent.state.p_pos)
-    other_d_vel.append(
-        self.get_angle_signed_and_mag(other.state.p_vel, agent.state.p_vel)
-    )
+leader = self.find_agent_by_id(world, 0)
+self.fix_agent_vel(leader)
+leader_d = leader.state.p_pos - agent.state.p_pos
+l_angle, l_mag = self.get_angle_signed_and_mag(
+    leader.state.p_vel, agent.state.p_vel
+)
 
-# return the complete state
-base_obs = [
-    vx,
-    vy,
-    d_pos[0],
-    d_pos[1],
-    dv_angle,
-    dv_mag,
+n_pos, n_angle, n_mag = self._compute_neighbor_averages(agent, world)
+
+return np.array([
+    agent.state.p_vel[0],
+    agent.state.p_vel[1],
     lm_d_pos[0],
     lm_d_pos[1],
     lm_act,
-]
-for dp in other_d_pos:
-    base_obs.append(dp[0])
-    base_obs.append(dp[1])
-for dv in other_d_vel:
-    base_obs.append(dv[0])
-    base_obs.append(dv[1])
-
-return np.array(base_obs)
+    leader_d[0],
+    leader_d[1],
+    l_angle,
+    l_mag,
+    n_pos[0],
+    n_pos[1],
+    n_angle,
+    n_mag,
+])
 ```
 
 For the reward function, balancing multiple objectives (distance, separation, and alignment) was challenging. We ultimately opted for logarithmic decay to heavily penalize agents when they were too far off track:
 
 ```python
 """compute the reward for one agent"""
-base_reward = 0.0
-# scale param
-sigma_d = 1.0
+# Hyperparameters & Weights
+self.SIGMA_DIST = 1.0
+self.SIGMA_ALIGN_ANGLE = 0.5
+self.SIGMA_ALIGN_MAG = 0.5
+self.SIGMA_COHERE = 1.0
+self.SIGMA_SEPARATE = 0.1
+self.NEIGHBOR_RADIUS = 0.2
+self.SEPARATION_RADIUS = 0.05
 
-# if there is an active goal, reward the agent for being close to it
-landmark = self.get_last_active_landmark(world)
-if landmark:
-    d = self.dist(agent.state.p_pos, landmark.state.p_pos)
-    base_reward = np.exp(-d / sigma_d)
+self.TRACK_WEIGHT = 0.4
+self.ALIGN_ANGLE_WEIGHT = 0.15
+self.ALIGN_MAG_WEIGHT = 0.15
+self.COHERENCE_WEIGHT = 0.3
+self.SEPARATION_WEIGHT = 1.0
 
-# else follow the previous agent 
-else:
-    target_id = agent.id - 1
-    target = self.find_agent_by_id(world, target_id)
-    target_pos = self.estimate_target_pos(agent, target)
-    d = self.dist(agent.state.p_pos, target_pos)
-    r_dist = np.exp(-d / sigma_d)
-    cos_sim = max(0, self.cos_sim(target.state.p_vel, agent.state.p_vel))
-    base_reward = 0.7 * r_dist + 0.3 * cos_sim
+target_pos = self._get_target_pos(agent, world)
+d = self.dist(agent.state.p_pos, target_pos)
+r_track = np.exp(-d / self.SIGMA_DIST)
 
-return base_reward
+if not self._has_neighbors(agent, world):
+    return r_track
+
+n_pos, n_angle, n_mag = self._compute_neighbor_averages(agent, world)
+r_align_angle = np.exp(-abs(n_angle) / self.SIGMA_ALIGN_ANGLE)
+r_align_mag = np.exp(-abs(n_mag) / self.SIGMA_ALIGN_MAG)
+d_avg = self._quick_norm(n_pos)
+r_cohere = np.exp(-d_avg / self.SIGMA_COHERE)
+# r_separate is a penalty  [0, -1]
+r_separate = (
+    np.exp(-d_avg / self.SIGMA_SEPARATE)
+    if d_avg < self.SEPARATION_RADIUS
+    else 0.0
+)
+
+return (
+    self.TRACK_WEIGHT * r_track
+    + self.ALIGN_ANGLE_WEIGHT * r_align_angle
+    + self.ALIGN_MAG_WEIGHT * r_align_mag
+    + self.COHERENCE_WEIGHT * r_cohere
+    - self.SEPARATION_WEIGHT * r_separate
+)
 ```
 ---
 
@@ -1189,20 +1212,22 @@ So, how did they learn?
 
 ### Final Conclusion
 
-Over our 10 incremental experiments, we explored how observation representation, reward structure, and cooperative goals impact Multi-Agent Reinforcement Learning using MADDPG. 
+Over our 11 incremental experiments, we explored how observation representation, reward structure, and cooperative goals impact Multi-Agent Reinforcement Learning using MADDPG. 
 
 The key takeaways from this exploration are:
 1. **The Power of Centralized Training with Decentralized Execution (CTDE)**: Training a centralized Critic that sees all agents' observations and actions effectively solves the non-stationarity problem. Once trained, the decentralization of the actors enables independent, real-time control based solely on local sensors.
 2. **The Criticality of Reward Design**: Unbounded logarithmic rewards ($-\ln(d)$) are mathematically unstable when agents overlap perfectly, causing gradient explosion or software crashes. Switching to **Bounded Exponential Decay** ($e^{-d / \sigma}$) maps physical errors to a clean $[0, 1]$ interval, which stabilizes learning gradients.
 3. **Local Reference Frames Matter**: Exposing relative angles and velocities rather than raw global values helps agents generalized coordination behaviors (like chain and circular tracking) much faster.
-4. **Coordination Bottlenecks**: Scaling multi-agent chains introduces delay propagation (the "whip effect"), which can be mitigated by tracking the leader directly or allocating cooperative tasks dynamically (like shared active goals).
-5. **Emergence of Boids-like Behaviors**: The classic rules of flocking (separation, alignment, and cohesion) seem to be able to emerge from reinforcement learning. By structuring reward functions to balance proximity and velocity alignment, we observed coordinated collective behaviors without hardcoding explicit swarm pathing.
+4. **Benefits of Combining Boids Dynamics with RL**: Integrating classical Boids rules into the Multi-Agent RL framework yields three major advantages:
+   * **Global Coherence with Limited Local Sensing**: Compressing observations into local neighborhood averages allowed the swarm to maintain high global coherence with very limited information, drastically improving training convergence time (comparing Exp. 10 vs. Exp. 11).
+   * **Scalability via Fixed Observation Vectors**: Since agents observe average neighbor metrics, the size of the local observation vector remains constant. This allows scaling the swarm size (e.g., from 3 followers in Exp. 10 to 9 in Exp. 11) without increasing state-space dimensionality.
+   * **Fine-Grained Behavior Control**: Individual weights and sigmas for each component provide precise control over collective behavior. The sigmas govern the sensitivity curves (e.g., a lower sigma narrows the high-reward band, allowing sharp gradient response only when close to the target state).
 
 
 ### What's Next?
 This project was a great dive into the world of MARL, but there is still plenty to do:
 
-- **Alternative Observation**: In our last experiment, we used all the global information possible for each agent. Next, we will try to limit the amount of information available to each agent to only their local neighbors to test if they can learn to coordinate with limited information. We will also try to average the position of the neighboring agents to keep the observation state from being too large.
+- **Alternative Observation (Accomplished in Exp. 11)**: Successfully compressed neighbor observations to local neighborhood averages to scale from 3 followers to a 10-agent swarm. Next, we can explore dynamic communication graphs where agents selectively share/request specific states.
 - **Introduce Obstacles**: Adding static or moving obstacles will force the agents to learn dynamic pathing on top of their current coordination and tracking constraints.
 - **Longer Training**: In the complex multi-objective scenarios, we could continue to train for a longer time to see if the chain instabilities eventually smooth out (particularly the last scenario).
 
