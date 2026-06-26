@@ -2,4 +2,6 @@
 
 #cv-section("Profil")
 
-Passionné par la convergence des réseaux de neurones, de la recherche industrielle et de l'ingénierie des données, j'aime concevoir des solutions innovantes et performantes. Actuellement Senior Data Scientist chez Mindflow spécialisé dans les systèmes agentiques, j'interviens de la recherche académique à la mise en production. Mon parcours allie un Doctorat en Graph Machine Learning à une expertise en ingénierie de données cloud (Kafka, Spark, Scala). J'apprécie le travail collaboratif, animé par la curiosité et la résolution de défis industriels complexes.
+Avec 15 ans d'expérience en Data & IA, j'ai un profil T-shaped, alliant une approche pragmatique de l'ingénierie (Clean Code, MLOps, Data Engineering Cloud : Kafka, Spark, Scala) à la rigueur d'un Doctorat en Graph Deep Learning (Recherche académique, Python/PyTorch, Data-visualisation complexe et Évaluation).
+J'ai consacré les 3 dernières années à transformer des architectures de LLM-Harnessing expérimentales en systèmes agentiques robustes, utilisés en production.
+Récemment, mon intérêt s'est tourné vers la sécurité des LLM, les tests de vecteurs d'injection et l'architecture de guardrails.

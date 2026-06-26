@@ -40,6 +40,7 @@ typst compile cv.typ --font-path "$FONT_DIR" --input language=en "$OUTPUT_DIR/Co
 # typst compile letter.typ --font-path "$FONT_DIR" "$OUTPUT_DIR/Corentin_Lallier_Letter_PhantomBuster.pdf"
 # typst compile letter_mirakl.typ --font-path "$FONT_DIR" "$OUTPUT_DIR/Corentin_Lallier_Letter_Mirakl.pdf"
 # typst compile letter_tiine.typ --font-path "$FONT_DIR" "$OUTPUT_DIR/Corentin_Lallier_Letter_Tiine.pdf"
+# typst compile letter_dd.typ --font-path "$FONT_DIR" "$OUTPUT_DIR/Corentin_Lallier_Letter_DataDog.pdf"
 
 # --- Public Versions (Privacy Masked) ---
 typst compile cv.typ --font-path "$FONT_DIR" --input language=fr --input privacy=true "$OUTPUT_DIR/Corentin_Lallier_CV_FR_Public.pdf"

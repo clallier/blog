@@ -1,4 +1,4 @@
-#import "@preview/brilliant-cv:3.3.0": cv-section, cv-entry
+#import "@preview/brilliant-cv:3.3.0": cv-entry, cv-section
 
 #cv-section("Professional Experience")
 
@@ -13,8 +13,8 @@
     [Mentored a talented AI team and shared expertise company-wide on agentic systems, RAG, and search optimization. Supported CSEs and Solution Designers in technical implementation.],
     [Developed an LLM drift monitoring framework (multi-route scenarios, parallel tool usage). Optimized internal search performance via a robust evaluation suite (MRR, F1, and NDCG).],
     [Scaled from €0 to €1.5M ARR since joining; delivered AI solutions for major accounts (Thales, LVMH, Auchan, Doctolib, Hermès, Cloudguard, Savencia, Fast Retailing, Heetch, etc.). #link("https://www.linkedin.com/company/mindflow/")[Mindflow LinkedIn page].],
-    [*Tech Stack:* LiteLLM, Langchain, LangGraph, RAG, tool calls, Bedrock, GPT, Gemini, Claude, Mistral, AWS Cloud]
-  )
+    [*Tech Stack:* LiteLLM, Langchain, LangGraph, RAG, tool calls, Bedrock, GPT, Gemini, Claude, Mistral, AWS Cloud],
+  ),
 )
 
 #cv-entry(
@@ -27,8 +27,8 @@
     [*PhD Research (2020-2023):* Enhanced "sections planning" algorithm by developing graph-oriented heuristics (Attention-based Deep Learning on Graphs) to minimize material waste. Trained models on 100,000+ real nestings using Azure ML, exceeding human expert precision. This is now a live web service used by industrial customers to optimize their production.],
     [*Data Engineering (2017-2020):* Designed and implemented large data pipelines (1000+ events/sec) for massive IoT fleet (Lectra cutters) using Kafka, Spark and Scala. CI/CD workflows on Kubernetes (Docker, Jenkins).],
     [One of the first Data Engineers hired at Lectra, supporting company revenue growth from €350M to €500M+ within a 500-person R&D department. #link("https://www.linkedin.com/company/lectra/")[Lectra LinkedIn page].],
-    [*Tech Stack:* Python, Scala, PyTorch, GNN, Azure ML, Apache Kafka, Spark, Kubernetes, Docker, IoT]
-  )
+    [*Tech Stack:* Python, Scala, PyTorch, GNN, Azure ML, Apache Kafka, Spark, Kubernetes, Docker, IoT],
+  ),
 )
 
 #cv-entry(
@@ -40,8 +40,8 @@
   description: list(
     [*Cdiscount:* Developed counterfeit detection algorithms using NLP and Hadoop (Hive/Spark) to secure the marketplace. Collaborated with the legal team to ensure regulatory compliance.],
     [*Lectra:* Architected clothing pattern recognition tools using Deep Vision and initiated new large-scale data processing pipelines.],
-    [*Tech Stack:* NLP, Computer Vision, Hadoop, Hive, Spark, Java, Scala]
-  )
+    [*Tech Stack:* NLP, Computer Vision, Hadoop, Hive, Spark, Java, Scala],
+  ),
 )
 
 #cv-entry(
@@ -54,11 +54,12 @@
     [*Data Science:* Implemented cloud-native analytics solutions using Python, AWS SageMaker and Google BigQuery for diverse industrial clients: #link("https://www.linkedin.com/company/cibler/")[Cibler], #link("https://www.linkedin.com/company/cdiscount/")[Cdiscount]],
     [*Full-Stack Development:* Developed high-performance web/mobile apps using React, Canvas API, WebRTC and Haxe.],
     [*Game Development:* Engineered 2D/3D games using Unity3D (C\#) and LibGDX. Winner of the #link("https://afjv.com/news/2979_intel-organise-la-codefest-destinee-aux-developpeurs-android.htm")[Android Codefest 2013]. Showcased my game during the Mobile World Congress (MWC) 2014 in Barcelona on the Intel booth.],
-    [*Tech Stack:* AWS, BigQuery, React, Unity3D, C\#, Javascript, WebRTC]
-  )
+    [*Tech Stack:* AWS, BigQuery, React, Unity3D, C\#, Javascript, WebRTC],
+  ),
 )
 
-#pagebreak()
+
+#v(1.2em)
 #cv-entry(
   title: [Project Manager & Software Engineer],
   society: link("https://www.linkedin.com/company/cybertech-computer/")[Cybertek],
@@ -68,20 +69,22 @@
   description: list(
     [Integrated several marketplaces (Amazon, Fnac) and optimized logistics by automating shipping workflows using carrier APIs (UPS, Chronopost). Redesigned the #link("https://www.cybertek.fr/")[e-commerce platform] with responsive design, fuzzy search, and SEO optimization, increasing store visibility and sales by 100%+],
     [Enhanced internal ERP/CRM and data-driven communication strategies to optimize customer retention.],
-    [*Tech Stack:* C\#, SQL Server, .NET, ERP, CRM, SEO, Marketplace APIs]
-  )
+    [*Tech Stack:* C\#, SQL Server, .NET, ERP, CRM, SEO, Marketplace APIs],
+  ),
 )
 
 #cv-entry(
   title: [Software Engineer],
-  society: link("https://www.aerocontact.com/entreprise-aeronautique/societe-nexeya-3566/presentation")[Nexeya - Aero Contact Group],
+  society: link(
+    "https://www.aerocontact.com/entreprise-aeronautique/societe-nexeya-3566/presentation",
+  )[Nexeya - Aero Contact Group],
   logo: image("../assets/logos/groupe_nexeya_logo.jpeg"),
   date: [Oct 2012 - Apr 2013],
   location: [Bordeaux],
   description: list(
     [Developed LYNCEA, a multi-sensor data fusion platform for naval defense. Integrated data acquisition modules and co-developed the high-performance network layer. [#link("https://www.aerocontact.com/videos/91272-lyncea-defense")[Video]]],
-    [*Tech Stack:* C++, Qt, Network Engineering, Embedded Systems]
-  )
+    [*Tech Stack:* C++, Qt, Network Engineering, Embedded Systems],
+  ),
 )
 
 #cv-entry(
@@ -92,8 +95,8 @@
   location: [Bordeaux],
   description: list(
     [Created Java JEE web services for research sharing and developed cross-language APIs (C++, C\#, Java) with a real-time web application.],
-    [*Tech Stack:* Java JEE, C++, C\#, Javascript, Web Services]
-  )
+    [*Tech Stack:* Java JEE, C++, C\#, Javascript, Web Services],
+  ),
 )
 
 #cv-entry(
@@ -105,6 +108,6 @@
   description: list(
     [Object tracking and one-class classification algorithms for video surveillance. Developed video analysis software solutions using C\+\+, Winforms, and MFC in Agile environment. #link("https://www.linkedin.com/company/foxstream/")[Foxstream LinkedIn page]],
     [Engineered network video stream retrieval (OpenCV, Winsockets) and remote usage features.],
-    [*Tech Stack:* C\+\+, OpenCV, Winforms, MFC, Agile, Winsockets]
-  )
+    [*Tech Stack:* C\+\+, OpenCV, Winforms, MFC, Agile, Winsockets],
+  ),
 )
