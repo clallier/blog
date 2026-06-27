@@ -1041,7 +1041,7 @@ This final phase addresses the instabilities and issues observed in previous exp
   2. The rewards are very comparable (`199` vs `197`), meaning both setups achieve similar tracking performance.
   3. The Policy Loss (`p_loss`) drops faster early on and converges to a more negative value in Exp. 10 (`-14.35` vs `-13.95`). Since the policy loss represents the negative expected Q-value ($-Q$), this indicates that having access to neighbors' positions and velocities allows the Actor to find high-value coordination strategies faster, with the Critic predicting higher long-term expected returns due to reduced collision interference! 🎉
   
-  * **Next step**: * To improve the cohesion of our agents and avoid collisions, we could give them the whole picture of the positions and velocities of all other agents. However, introducing this global information directly into the local observation space of each agent brings major theoretical and practical issues:
+  * **Next step**: To improve the cohesion of our agents and avoid collisions, we could give them the whole picture of the positions and velocities of all other agents. However, introducing this global information directly into the local observation space of each agent brings major theoretical and practical issues:
   1. **Loss of CTDE Benefits**: Since all agents share the same complete view of every other agent's state, there is no longer a meaningful distinction between what the local Actor sees and what the Centralized Critic sees. This negates the primary benefit of the Centralized Training with Decentralized Execution (CTDE) paradigm in MADDPG.
   2. **Linear State-Space Explosion**: If we add more agents, the size of the local observation vectors grows linearly with the size of the flock, meaning this approach cannot scale to large swarms.
   3. **Unrealistic Sensing Assumptions**: Having access to the real-time exact positions and velocities of the entire flock is impractical under real conditions (e.g., deployed physical drones, which only have local sensors or limited communication).
@@ -1059,10 +1059,26 @@ This final phase addresses the instabilities and issues observed in previous exp
   * Relative offset and velocity difference (angle and magnitude) to the leader: `dx_leader, dy_leader, dl_angle, dl_mag`
   * Compressed local neighbor average relative position and average velocity differences (angle and magnitude): `n_pos_x, n_pos_y, n_angle, n_mag`
 * **Reward**:
-  * Tracking reward: $0.4 \times e^{-d/\sigma_{\text{dist}}}$
-  * Coherence reward: $0.3 \times e^{-d_{\text{avg}}/\sigma_{\text{cohere}}}$
-  * Additive velocity alignment reward: $0.15 \times e^{-|n_{\text{angle}}|/\sigma_{\text{angle}}} + 0.15 \times e^{-|n_{\text{mag}}|/\sigma_{\text{mag}}}$
-  * Separation penalty: $-1.0 \times e^{-d_{\text{avg}}/\sigma_{\text{separate}}}$ if $d_{\text{avg}} < \text{SEPARATION\_RADIUS}$
+  * Tracking reward (against the target: Leader or Landmark):  
+  
+  $$ 0.4 \times e^{-d/\sigma_{\text{dist}}} $$
+  
+  * Coherence reward (distance to the avg position of neighbors):
+  
+  $$ 0.3 \times e^{-d_{\text{avg}}/\sigma_{\text{cohere}}} $$
+
+  * Velocity angle alignment reward (against the avg angle of velocity of neighbors): 
+  
+  $$ 0.15 \times e^{-|n_{\text{angle}}|/\sigma_{\text{angle}}} $$ 
+
+  * Velocity magnitude alignment reward (against the avg magnitude of velocity of neighbors): 
+ 
+  $$ 0.15 \times e^{-|n_{\text{mag}}|/\sigma_{\text{mag}}} $$
+
+  * Separation penalty (if too close from avg position of neighbors): 
+  
+  $$ -1.0 \times e^{-d_{\text{avg}}/\sigma_{\text{separate}}} \text{ if } d_{\text{avg}} < \text{SEPARATION_RADIUS} $$
+
 * **Results**:
 
   ![Experiment 11 Behavior](https://github.com/clallier/multi-agent-circle-sandbox/raw/main/docs/gifs/experiment_11.gif)
@@ -1227,14 +1243,12 @@ The key takeaways from this exploration are:
 ### What's Next?
 This project was a great dive into the world of MARL, but there is still plenty to do:
 
-- **Alternative Observation (Accomplished in Exp. 11)**: Successfully compressed neighbor observations to local neighborhood averages to scale from 3 followers to a 10-agent swarm. Next, we can explore dynamic communication graphs where agents selectively share/request specific states.
 - **Introduce Obstacles**: Adding static or moving obstacles will force the agents to learn dynamic pathing on top of their current coordination and tracking constraints.
-- **Longer Training**: In the complex multi-objective scenarios, we could continue to train for a longer time to see if the chain instabilities eventually smooth out (particularly the last scenario).
+- **Longer Training**: For highly complex multi-objective scenarios, training could be extended further. Currently, the wall-clock training time is approximately 2 hours for both Exp. 11 (9 agents for 20k episodes) and Exp. 10 (3 agents for 100k episodes).
 
 Thank you for reading and stay tuned for more updates as we continue to experiment with these particle swarms!
 
-
 [^1]: In **Temporal Difference (TD) learning**, an agent updates its value estimates based on the difference between successive predictions of the value function. At each time step, the agent observes a reward and estimates the value of the next state. The TD error measures how far off the current prediction is from this new estimate, and the value function is updated to reduce this error. In practice, storing these transitions in an **experience replay buffer** allows the agent to observe and learn from rewards collected over time. TD learning is a core concept in reinforcement learning that allows agents to learn from experience without needing a full model of the environment.
 
-[^2]: **Boids**[^2] is a classic simulation of **collective behavior**, where simple autonomous agents (boids) interact locally with their neighbors according to three rules: **Separation** (avoid crowding), **Alignment** (match velocities), and **Cohesion** (steer toward the center of the flock). Despite the simplicity of these rules and the absence of global coordination or higher-level intelligence, these agents collectively produce complex, emergent group behaviors—such as flocking, swirling, and navigating around obstacles—that resemble the behavior of real bird flocks. [Reynolds, C. W. (1987) Flocks, Herds, and Schools: A Distributed Behavioral Model, in Computer Graphics, 21(4) (SIGGRAPH '87 Conference Proceedings) pages 25-34.](https://team.inria.fr/imagine/files/2014/10/flocks-hers-and-schools.pdf)
+[^2]: **Boids** is a classic simulation of **collective behavior**, where simple autonomous agents (boids) interact locally with their neighbors according to three rules: **Separation** (avoid crowding), **Alignment** (match velocities), and **Cohesion** (steer toward the center of the flock). Despite the simplicity of these rules and the absence of global coordination or higher-level intelligence, these agents collectively produce complex, emergent group behaviors—such as flocking, swirling, and navigating around obstacles—that resemble the behavior of real bird flocks. [Reynolds, C. W. (1987) Flocks, Herds, and Schools: A Distributed Behavioral Model, in Computer Graphics, 21(4) (SIGGRAPH '87 Conference Proceedings) pages 25-34.](https://team.inria.fr/imagine/files/2014/10/flocks-hers-and-schools.pdf)
 
