@@ -17,3 +17,6 @@ Here you can find some of my presentations:
 
 * **[Building Agentic Systems]({{ site.baseurl }}/presentations/augmented-llms-agents/)**
   An overview of autonomous agents, including planning loops (ReAct, Tree of Thoughts), memory architectures (short-term vs. long-term memory), tool calling, and multi-agent systems (MetaGPT SOPs).
+
+* **[Career Timeline]({{ site.baseurl }}/assets/presentations/Timeline/timeline.pdf)** (PDF)
+  A visual walkthrough of my career journey, milestones, and technical path over the last 15 years in software engineering, cloud architecture, data science, and AI.

@@ -2,8 +2,9 @@
 layout: post
 title: "Doctoral party 🌟"
 date: 2023-04-01 21:00:00 +0100
-categories: life, studies
+categories: ["Personal"]
 image: "/assets/img/ceremonie_doctorat_2023_mini.jpg"
+tags: ["phd", "academic-life", "presentation"]
 ---
 
 Today, I went to the Doctoral Graduation Ceremony organized by the College of Doctoral Schools at the University of Bordeaux.

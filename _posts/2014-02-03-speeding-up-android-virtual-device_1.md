@@ -3,9 +3,11 @@ layout: post
 group: "Android Virtual Device"
 title: "Speeding up the Android Virtual Device part 1: using Geanymotion!"
 date: 2014-02-03 21:00:00 +0100
-categories: android, debugging, virtualization
+categories: ["Software Engineering"]
 image: /assets/img/AVD.png
+tags: ["android", "emulator", "virtualization", "performance"]
 ---
+
 Hello everybody,
 
 Today we'll discuss virtualization. 

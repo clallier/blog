@@ -1,20 +1,43 @@
 <header class="site-header">
-
   <div class="wrapper">
-    {%- assign default_paths = site.pages | map: "path" -%}
-    {%- assign page_paths = site.minima.nav_pages | default: default_paths -%}
-    {%- assign page_titles = site.pages | map: 'title' | compact %}
     <a class="site-title" rel="author" href="{{ '/' | relative_url }}">{{ site.title | escape }}</a>
 
-    {%- unless page_titles == empty %}
-      <nav class="site-nav">
-        <input type="checkbox" id="nav-trigger" />
-        <label for="nav-trigger">
-          <span class="menu-icon"></span>
-        </label>
+    <nav class="site-nav">
+      <input type="checkbox" id="nav-trigger" />
+      <label for="nav-trigger">
+        <span class="menu-icon"></span>
+      </label>
 
-        {% include nav-items.html paths = page_paths %}
-      </nav>
-    {%- endunless %}
+      <div class="trigger">
+        <!-- About Link -->
+        <a class="nav-link" href="{{ '/about/' | relative_url }}">About</a>
+
+        <!-- Categories Dropdown -->
+        <details class="nav-dropdown" id="dropdown-categories">
+          <summary class="nav-link dropdown-toggle">Categories ▾</summary>
+          <div class="nav-dropdown-content">
+            <a href="{{ '/category/artificial-intelligence/' | relative_url }}">🤖 AI & Machine Learning</a>
+            <a href="{{ '/category/game-development/' | relative_url }}">🎮 Game Development</a>
+            <a href="{{ '/category/dataviz-shaders/' | relative_url }}">🎨 Shaders & Nature+Code</a>
+            <a href="{{ '/category/software-engineering/' | relative_url }}">⚙️ Software Engineering</a>
+          </div>
+        </details>
+
+        <!-- Presentations Link -->
+        <a class="nav-link" href="{{ '/presentations/' | relative_url }}">Presentations</a>
+
+        <!-- Personal / Academic Dropdown -->
+        <details class="nav-dropdown" id="dropdown-personal">
+          <summary class="nav-link dropdown-toggle">Personal ▾</summary>
+          <div class="nav-dropdown-content">
+            <a href="{{ '/category/personal/' | relative_url }}">🌱 Personal & Academic Feed</a>
+            <a href="{{ '/resume/' | relative_url }}">📄 Resume</a>
+            <a href="{{ '/assets/presentations/Timeline/timeline.pdf' | relative_url }}" target="_blank">⏳ Career
+              Timeline</a>
+            <a href="{{ '/2022/12/doctoral-defence/' | relative_url }}">🎓 PhD Defense</a>
+          </div>
+        </details>
+      </div>
+    </nav>
   </div>
 </header>

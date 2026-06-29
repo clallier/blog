@@ -2,8 +2,9 @@
 layout: post
 title: "PhD Defence"
 date: 2022-12-23 21:00:00 +0100
-categories: life, studies
+categories: ["Personal"]
 image: "/assets/img/phd_defence_mini.png"
+tags: ["phd", "academic-life", "presentation"]
 ---
 
 Last week, I completed a major milestone: my PhD defense.

@@ -2,8 +2,9 @@
 layout: post
 title: "Experiment with Three.js, Blender and pixel-art textures!"
 date: 2015-03-01 21:00:00 +0100
-categories: experiment, three.js, Blender3D
+categories: ["DataViz & Shaders"]
 image: /assets/img/retrowipe_capture.png
+tags: ["threejs", "webgl", "blender", "3d-graphics"]
 ---
 
 ## Experiment with Three.js and Blender

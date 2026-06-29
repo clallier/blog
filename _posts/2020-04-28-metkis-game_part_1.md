@@ -3,8 +3,9 @@ layout: post
 group: "Metkis game"
 title: "1. Dynamic textures drawing for Three.js!"
 date: 2020-04-28 21:00:00 +0100
-categories: video game, gamedev, Three.js, 3D, Cannon.js, physics, physics engine, ECS, Entity-Component-Systems
+categories: ["Game Development"]
 image: "/assets/img/metkis_player.png"
+tags: ["canvas-api", "game-design", "haxe", "javascript", "2d-physics", "physics", "simulations"]
 ---
 
 This article is about texture drawing, it is a part of a series, composed of: 

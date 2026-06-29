@@ -2,8 +2,9 @@
 layout: post
 title: "Exploring Swarm Dynamics with Multi-Agent Reinforcement Learning"
 date: 2026-06-02 15:25:00 +0200
-categories: Machine Learning, Reinforcement Learning, Multi-Agent, Swarm Dynamics
+categories: ["Artificial Intelligence"]
 image: /assets/img/maddpg.png
+tags: ["maddpg", "multi-agent", "swarm-dynamics", "reinforcement-learning", "python", "simulations"]
 ---
 
 # Exploring Swarm Dynamics with Multi-Agent Reinforcement Learning

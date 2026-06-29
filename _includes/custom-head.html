@@ -1,6 +1,6 @@
 <!-- Favicon -->
 <link id="favicon" rel="icon" href="{{ '/assets/img/favicon.png' | relative_url }}" type="image/png">
-<link rel="stylesheet" href="{{ '/assets/css/cv.css' | relative_url }}">
+<!-- code block color syntax -->
 <link rel="stylesheet" href="{{ '/assets/css/syntax.css' | relative_url }}">
 
 <style>
@@ -193,7 +193,6 @@
 
     .sub-graph {
         border: 1px dashed var(--minima-card-border);
-        /* padding: 0.5rem; */
         border-radius: 12px;
         background: rgba(255, 255, 255, 0.02);
         display: flex;
@@ -537,6 +536,172 @@
         border-top: 1px solid var(--minima-card-border);
         background-color: var(--minima-background-color);
     }
+
+
+    /* CV Specific Styles */
+    .cv-avatar {
+        float: right;
+        border-radius: 50% !important;
+        margin: 0rem auto 2rem !important;
+        border: 2px solid var(--minima-card-border);
+        width: 8rem;
+    }
+
+    .cv-logo {
+        height: 25px !important;
+        width: auto !important;
+        vertical-align: bottom !important;
+        margin-right: 8px !important;
+        display: inline !important;
+        position: relative !important;
+        top: -6px !important;
+    }
+
+    /* Ensure headers don't clip the floating avatar */
+    .page-content {
+        overflow: auto;
+    }
+
+    /* Trigger Wrapper */
+    .trigger {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    /* Dropdown Container */
+    .nav-dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    /* Hide details default arrows */
+    .nav-dropdown summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .nav-dropdown summary {
+        list-style: none;
+        outline: none;
+    }
+
+    .dropdown-toggle {
+        cursor: pointer;
+        display: inline-block;
+        padding: 5px 10px;
+        user-select: none;
+    }
+
+    /* Dropdown content (hidden by default unless open or hovered on desktop) */
+    .nav-dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #ffffff;
+        min-width: 240px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.1);
+        border: 1px solid #e8e8e8;
+        border-radius: 6px;
+        z-index: 1000;
+        top: 100%;
+        left: 0;
+        margin-top: 5px;
+        padding: 6px 0;
+    }
+
+    /* Show when open attribute is present */
+    .nav-dropdown[open] .nav-dropdown-content {
+        display: block;
+    }
+
+    /* Links inside the dropdown */
+    .nav-dropdown-content a {
+        color: #515151;
+        /* padding: 8px 16px; */
+        text-decoration: none;
+        display: block;
+        font-size: 14px;
+        text-align: left;
+        transition: background-color 0.2s, color 0.2s;
+    }
+
+    /* Hover effects */
+    .nav-dropdown-content a:hover {
+        background-color: #f4f4f4;
+        color: #111;
+    }
+
+    /* Desktop hover helper to automatically open details */
+    @media screen and (min-width: 601px) {
+        .nav-dropdown:hover .nav-dropdown-content {
+            display: block;
+        }
+    }
+
+    /* Dark mode compatibility */
+    @media (prefers-color-scheme: dark) {
+        .nav-dropdown-content {
+            background-color: #1e1e1e;
+            border-color: #303030;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-dropdown-content a {
+            color: #b5b5b5;
+        }
+
+        .nav-dropdown-content a:hover {
+            background-color: #2b2b2b;
+            color: #fff;
+        }
+    }
+
+    /* Adjust layout on mobile devices */
+    @media screen and (max-width: 600px) {
+        .trigger {
+            display: none;
+            /* Standard mobile trigger hide */
+        }
+
+        #nav-trigger:checked~.trigger {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            position: absolute;
+            right: 0;
+            top: 50px;
+            background-color: #fff;
+            border: 1px solid #e8e8e8;
+            border-radius: 4px;
+            padding: 10px;
+            width: 220px;
+            z-index: 1000;
+        }
+
+        #nav-trigger:checked~.trigger .nav-dropdown {
+            width: 100%;
+        }
+
+        #nav-trigger:checked~.trigger .nav-dropdown-content {
+            position: static;
+            box-shadow: none;
+            border: none;
+            min-width: 0;
+            padding-left: 10px;
+            margin-top: 0;
+        }
+
+        #nav-trigger:checked~.trigger .dropdown-toggle {
+            font-weight: bold;
+            padding-left: 0;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            #nav-trigger:checked~.trigger {
+                background-color: #1e1e1e;
+                border-color: #303030;
+            }
+        }
+    }
 </style>
 
 <script async src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?version=4.8.0&features=es6"></script>
@@ -553,3 +718,23 @@
 <script async src="{{ '/assets/js/modules/matrix.js' | relative_url }}" type="module"></script>
 <script async src="{{ '/assets/js/modules/html-graph.js' | relative_url }}" type="module"></script>
 <script async src="{{ '/assets/js/main.js' | relative_url }}" type="module"></script>
+
+<script>
+    // Prevent multiple dropdowns from staying open simultaneously on click/tap,
+    // and auto-close dropdown when clicking outside on mobile devices.
+    document.addEventListener('click', function (e) {
+        const dropdowns = document.querySelectorAll('.nav-dropdown');
+        dropdowns.forEach(dropdown => {
+            if (!dropdown.contains(e.target)) {
+                dropdown.removeAttribute('open');
+            } else if (e.target.classList.contains('dropdown-toggle')) {
+                // If clicking a toggle, close other open dropdowns
+                dropdowns.forEach(other => {
+                    if (other !== dropdown) {
+                        other.removeAttribute('open');
+                    }
+                });
+            }
+        });
+    });
+</script>

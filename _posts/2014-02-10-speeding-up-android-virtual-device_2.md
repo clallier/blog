@@ -3,9 +3,11 @@ layout: post
 group: "Android Virtual Device"
 title: "Speeding up the Android Virtual Device part 2: using Intel HAXM!"
 date: 2014-02-10 21:00:00 +0100
-categories: android, debugging, virtualization
+categories: ["Software Engineering"]
 image: /assets/img/AVD.png
+tags: ["android", "emulator", "virtualization", "performance"]
 ---
+
 Hi everyone.
 
 This mini series talks about two tools to improve the speed of the Android Virtual Devices (AVD).

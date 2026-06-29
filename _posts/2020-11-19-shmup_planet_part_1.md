@@ -3,8 +3,9 @@ layout: post
 group: "Shmup planet"
 title: "1. Shaders: displacement map and Bloom"
 date: 2020-11-19 21:00:00 +0100
-categories: game, gamedev, experiment, Three.js, ECS, shaders, coroutines, mini-console, tech
+categories: ["Game Development"]
 image: "/assets/img/shmup_planet_player.png"
+tags: ["canvas-api", "game-design", "haxe", "javascript", "2d-physics", "physics", "simulations"]
 ---
 
 This article is part of a series, here are the other articles:

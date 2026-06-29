@@ -3,8 +3,9 @@ layout: post
 group: "Metkis game"
 title: "2. 3D physics for the mobile web!"
 date: 2020-05-05 21:00:00 +0100
-categories: video game, gamedev, Three.js, 3D, Cannon.js, physics, physics engine, ECS, Entity-Component-Systems
+categories: ["Game Development"]
 image: "/assets/img/metkis_player.png"
+tags: ["canvas-api", "game-design", "haxe", "javascript", "2d-physics", "physics", "simulations"]
 ---
 
 This article is a part of a series, composed of: 
