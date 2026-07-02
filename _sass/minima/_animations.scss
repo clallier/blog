@@ -1,0 +1,46 @@
+/* Global Animations and Random CSS Variables Seeds */
+:root {
+    // Generate random values at build time (when Jekyll compiles Sass)
+    // These can be used by animations or transitions for unique layouts on build
+    --wobble-seed-angle: #{(random(60) / 10 - 3) * 1deg}; // random between -3deg and 3deg
+    --wobble-seed-scale: #{0.95 + (random(10) / 100)}; // random between 0.95 and 1.05
+    --wobble-seed-translate-x: #{(random(20) - 10) * 1px}; // random between -10px and 10px
+    --wobble-seed-translate-y: #{(random(20) - 10) * 1px}; // random between -10px and 10px
+}
+
+@keyframes elastic-wobble {
+    0% {
+        transform: scale(0.98);
+    }
+    30% {
+        transform: scale(1.03) rotate(0.5deg);
+    }
+    50% {
+        transform: scale(0.98) rotate(-0.5deg);
+    }
+    70% {
+        transform: scale(1.01) rotate(0.2deg);
+    }
+    100% {
+        transform: scale(1) rotate(0);
+    }
+}
+
+@keyframes wobble-appear {
+    0% {
+        transform: scale(0.3, 0.3) translate(var(--wobble-seed-translate-x, 20px), var(--wobble-seed-translate-y, -50px)) rotate(var(--wobble-seed-angle, 5deg));
+        opacity: 0;
+    }
+    50% {
+        transform: scale(var(--wobble-seed-scale, 1.05), var(--wobble-seed-scale, 1.05)) translate(calc(-1 * var(--wobble-seed-translate-x, 5px)), calc(-1 * var(--wobble-seed-translate-y, -5px))) rotate(calc(-0.5 * var(--wobble-seed-angle, 2deg)));
+        opacity: 0.8;
+    }
+    75% {
+        transform: scale(0.97, 0.97) translate(calc(0.2 * var(--wobble-seed-translate-x, 2px)), calc(0.2 * var(--wobble-seed-translate-y, -2px))) rotate(calc(0.2 * var(--wobble-seed-angle, 1deg)));
+        opacity: 0.95;
+    }
+    100% {
+        transform: scale(1, 1) translate(0, 0) rotate(0deg);
+        opacity: 1;
+    }
+}

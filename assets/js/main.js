@@ -213,9 +213,33 @@ function makeTablesResponsive() {
 }
 
 if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", makeTablesResponsive);
+    document.addEventListener("DOMContentLoaded", () => {
+        makeTablesResponsive();
+        randomizeWobbleSeed();
+    });
 } else {
     makeTablesResponsive();
+    randomizeWobbleSeed();
 }
+
+// Randomize CSS variables for dynamic wobble seed values
+function randomizeWobbleSeed() {
+    const angle = (Math.random() * 6 - 3).toFixed(2) + 'deg';
+    const scale = (0.95 + Math.random() * 0.1).toFixed(2);
+    const tx = (Math.random() * 20 - 10).toFixed(2) + 'px';
+    const ty = (Math.random() * 20 - 10).toFixed(2) + 'px';
+
+    document.documentElement.style.setProperty('--wobble-seed-angle', angle);
+    document.documentElement.style.setProperty('--wobble-seed-scale', scale);
+    document.documentElement.style.setProperty('--wobble-seed-translate-x', tx);
+    document.documentElement.style.setProperty('--wobble-seed-translate-y', ty);
+}
+
+// Listen for mouse entry to randomize on each dropdown hover/click
+document.addEventListener('mouseenter', e => {
+    if (e.target.closest && (e.target.closest('.nav-dropdown') || e.target.closest('.site-nav'))) {
+        randomizeWobbleSeed();
+    }
+}, true);
 
 
