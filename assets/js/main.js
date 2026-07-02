@@ -197,3 +197,25 @@ function drawLine(transformed, i, j) {
     ctx.closePath();
 }
 
+// Automatically make markdown tables responsive
+function makeTablesResponsive() {
+    document.querySelectorAll(".post-content table").forEach(table => {
+        table.classList.add("rwd-table");
+        const headers = Array.from(table.querySelectorAll("thead th")).map(th => th.textContent.trim());
+        table.querySelectorAll("tbody tr").forEach(tr => {
+            tr.querySelectorAll("td").forEach((td, index) => {
+                if (headers[index]) {
+                    td.setAttribute("data-th", headers[index]);
+                }
+            });
+        });
+    });
+}
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", makeTablesResponsive);
+} else {
+    makeTablesResponsive();
+}
+
+

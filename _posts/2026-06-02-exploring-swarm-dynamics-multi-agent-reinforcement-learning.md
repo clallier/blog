@@ -430,7 +430,8 @@ Let's assume our policy network outputs logits $z = [2.0, 1.0, 0.1]$ for 3 possi
 | :--- | :--- | :--- | :--- |
 | **1. Standard Softmax** | $\pi_i = \frac{e^{z_i}}{\sum e^{z_j}}$ | $\pi \approx [0.66, 0.24, 0.10]$ | **Yes** (Continuous & Differentiable) |
 | **2. Random Sampling** | $\text{Sample}(\pi)$ | One-hot discrete choice: $[1.0, 0.0, 0.0]$ | **Nope** (Discrete argmax step is non-differentiable!) |
-| **3. Gumbel-Softmax** (with **Gumbel noise** $g = [-0.5, 0.8, -0.2]$) | $y_i = \frac{e^{(z_i + g_i)/\tau}}{\sum e^{(z_j + g_j)/\tau}}$ | • $\tau = 1.0$: $y \approx [0.39, 0.53, 0.08]$ (exploration)<br>• $\tau = 0.1$: $y \approx [0.05, 0.95, 0.00]$ (approaches one-hot) | **Yes too!** But we can have **more control over the output** of the policy network using the temperature and Gumbel noise! | 
+| **3. Gumbel-Softmax** (with **Gumbel noise** $g = [-0.5, 0.8, -0.2]$) | $y_i = \frac{e^{(z_i + g_i)/\tau}}{\sum e^{(z_j + g_j)/\tau}}$ | • $\tau = 1.0$: $y \approx [0.39, 0.53, 0.08]$ (exploration)<br>• $\tau = 0.1$: $y \approx [0.05, 0.95, 0.00]$ (approaches one-hot) | **Yes too!** But we can have **more control over the output** of the policy network using the temperature and Gumbel noise! |
+
 
 - The **temperature** parameter $\tau$ controls the level of exploration, with a higher temperature leading to more exploration and a lower temperature leading to less exploration.
 
