@@ -216,10 +216,20 @@ if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", () => {
         makeTablesResponsive();
         randomizeWobbleSeed();
+        openDropdownsOnMobile();
     });
 } else {
     makeTablesResponsive();
     randomizeWobbleSeed();
+    openDropdownsOnMobile();
+}
+
+function openDropdownsOnMobile() {
+    if (window.innerWidth <= 600) {
+        document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+            dropdown.setAttribute('open', '');
+        });
+    }
 }
 
 // Randomize CSS variables for dynamic wobble seed values

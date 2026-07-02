@@ -30,7 +30,7 @@
                 } else {
                     dropdown.setAttribute('open', '');
                 }
-            } else if (!dropdown.contains(e.target)) {
+            } else if (!dropdown.contains(e.target) && window.innerWidth > 600) {
                 dropdown.removeAttribute('open');
             }
         });

@@ -708,10 +708,5 @@ h6 {
         #nav-trigger:checked~.trigger .dropdown-toggle {
             padding-left: 0;
         }
-
-        /* faster inner animation when mobile */
-        .nav-dropdown-content {
-            transition: display 0.0s allow-discrete, opacity 0.1s ease, transform 0.2s ease;
-        }
     }
 }
