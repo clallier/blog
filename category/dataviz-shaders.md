@@ -13,4 +13,9 @@ Visualizing datasets, algorithms, and real-time shader graphics.
       <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
     </li>
   {% endfor %}
+
+  <li>
+  <span class="post-date">Jul 29, 2014</span> &raquo; 
+  <a href="{{ '/nature_code/' | relative_url }}">Nature + Code</a>
+  </li>
 </ul>
