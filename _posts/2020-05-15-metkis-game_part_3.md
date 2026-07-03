@@ -6,6 +6,8 @@ date: 2020-05-15 21:00:00 +0100
 categories: ["Game Development"]
 image: "/assets/img/metkis_player.png"
 tags: ["canvas-api", "game-design", "haxe", "javascript", "2d-physics", "physics", "simulations"]
+
+description: "Shows how to combine all previous pieces using an Entity‑Component‑System, tying together graphics, physics and game logic. It explains the basics of ECS with clear examples."
 ---
 
 This article is a part of a series, composed of: 

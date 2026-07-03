@@ -6,16 +6,18 @@ permalink: /category/dataviz-shaders/
 
 Visualizing datasets, algorithms, and real-time shader graphics.
 
-<ul class="posts-list">
+<ul>
   {% for post in site.categories["DataViz & Shaders"] %}
     <li>
-      <span class="post-date">{{ post.date | date: "%b %d, %Y" }}</span> &raquo; 
-      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      <span class="cat-date">{{ post.date | date: "%b %d, %Y" }}</span> &raquo; 
+      <img class="cat-image" src="{{ post.image | relative_url}}">
+      <a href="{{ post.url | relative_url }}">{{ post.group }} - {{ post.title }}</a>
+      <p class="cat-description">{{ post.description }}</p>
     </li>
   {% endfor %}
 
   <li>
-  <span class="post-date">Jul 29, 2014</span> &raquo; 
+  <span class="cat-date">Jul 29, 2014</span> &raquo; 
   <a href="{{ '/nature_code/' | relative_url }}">Nature + Code</a>
   </li>
 </ul>

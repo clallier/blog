@@ -6,6 +6,8 @@ date: 2020-04-19 21:00:00 +0100
 categories: ["Game Development"]
 image: "/assets/img/metkis_player.png"
 tags: ["canvas-api", "game-design", "haxe", "javascript", "2d-physics", "physics", "simulations"]
+
+description: "Shows how to start building a 3D mobile game using Cannon.js physics, explaining idea and basic setup. Gives a quick overview of the project and its goals."
 ---
 
 ## Introduction

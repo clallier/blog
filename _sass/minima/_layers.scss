@@ -1,4 +1,4 @@
-@layer post-feed, post-content, collapsible-components, graph-components, cv-components, navigation-dropdowns, footer-components;
+@layer post-feed, post-content, collapsible-components, graph-components, cv-components, navigation-dropdowns, footer-components, categorie-components;
 
 /* List of posts on front page */
 @layer post-feed {
@@ -708,5 +708,17 @@ h6 {
         #nav-trigger:checked~.trigger .dropdown-toggle {
             padding-left: 0;
         }
+    }
+}
+
+@layer categorie-components {
+    .cat-date {
+        font-weight: bold;
+    }
+
+    .cat-image {
+        max-height: 1.5rem;
+        display: inline;
+        margin: 0rem 0.5rem;
     }
 }

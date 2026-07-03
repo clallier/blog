@@ -6,6 +6,8 @@ date: 2020-11-14 21:00:00 +0100
 categories: ["Game Development"]
 image: "/assets/img/shmup_planet_player.png"
 tags: ["canvas-api", "game-design", "haxe", "javascript", "2d-physics", "physics", "simulations"]
+
+description: "Shows how to build a simple mobile shooter game using Three.js, with ECS and coroutines. It explains the basic idea and goals in easy terms."
 ---
 
 <iframe src="https://shmup-6a843.web.app" width="100%" height="500px"></iframe>

@@ -5,7 +5,8 @@ title: "Speeding up the Android Virtual Device part 2: using Intel HAXM!"
 date: 2014-02-10 21:00:00 +0100
 categories: ["Software Engineering"]
 image: /assets/img/AVD.png
-tags: ["android", "emulator", "virtualization", "performance"]
+tags: ["android", "emulator", "virtualization", "genymotion", "performance"]
+description: "Shows how to make the Android emulator start faster, like turning on a toy car quickly. It also explains how Intel HAXM can speed up debugging."
 ---
 
 Hi everyone.

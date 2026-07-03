@@ -6,6 +6,8 @@ date: 2020-11-27 21:00:00 +0100
 categories: ["Game Development"]
 image: "/assets/img/shmup_planet_player.png"
 tags: ["canvas-api", "game-design", "haxe", "javascript", "2d-physics", "physics", "simulations"]
+
+description: "Shows how to create a small library for particle animation, explaining how particles are managed and rendered. It breaks down the steps in simple terms."
 ---
 
 

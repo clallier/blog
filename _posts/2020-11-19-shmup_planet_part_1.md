@@ -6,6 +6,8 @@ date: 2020-11-19 21:00:00 +0100
 categories: ["Game Development"]
 image: "/assets/img/shmup_planet_player.png"
 tags: ["canvas-api", "game-design", "haxe", "javascript", "2d-physics", "physics", "simulations"]
+
+description: "Shows how to add a displacement map and bloom effect to a 3D scene using shaders, making the visuals richer and glowier. It explains the steps in simple everyday language."
 ---
 
 This article is part of a series, here are the other articles:

@@ -6,6 +6,8 @@ date: 2020-05-05 21:00:00 +0100
 categories: ["Game Development"]
 image: "/assets/img/metkis_player.png"
 tags: ["canvas-api", "game-design", "haxe", "javascript", "2d-physics", "physics", "simulations"]
+
+description: "Shows how to integrate Cannon.js 3D physics into a mobile web game, covering world setup, gravity, and syncing physics with rendering. It walks through creating bodies, applying forces, and updating the scene each frame."
 ---
 
 This article is a part of a series, composed of: 

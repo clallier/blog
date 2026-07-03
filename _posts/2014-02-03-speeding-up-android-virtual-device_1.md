@@ -5,7 +5,10 @@ title: "Speeding up the Android Virtual Device part 1: using Geanymotion!"
 date: 2014-02-03 21:00:00 +0100
 categories: ["Software Engineering"]
 image: /assets/img/AVD.png
-tags: ["android", "emulator", "virtualization", "performance"]
+
+tags: ["android", "emulator", "virtualization", "genymotion", "performance"]
+
+description: "Shows how to make the Android emulator start faster. It also shows how to debug more smoothly."
 ---
 
 Hello everybody,

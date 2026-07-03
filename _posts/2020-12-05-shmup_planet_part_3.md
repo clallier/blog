@@ -6,6 +6,8 @@ date: 2020-12-05 21:00:00 +0100
 categories: ["Game Development"]
 image: "/assets/img/shmup_planet_player.png"
 tags: ["canvas-api", "game-design", "haxe", "javascript", "2d-physics", "physics", "simulations"]
+
+description: "Shows how coroutines simplify complex game logic, like chaining animations and managing enemy waves, using simple generator functions. It explains the idea in everyday language."
 ---
 
 

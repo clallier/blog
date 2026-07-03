@@ -6,6 +6,8 @@ date: 2020-04-28 21:00:00 +0100
 categories: ["Game Development"]
 image: "/assets/img/metkis_player.png"
 tags: ["canvas-api", "game-design", "haxe", "javascript", "2d-physics", "physics", "simulations"]
+
+description: "Shows how to draw dynamic textures on the fly using a canvas, then turn them into 3D textures for Three.js. It explains the simple steps to create animated or procedural textures for a web game."
 ---
 
 This article is about texture drawing, it is a part of a series, composed of: 

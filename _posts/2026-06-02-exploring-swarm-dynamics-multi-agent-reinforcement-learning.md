@@ -5,6 +5,9 @@ date: 2026-06-02 15:25:00 +0200
 categories: ["Artificial Intelligence"]
 image: /assets/img/maddpg.png
 tags: ["maddpg", "multi-agent", "swarm-dynamics", "reinforcement-learning", "python", "simulations"]
+
+description: "Explores multi-agent reinforcement learning applied to swarm dynamics with MADDPG, including theory and experiments. Shows practical implementations and experimental results across several scenarios."
+
 ---
 
 # Exploring Swarm Dynamics with Multi-Agent Reinforcement Learning

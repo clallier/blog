@@ -5,6 +5,8 @@ date: 2022-12-23 21:00:00 +0100
 categories: ["Personal"]
 image: "/assets/img/phd_defence_mini.png"
 tags: ["phd", "academic-life", "presentation"]
+
+description: "Explains how a PhD defence works, what to prepare and what happens on the day. It gives simple tips for a successful presentation."
 ---
 
 Last week, I completed a major milestone: my PhD defense.

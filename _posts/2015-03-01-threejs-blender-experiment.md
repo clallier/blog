@@ -5,6 +5,8 @@ date: 2015-03-01 21:00:00 +0100
 categories: ["DataViz & Shaders"]
 image: /assets/img/retrowipe_capture.png
 tags: ["threejs", "webgl", "blender", "3d-graphics"]
+
+description: "Shows a quick experiment that mixes Three.js 3‑D graphics with Blender‑made models and pixel‑art textures. It demonstrates how to render a retro‑styled scene in the browser."
 ---
 
 ## Experiment with Three.js and Blender

@@ -6,11 +6,13 @@ permalink: /category/software-engineering/
 
 System programming, development pipelines, virtualization, and engineering practices.
 
-<ul class="posts-list">
+<ul>
   {% for post in site.categories["Software Engineering"] %}
     <li>
-      <span class="post-date">{{ post.date | date: "%b %d, %Y" }}</span> &raquo; 
-      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      <span class="cat-date">{{ post.date | date: "%b %d, %Y" }}</span> &raquo; 
+      <img class="cat-image" src="{{ post.image | relative_url}}">
+      <a href="{{ post.url | relative_url }}">{{ post.group }} - {{ post.title }}</a>
+      <p class="cat-description">{{ post.description }}</p>
     </li>
   {% endfor %}
 </ul>
