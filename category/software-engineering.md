@@ -11,8 +11,8 @@ System programming, development pipelines, virtualization, and engineering pract
     <li>
       <span class="cat-date">{{ post.date | date: "%b %d, %Y" }}</span> &raquo; 
       <img class="cat-image" src="{{ post.image | relative_url}}">
-      <a href="{{ post.url | relative_url }}">{{ post.group }} - {{ post.title }}</a>
-      <p class="cat-description">{{ post.description }}</p>
+      <a href="{{ post.url | relative_url }}">{% if post.group %}{{ post.group }} - {% endif %}{{ post.title }}</a>
+      <p>{{ post.description }}</p>
     </li>
   {% endfor %}
 </ul>

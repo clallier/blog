@@ -15,6 +15,7 @@ group :jekyll_plugins do
   gem "jekyll-remote-theme"
   gem "jekyll-titles-from-headings"
   gem "jemoji"
+  gem "jekyll-redirect-from"
 end
 
 # Windows/Mac compatibility

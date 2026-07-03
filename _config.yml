@@ -45,6 +45,7 @@ plugins:
   - jekyll-gist
   - jekyll-titles-from-headings
   - jemoji
+  - jekyll-redirect-from
 
 # to allow having minima v3 (see https://github.com/jekyll/minima/issues/419#issuecomment-558693485)
 theme: null  # Remove or comment out if exists

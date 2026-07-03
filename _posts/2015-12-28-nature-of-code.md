@@ -1,7 +1,13 @@
 ---
-layout: page
-title: Nature+Code
-permalink: /nature_code/
+layout: post
+title: "Nature + Code"
+date: 2015-12-28
+categories: ["Dataviz"]
+permalink: /nature_of_code/
+redirect_from:
+  - /nature_code/
+image: /assets/img/nc.png
+description: "Personal project inspired by Daniel Shiffman's 'The Nature of Code', about modeling natural phenomena (physics, swarms, fractals, cellular automata, genetic algorithms and more)"
 ---
 
 <iframe src="https://godjam.github.io/" width="100%" height="500px" allowFullScreen></iframe>
