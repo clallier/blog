@@ -1,4 +1,5 @@
 :root {
+    color-scheme: dark;
     --minima-brand-color: #00bfffff;
     --minima-brand-color-dimmed: #b2b2b2ff;
     --minima-brand-color-light: #ff3399ff;
@@ -30,6 +31,7 @@
 
 @media (prefers-color-scheme: light) {
     :root {
+        color-scheme: light;
         --minima-brand-color-dimmed: #2b2b2bff;
         --minima-site-title-color: #1d1e2cff;
         --minima-text-color: #1d1e2cff;
@@ -52,6 +54,10 @@
         /* Light Mode Math */
         --math-box-text: #1d1e2cff;
     }
+}
+
+html {
+    background-color: var(--minima-background-color);
 }
 
 body {

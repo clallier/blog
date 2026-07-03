@@ -12,15 +12,19 @@
     0% {
         transform: scale(0.98);
     }
+
     30% {
         transform: scale(1.03) rotate(0.5deg);
     }
+
     50% {
         transform: scale(0.98) rotate(-0.5deg);
     }
+
     70% {
         transform: scale(1.01) rotate(0.2deg);
     }
+
     100% {
         transform: scale(1) rotate(0);
     }
@@ -31,16 +35,106 @@
         transform: scale(0.3, 0.3) translate(var(--wobble-seed-translate-x, 20px), var(--wobble-seed-translate-y, -50px)) rotate(var(--wobble-seed-angle, 5deg));
         opacity: 0;
     }
+
     50% {
         transform: scale(var(--wobble-seed-scale, 1.05), var(--wobble-seed-scale, 1.05)) translate(calc(-1 * var(--wobble-seed-translate-x, 5px)), calc(-1 * var(--wobble-seed-translate-y, -5px))) rotate(calc(-0.5 * var(--wobble-seed-angle, 2deg)));
         opacity: 0.8;
     }
+
     75% {
         transform: scale(0.97, 0.97) translate(calc(0.2 * var(--wobble-seed-translate-x, 2px)), calc(0.2 * var(--wobble-seed-translate-y, -2px))) rotate(calc(0.2 * var(--wobble-seed-angle, 1deg)));
         opacity: 0.95;
     }
+
     100% {
         transform: scale(1, 1) translate(0, 0) rotate(0deg);
         opacity: 1;
+    }
+}
+
+/* Page transitions via Cross-Document View Transitions */
+@view-transition {
+    navigation: auto;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    ::view-transition-old(root) {
+        animation: 180ms cubic-bezier(0.4, 0, 0.2, 1) both fade-out,
+            180ms cubic-bezier(0.4, 0, 0.2, 1) both slide-out-up;
+    }
+
+    ::view-transition-new(root) {
+        animation: 280ms cubic-bezier(0.4, 0, 0.2, 1) both fade-in,
+            280ms cubic-bezier(0.4, 0, 0.2, 1) both slide-in-up;
+    }
+
+    .back-transition::view-transition-old(root) {
+        animation: 180ms cubic-bezier(0.4, 0, 0.2, 1) both fade-out,
+            180ms cubic-bezier(0.4, 0, 0.2, 1) both slide-out-down;
+    }
+
+    .back-transition::view-transition-new(root) {
+        animation: 280ms cubic-bezier(0.4, 0, 0.2, 1) both fade-in,
+            280ms cubic-bezier(0.4, 0, 0.2, 1) both slide-in-down;
+    }
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slide-out-up {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-50vh);
+    }
+}
+
+@keyframes slide-in-up {
+    from {
+        transform: translateY(50vh);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes slide-out-down {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(50vh);
+    }
+}
+
+@keyframes slide-in-down {
+    from {
+        transform: translateY(-50vh);
+    }
+
+    to {
+        transform: translateY(0);
     }
 }

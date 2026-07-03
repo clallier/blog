@@ -1,5 +1,17 @@
 <!-- Favicon -->
 <link id="favicon" rel="icon" href="{{ '/assets/img/favicon.png' | relative_url }}" type="image/png">
+<script>
+    // Track navigation direction for cross-document page transitions
+    (function () {
+        const navEntry = performance.getEntriesByType("navigation")[0];
+
+        if (navEntry && navEntry.type === "back_forward") {
+            document.documentElement.classList.add('back-transition');
+        } else {
+            document.documentElement.classList.remove('back-transition');
+        }
+    })();
+</script>
 <script async src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?version=4.8.0&features=es6"></script>
 <script>
     window.MathJax = {
