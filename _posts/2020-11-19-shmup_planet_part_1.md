@@ -3,7 +3,7 @@ layout: post
 group: "Shmup planet"
 title: "1. Shaders: displacement map and Bloom"
 date: 2020-11-19 21:00:00 +0100
-categories: ["Game Development"]
+categories: ["Game Development", "Dataviz"]
 image: "/assets/img/shmup_planet_player.png"
 tags: ["canvas-api", "game-design", "haxe", "javascript", "2d-physics", "physics", "simulations"]
 

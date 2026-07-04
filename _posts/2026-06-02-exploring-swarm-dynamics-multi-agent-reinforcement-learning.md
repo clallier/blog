@@ -18,16 +18,25 @@ During my internship in Computational Neuroscience for my Master 2 at Inserm, I 
 
 It was a great experience, and working with a real-world robotic platform was super exciting. But I've always wanted to explore what happens when you introduce more agents into the same environment. How do they interact? How do they learn from each other?
 
-First, the environment becomes **non-stationary**: from the perspective of a single agent, the world becomes harder to predict, requiring agents to adapt to evolving situations as the other agents are simultaneously learning and changing their own behaviors.
+First, imagine a flock of drones or smart cars navigating a city. From the perspective of a single agent (like a car or a drone), as the number of agents increases, the world becomes harder to predict. 
+The agent must adapt not only to the static environment but also to the evolving actions of other agents, who are simultaneously learning and changing their own behaviors. This makes the environment **non-stationary**. 
 
-I recently discovered **MADDPG (Multi-Agent Deep Deterministic Policy Gradient)**, a popular reinforcement learning (RL) algorithm introduced by [Lowe et al. in 2017](https://arxiv.org/abs/1706.02275), which is _quite more_ recent (my internship was in 2009, don't judge me!).
+Using a "centralized controller" to micro-manage every agent is also problematic:
+1. It struggles to adapt if dynamic factors (like humans) are introduced.
+2. It would require a **perfect view** of the entire world.
+3. So it is probably computationally resource-heavy.
+4. It is difficult to train as the environment and agents co-evolve.
+
+Instead, it would be ideal if each agent could react to high-level orders (like "go to spot 2" or "follow agent 2") and make its own decisions based on its local observations, regardless of communication limits or global state complexity. My hypothesis is that Multi-Agent Reinforcement Learning (MARL) is a perfect fit for this kind of setup.
+
+I recently discovered **MADDPG (Multi-Agent Deep Deterministic Policy Gradient)**, a popular reinforcement learning algorithm introduced by [Lowe et al. in 2017](https://arxiv.org/abs/1706.02275)—which is significantly more recent than my M2 internship in 2009 (don't judge me!).
 
 In this post, we'll apply this algorithm on a small sandbox environment and explore the MADDPG behavior across progressively more complex simulations. We'll walk through: 
 
 1. **The Theory**: The core concepts of MADDPG (Centralized Training, Decentralized Execution).
-2. **The Environment**: The underlying Multi-Agent Particle Environment.
+2. **The Environment**: The underlying Multi-Agent Environment.
 3. **The Implementation**: A deep dive into the code (MLP architectures, Gumbel-Softmax differentiable sampling, and stable Bellman updates via Target Networks).
-4. **The Experiments**: A summary of our 11 incremental scenarios, accompanied by animations of the learned behaviors.
+4. **The Experiments**: We'll test incremental scenarios, accompanied by animations of the learned behaviors.
 5. **Learnings & Conclusion**: Our key takeaways, mathematical insights on reward shaping, and macOS Apple Silicon compatibility adjustments.
 
 ## 1. The Theory: How MADDPG Works
@@ -232,11 +241,11 @@ Since the physics of the environment do not change, this joint transition probab
 
 **Decentralized Execution (The Actor)**: The Actor network $\pi(o) \rightarrow a$ **still only relies on local observations** $o_i$ during execution. Once deployed, the agents act independently based on what they can see, without needing a global view.
 
-## 2. The Environment: Multi-Agent Particle Environments
+## 2. The Environment: Multi-Agent Environments
 
 - **The Playground**: [OpenAI's Multi-Agent Particle Environments (MPE)](https://github.com/openai/multiagent-particle-envs).
 To test this, we use a custom sandbox based on OpenAI's Multi-Agent Particle Environments. 
-It features a simple 2D particle world with continuous observations and continuous/discrete action spaces, complete with basic simulated physics (such as momentum, friction, and elastic collisions).
+It features a simple 2D world with continuous observations and continuous/discrete action spaces, complete with basic simulated physics (such as momentum, friction, and elastic collisions).
 
 ![Circle Sandbox Environment](https://github.com/clallier/multi-agent-circle-sandbox/raw/main/docs/gifs/experiment_4.gif)
 
