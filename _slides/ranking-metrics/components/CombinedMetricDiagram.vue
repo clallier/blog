@@ -1,0 +1,85 @@
+<template>
+<svg width="1280.0" height="704.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 440"  >
+  <defs>
+    <marker id="svg_e067fd_arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 2 L 8 5 L 0 8 z" fill="currentColor" />
+    </marker>
+  </defs>
+
+  <!-- Base Layer: Always Visible -->
+  <!-- Row 1: MRR (Step 1) -->
+  <g v-click="1" id="svg_e067fd_row1_step_1">
+    <!-- MRR Base (Orange for 20% weight) -->
+    <rect x="20" y="20" width="200" height="60" rx="8" ry="8" fill="none" stroke="#ff9800" stroke-width="2.5" />
+    <text x="35" y="55" font-family="'Avenir Next', sans-serif" font-size="14px" font-weight="bold" fill="currentColor">MRR = 0.85</text>
+    <!-- Connector -->
+    <path d="M 220 50 L 260 50" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#svg_e067fd_arrow)" />
+    <!-- W1 (Orange for 20% weight) -->
+    <rect x="270" y="20" width="230" height="60" rx="8" ry="8" fill="#fff3e0" stroke="#ef6c00" stroke-width="2" />
+    <text x="285" y="55" font-family="'Avenir Next', sans-serif" font-size="13px" font-weight="bold" fill="#e65100">x 20% = 0.17</text>
+  </g>
+
+  <!-- Row 2: avgF1 (Step 2) -->
+  <g v-click="2" id="svg_e067fd_row2_step_2">
+    <!-- avgF1 Base (Orange for 20% weight) -->
+    <rect x="20" y="100" width="200" height="60" rx="8" ry="8" fill="none" stroke="#ff9800" stroke-width="2.5" />
+    <text x="35" y="135" font-family="'Avenir Next', sans-serif" font-size="14px" font-weight="bold" fill="currentColor">avgF1 = 0.80</text>
+    <!-- Connector -->
+    <path d="M 220 130 L 260 130" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#svg_e067fd_arrow)" />
+    <!-- W2 (Orange for 20% weight) -->
+    <rect x="270" y="100" width="230" height="60" rx="8" ry="8" fill="#fff3e0" stroke="#ef6c00" stroke-width="2" />
+    <text x="285" y="135" font-family="'Avenir Next', sans-serif" font-size="13px" font-weight="bold" fill="#e65100">x 20% = 0.16</text>
+  </g>
+
+  <!-- Row 3: avgNDCG with Highlight (Step 3) -->
+  <g v-click="3" id="svg_e067fd_row3_step_3">
+    <!-- avgNDCG Base (Green for 30% weight) -->
+    <rect x="20" y="180" width="200" height="60" rx="8" ry="8" fill="none" stroke="#4caf50" stroke-width="3" />
+    <text x="35" y="215" font-family="'Avenir Next', sans-serif" font-size="14px" font-weight="bold" fill="currentColor">avgNDCG = 0.75</text>
+    <!-- Connector -->
+    <path d="M 220 210 L 260 210" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#svg_e067fd_arrow)" />
+    <!-- W3 Highlighted (Green for 30% weight) -->
+    <rect x="270" y="180" width="230" height="60" rx="8" ry="8" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2.5" />
+    <text x="285" y="215" font-family="'Avenir Next', sans-serif" font-size="13px" font-weight="bold" fill="#1b5e20">x 30% = 0.225 (NDCG)</text>
+  </g>
+
+  <!-- Row 4: avgSizeAccuracy (Step 4) -->
+  <g v-click="4" id="svg_e067fd_row4_step_4">
+    <!-- avgSize Base (Yellow for 10% weight) -->
+    <rect x="20" y="260" width="200" height="60" rx="8" ry="8" fill="none" stroke="#fbc02d" stroke-width="2.5" />
+    <text x="35" y="295" font-family="'Avenir Next', sans-serif" font-size="14px" font-weight="bold" fill="currentColor">avgSizeAccuracy = 0.90</text>
+    <!-- Connector -->
+    <path d="M 220 290 L 260 290" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#svg_e067fd_arrow)" />
+    <!-- W4 (Yellow for 10% weight) -->
+    <rect x="270" y="260" width="230" height="60" rx="8" ry="8" fill="#fffde7" stroke="#fbc02d" stroke-width="2" />
+    <text x="285" y="295" font-family="'Avenir Next', sans-serif" font-size="13px" font-weight="bold" fill="#f57f17">x 10% = 0.09</text>
+  </g>
+
+  <!-- Row 5: minRR (Step 5) -->
+  <g v-click="5" id="svg_e067fd_row5_step_5">
+    <!-- minRR Base (Orange for 20% weight) -->
+    <rect x="20" y="340" width="200" height="60" rx="8" ry="8" fill="none" stroke="#ff9800" stroke-width="2.5" />
+    <text x="35" y="375" font-family="'Avenir Next', sans-serif" font-size="14px" font-weight="bold" fill="currentColor">minRR = 0.70</text>
+    <!-- Connector -->
+    <path d="M 220 370 L 260 370" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#svg_e067fd_arrow)" />
+    <!-- W5 (Orange for 20% weight) -->
+    <rect x="270" y="340" width="230" height="60" rx="8" ry="8" fill="#fff3e0" stroke="#ef6c00" stroke-width="2" />
+    <text x="285" y="375" font-family="'Avenir Next', sans-serif" font-size="13px" font-weight="bold" fill="#e65100">x 20% = 0.14</text>
+  </g>
+
+  <!-- Step 6: Final Sum Card (Step 6) -->
+  <g v-click="6" id="svg_e067fd_sum_step_6">
+    <!-- Converging connectors from Products to Sum -->
+    <path d="M 500 50 C 520 50, 520 210, 540 210" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#svg_e067fd_arrow)" />
+    <path d="M 500 130 C 520 130, 520 210, 540 210" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#svg_e067fd_arrow)" />
+    <path d="M 500 210 L 540 210" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#svg_e067fd_arrow)" />
+    <path d="M 500 290 C 520 290, 520 210, 540 210" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#svg_e067fd_arrow)" />
+    <path d="M 500 370 C 520 370, 520 210, 540 210" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#svg_e067fd_arrow)" />
+
+    <!-- Sum Card (Blue Highlight) -->
+    <rect x="550" y="160" width="230" height="100" rx="12" ry="12" fill="#e3f2fd" stroke="#1976d2" stroke-width="3" />
+    <text x="665" y="200" font-family="'Avenir Next', sans-serif" font-size="15px" font-weight="bold" fill="#1976d2" text-anchor="middle">Weighted Average</text>
+    <text x="665" y="235" font-family="'Avenir Next', sans-serif" font-size="28px" font-weight="bold" fill="#0d47a1" text-anchor="middle">0.785</text>
+  </g>
+</svg>
+</template>

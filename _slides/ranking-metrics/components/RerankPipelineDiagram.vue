@@ -1,0 +1,62 @@
+<template>
+<svg width="900.0" height="900.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"  >
+  <defs>
+    <marker id="svg_1d0c0e_arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 2 L 8 5 L 0 8 z" fill="currentColor" />
+    </marker>
+  </defs>
+
+  <!-- Base Layer: Always Visible (Step 1 Retrieval) -->
+  <g id="svg_1d0c0e_base_retrieval">
+    <!-- User Query -->
+    <rect x="150" y="15" width="200" height="45" rx="22.5" ry="22.5" fill="none" stroke="currentColor" stroke-width="2" />
+    <text x="250" y="42" font-family="'Avenir Next', sans-serif" font-size="14px" font-weight="bold" text-anchor="middle" fill="currentColor">User Query</text>
+
+    <!-- Arrow 1 -->
+    <path d="M 250 60 L 250 82" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#svg_1d0c0e_arrow)" />
+
+    <!-- Step 1 Box -->
+    <rect x="100" y="90" width="300" height="65" rx="10" ry="10" fill="#e3f2fd" stroke="#1976d2" stroke-width="2.5" />
+    <text x="250" y="118" font-family="'Avenir Next', sans-serif" font-size="14px" font-weight="bold" fill="#1976d2" text-anchor="middle">Step 1: Retrieve</text>
+    <text x="250" y="138" font-family="'Avenir Next', sans-serif" font-size="12px" fill="#0d47a1" text-anchor="middle">Bi-Encoder / Vector Search</text>
+
+    <!-- Arrow 2 -->
+    <path d="M 250 155 L 250 172" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#svg_1d0c0e_arrow)" />
+
+    <!-- Top-100 Box -->
+    <rect x="120" y="180" width="260" height="50" rx="8" ry="8" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.8" />
+    <text x="250" y="202" font-family="'Avenir Next', sans-serif" font-size="13px" font-weight="bold" fill="currentColor" text-anchor="middle">Broad Top-100 Candidates</text>
+    <text x="250" y="220" font-family="'Avenir Next', sans-serif" font-size="11px" fill="currentColor" opacity="0.6" text-anchor="middle">(Optimizing Recall@100)</text>
+  </g>
+
+  <!-- Step 1: Reranking Flow -->
+  <g v-click="1" id="svg_1d0c0e_reranking_step_1">
+    <!-- Arrow 3 -->
+    <path d="M 250 230 L 250 247" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#svg_1d0c0e_arrow)" />
+
+    <!-- Step 2 Box -->
+    <rect x="100" y="255" width="300" height="65" rx="10" ry="10" fill="#f3e5f5" stroke="#8e24aa" stroke-width="2.5" />
+    <text x="250" y="283" font-family="'Avenir Next', sans-serif" font-size="14px" font-weight="bold" fill="#8e24aa" text-anchor="middle">Step 2: Rerank</text>
+    <text x="250" y="303" font-family="'Avenir Next', sans-serif" font-size="12px" fill="#4a148c" text-anchor="middle">Cross-Encoder Model</text>
+
+    <!-- Arrow 4 -->
+    <path d="M 250 320 L 250 337" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#svg_1d0c0e_arrow)" />
+
+    <!-- Top-5 Box -->
+    <rect x="120" y="345" width="260" height="50" rx="8" ry="8" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.8" />
+    <text x="250" y="367" font-family="'Avenir Next', sans-serif" font-size="13px" font-weight="bold" fill="currentColor" text-anchor="middle">Refined Top-5 Candidates</text>
+    <text x="250" y="385" font-family="'Avenir Next', sans-serif" font-size="11px" fill="currentColor" opacity="0.6" text-anchor="middle">(Optimizing NDCG@5 / MRR)</text>
+  </g>
+
+  <!-- Step 2: LLM Context -->
+  <g v-click="2" id="svg_1d0c0e_llm_step_2">
+    <!-- Arrow 5 -->
+    <path d="M 250 395 L 250 412" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#svg_1d0c0e_arrow)" />
+
+    <!-- Step 3 Box -->
+    <rect x="100" y="420" width="300" height="65" rx="10" ry="10" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2.5" />
+    <text x="250" y="448" font-family="'Avenir Next', sans-serif" font-size="14px" font-weight="bold" fill="#2e7d32" text-anchor="middle">Step 3: Generate Response</text>
+    <text x="250" y="468" font-family="'Avenir Next', sans-serif" font-size="12px" fill="#1b5e20" text-anchor="middle">LLM Generation with context</text>
+  </g>
+</svg>
+</template>

@@ -46,15 +46,31 @@ const style = computed(() => {
   }
 
   return {
-    backgroundColor: `color-mix(in srgb, ${resolvedColorVal} 10%, transparent)`,
+    '--badge-bg': `color-mix(in srgb, ${resolvedColorVal} 10%, transparent)`,
     color: 'currentColor',
-    borderRadius: 'var(--slidev-code-radius, 4px)'
+    borderRadius: 'var(--slidev-code-radius, 2px)'
   }
 })
 </script>
 
+<style scoped>
+.badge-custom {
+  position: relative;
+  z-index: 1;
+}
+.badge-custom::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--badge-bg);
+  border-radius: inherit;
+  transform: skewY(-4deg);
+  z-index: -1;
+}
+</style>
+
 <template>
-  <span :style="style" class="inline-block px-1.5 font-medium align-middle select-none whitespace-nowrap">
+  <span :style="style" class="badge-custom inline-block px-1.5 font-medium align-middle select-none whitespace-nowrap">
     <slot />
   </span>
 </template>

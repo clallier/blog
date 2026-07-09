@@ -1,0 +1,91 @@
+<template>
+<svg width="1280.0" height="736.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 460"  >
+  <defs>
+    <marker id="svg_a922ef_arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 2 L 8 5 L 0 8 z" fill="currentColor" />
+    </marker>
+  </defs>
+
+  <!-- Base Layer: Always Visible -->
+  <g id="svg_a922ef_base_query">
+    <!-- Query Box -->
+    <rect x="20" y="175" width="180" height="110" rx="12" ry="12" fill="none" stroke="currentColor" stroke-width="2.5" />
+    <text x="110" y="210" font-family="'Avenir Next', sans-serif" font-size="16px" font-weight="bold" text-anchor="middle" fill="currentColor">Expected Ranking</text>
+    <text x="110" y="235" font-family="'Avenir Next', sans-serif" font-size="13px" text-anchor="middle" fill="#2196f3" font-weight="bold">1. item1 (rel=3)</text>
+    <text x="110" y="255" font-family="'Avenir Next', sans-serif" font-size="13px" text-anchor="middle" fill="#2196f3" font-weight="bold">2. item2 (rel=2)</text>
+    <text x="110" y="275" font-family="'Avenir Next', sans-serif" font-size="13px" text-anchor="middle" fill="#2196f3" font-weight="bold">3. item3 (rel=1)</text>
+  </g>
+
+  <!-- Row 1: Case 1 and its evaluation (Step 1) -->
+  <g v-click="1" id="svg_a922ef_row1_step_1">
+    <!-- Connector from Query to Case 1 -->
+    <path d="M 200 230 C 230 230, 230 90, 260 90" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#svg_a922ef_arrow)" />
+    
+    <!-- Case 1 Box -->
+    <rect x="270" y="35" width="220" height="110" rx="10" ry="10" fill="none" stroke="currentColor" stroke-width="2" opacity="0.8" />
+    <text x="285" y="60" font-family="'Avenir Next', sans-serif" font-size="14px" font-weight="bold" fill="currentColor">Case 1: Perfect Order</text>
+    <text x="285" y="85" font-family="'Avenir Next', sans-serif" font-size="13px" fill="#4caf50" font-weight="bold">1. item1 (rel=3) ✓</text>
+    <text x="285" y="105" font-family="'Avenir Next', sans-serif" font-size="13px" fill="#4caf50">2. item2 (rel=2) ✓</text>
+    <text x="285" y="125" font-family="'Avenir Next', sans-serif" font-size="13px" fill="#4caf50">3. item3 (rel=1) ✓</text>
+
+    <!-- Solid connector from Case 1 to D1 -->
+    <path d="M 490 90 L 540 90" fill="none" stroke="#4caf50" stroke-width="2.5" marker-end="url(#svg_a922ef_arrow)" />
+    
+    <!-- Bold Green Border for Case 1 -->
+    <rect x="270" y="35" width="220" height="110" rx="10" ry="10" fill="none" stroke="#4caf50" stroke-width="3" />
+
+    <!-- D1 Card -->
+    <rect x="550" y="35" width="230" height="110" rx="10" ry="10" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2" />
+    <text x="665" y="65" font-family="'Avenir Next', sans-serif" font-size="12px" font-weight="bold" fill="#2e7d32" text-anchor="middle">DCG = 3/1 + 2/1.58 + 1/2 = 4.76</text>
+    <text x="665" y="95" font-family="'Avenir Next', sans-serif" font-size="16px" font-weight="bold" fill="#1b5e20" text-anchor="middle">NDCG = 4.76/4.76 = 1.00</text>
+  </g>
+
+  <!-- Row 2: Case 2 and its evaluation (Step 2) -->
+  <g v-click="2" id="svg_a922ef_row2_step_2">
+    <!-- Connector from Query to Case 2 -->
+    <path d="M 200 230 L 260 230" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#svg_a922ef_arrow)" />
+
+    <!-- Case 2 Box -->
+    <rect x="270" y="175" width="220" height="110" rx="10" ry="10" fill="none" stroke="currentColor" stroke-width="2" opacity="0.8" />
+    <text x="285" y="200" font-family="'Avenir Next', sans-serif" font-size="14px" font-weight="bold" fill="currentColor">Case 2: Permuted Order</text>
+    <text x="285" y="225" font-family="'Avenir Next', sans-serif" font-size="13px" fill="#ff9800">1. item2 (rel=2) ⤳</text>
+    <text x="285" y="245" font-family="'Avenir Next', sans-serif" font-size="13px" fill="#ff9800" font-weight="bold">2. item1 (rel=3) ⤳</text>
+    <text x="285" y="265" font-family="'Avenir Next', sans-serif" font-size="13px" fill="#4caf50">3. item3 (rel=1) ✓</text>
+
+    <!-- Solid connector from Case 2 to D2 -->
+    <path d="M 490 230 L 540 230" fill="none" stroke="#ff9800" stroke-width="2.5" marker-end="url(#svg_a922ef_arrow)" />
+
+    <!-- Bold Orange Border for Case 2 -->
+    <rect x="270" y="175" width="220" height="110" rx="10" ry="10" fill="none" stroke="#ff9800" stroke-width="3" />
+
+    <!-- D2 Card -->
+    <rect x="550" y="175" width="230" height="110" rx="10" ry="10" fill="#fff3e0" stroke="#ef6c00" stroke-width="2" />
+    <text x="665" y="205" font-family="'Avenir Next', sans-serif" font-size="12px" font-weight="bold" fill="#ef6c00" text-anchor="middle">DCG = 2/1 + 3/1.58 + 1/2 = 4.39</text>
+    <text x="665" y="235" font-family="'Avenir Next', sans-serif" font-size="16px" font-weight="bold" fill="#e65100" text-anchor="middle">NDCG = 4.39/4.76 = 0.92</text>
+  </g>
+
+  <!-- Row 3: Case 3 and its evaluation (Step 3) -->
+  <g v-click="3" id="svg_a922ef_row3_step_3">
+    <!-- Connector from Query to Case 3 -->
+    <path d="M 200 230 C 230 230, 230 370, 260 370" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#svg_a922ef_arrow)" />
+
+    <!-- Case 3 Box -->
+    <rect x="270" y="315" width="220" height="110" rx="10" ry="10" fill="none" stroke="currentColor" stroke-width="2" opacity="0.8" />
+    <text x="285" y="340" font-family="'Avenir Next', sans-serif" font-size="14px" font-weight="bold" fill="currentColor">Case 3: Missing item1</text>
+    <text x="285" y="365" font-family="'Avenir Next', sans-serif" font-size="13px" fill="#ff9800">1. item2 (rel=2) ✓</text>
+    <text x="285" y="385" font-family="'Avenir Next', sans-serif" font-size="13px" fill="#ff9800">2. item3 (rel=1) ✓</text>
+    <text x="285" y="405" font-family="'Avenir Next', sans-serif" font-size="13px" fill="#f44336" font-weight="bold">3. item4 (rel=0) ✗</text>
+
+    <!-- Solid connector from Case 3 to D3 -->
+    <path d="M 490 370 L 540 370" fill="none" stroke="#f44336" stroke-width="2.5" marker-end="url(#svg_a922ef_arrow)" />
+
+    <!-- Bold Red Border for Case 3 -->
+    <rect x="270" y="315" width="220" height="110" rx="10" ry="10" fill="none" stroke="#f44336" stroke-width="3" />
+
+    <!-- D3 Card -->
+    <rect x="550" y="315" width="230" height="110" rx="10" ry="10" fill="#ffebee" stroke="#c62828" stroke-width="2" />
+    <text x="665" y="345" font-family="'Avenir Next', sans-serif" font-size="12px" font-weight="bold" fill="#c62828" text-anchor="middle">DCG = 2/1 + 1/1.58 + 0/2 = 2.63</text>
+    <text x="665" y="375" font-family="'Avenir Next', sans-serif" font-size="16px" font-weight="bold" fill="#b71c1c" text-anchor="middle">NDCG = 2.63/4.76 = 0.55</text>
+  </g>
+</svg>
+</template>

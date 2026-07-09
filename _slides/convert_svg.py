@@ -29,6 +29,15 @@ PROJECT_MAPPING = {
     "agent_react": "augmented-llms-agents",
     "memory_diagram": "augmented-llms-agents",
     "toolcalls_diagram": "augmented-llms-agents",
+    # ranking-metrics
+    "mrr_diagram": "ranking-metrics",
+    "ndcg_diagram": "ranking-metrics",
+    "map_diagram": "ranking-metrics",
+    "f1_diagram": "ranking-metrics",
+    "size_accuracy_diagram": "ranking-metrics",
+    "bounded_k_diagram": "ranking-metrics",
+    "combined_metric_diagram": "ranking-metrics",
+    "rerank_pipeline_diagram": "ranking-metrics",
 }
 
 

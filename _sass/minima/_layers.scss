@@ -131,8 +131,10 @@ h6 {
     /* MathJax Colorbox Readability Fix */
     mjx-container [style*="background-color"] {
         color: var(--math-box-text) !important;
+        margin: 2px;
         padding: 2px 4px;
-        border-radius: 4px;
+        border-radius: 2px;
+        transform: skewY(-2deg);
     }
 
     /* MathJax responsive display equations */
@@ -164,12 +166,11 @@ h6 {
 
     /* Custom Blockquote Styling */
     blockquote {
-        color: var(--minima-brand-color-dimmed);
-        border-left: 4px solid var(--minima-brand-color);
-        background-color: var(--minima-card-bg);
-        border-radius: 1rem;
-        padding: 0.5rem 1rem;
-        font-style: italic;
+        color: var(--minima-brand-color-dimmed) !important;
+        border-left: 4px solid var(--minima-brand-color) !important;
+        background-color: var(--minima-card-bg) !important;
+        border-radius: 1rem !important;
+        padding: 0.5rem 1rem !important;
     }
 
     .post-content p {

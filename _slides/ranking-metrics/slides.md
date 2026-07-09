@@ -1,37 +1,37 @@
 ---
 theme: "@ktym4a/slidev-theme-ktym4a"
 themeConfig:
-    # baseColor Options: rosewater (default), flamingo, pink, mauve, red, maroon, peach, yellow, green, teal, sky, sapphire, blue, lavender
-    baseColor: "teal"
-    colorPattern: "rotation"
+  # baseColor Options: rosewater (default), flamingo, pink, mauve, red, maroon, peach, yellow, green, teal, sky, sapphire, blue, lavender
+  baseColor: "lavender"
+  colorPattern: "rotation"
 title: Ranking Metrics
 titleTemplate: "%s"
 info: |
-    ## Ranking Metrics
-    An introduction to ranking metrics.
+  ## 🥇 Ranking Metrics
+  An introduction to ranking for information retrieval systems.
 author: Corentin Lallier
 class: text-center
 drawings:
-    persist: false
+  persist: false
 transition: slide-left
 mdc: true
 comark: true
 routerMode: hash
 favicon: /blog/assets/img/favicon.png
 addons:
-    - ../_slidev_addons/components
+  - ../_slidev_addons/components
 keywords:
-    - RAG
-    - advanced retrieval
-    - hybrid search
-    - Ranking metrics
+  - RAG
+  - advanced retrieval
+  - hybrid search
+  - Ranking metrics
 hideInToc: true
 ---
 
 <global-bottom />
 
 # 🥇🥈🥉 Ranking Metrics
-Evaluating search quality in RAG (Retrieval Augmented Generation) or modern retrieval systems
+Evaluating quality of modern information retrieval systems (and RAGs)
 
 Corentin Lallier
 
@@ -48,7 +48,79 @@ hideInToc: true
 layout: section
 ---
 
-# Introduction: The Ranking Challenge
+# The Ranking Challenge
+
+---
+layout: two-cols
+---
+
+::left::
+
+## POV: You work at 🪕ify
+
+<div class="mt-10" v-click="1">
+
+- You just finished work on your company's :badge[<carbon-magnify />Retrieval System] (e.g., a RAG, or just tuned the search engine's :badge[parameters]) ...
+
+</div>
+
+<div class="mt-10" v-click="2">
+
+- **Question**: How do you :badge[know] if it's good / better than the previous one? Or even if the open-source benchmark you used works for :badge[your] specific case?
+
+</div>
+
+
+::right::
+
+<div v-click="3">
+
+Example query: `"focus lofi beats"`
+
+</div>
+
+::Card{title="Previous Playlists Recommendation" color="note" icon="i-carbon-cafe" v-click="3"}
+1. 🎸 **Death Metal** (Not Relevant)
+2. 🐸 **Lofi Study Beats** (Highly Relevant)
+3. ☕ **Chill Lofi Focus** (Highly Relevant)
+
+<div v-click="5">
+
+* **Pro**: High overall concentration of relevant items.
+* **Con**: Terrible first impression.
+
+</div>
+
+::
+
+::Card{title="New Playlists Recommendation" color="success" icon="i-carbon-campsite" v-click="4"}
+1. 🎧 **Lo-fi for focus** (Highly Relevant)
+2. 🎷 **Jazz cafe** (Slightly Relevant)
+3. 🎸 **Death Metal** (Not Relevant)
+
+<div v-click="6">
+
+* **Pro**: The very first item is perfect. Great if the user just clicks the first thing.
+* **Con**: Relevancy degrades extremely fast.
+
+</div>
+
+::
+
+---
+
+## You'll need to evaluate the two ranking algorithms
+
+::Card{title="How do you compare results of each ranking model?" color="warning" icon="i-carbon-research-matrix" v-click="1" class="mt-20"}
+
+- Need for a set of :badge[queries] for each cases. E.g: search by Genre (🎷,🎹,🎸,📯), Band (👨‍🎤,🌶️,📻🤯), Album (🌈⃤), Song (👁️🐯, 🛣️🔥) or Similarity (🦝)
+- For each query, a :badge[ground truth] (the expected "best result"):
+  - *Which is sometimes partial,*
+  - *inexistant,*
+  - *or not well defined ("I think item A should be over B").*
+- And :badge[metrics] to compare them 
+
+::
 
 ---
 layout: two-cols-header
@@ -58,85 +130,64 @@ layout: two-cols-header
 
 ::left::
 
-::Card{title="Multidimensional Comparisons" color="important"}
-* **Multiple Ways to Evaluate**: Comparing two lists cannot be reduced to a single perspective:
+::Card{title="Multidimensional Comparisons" color="important" v-click="1" class="mt-20"}
+* **Multiple Ways to Evaluate** the content of two lists:
   * Do we care most about the **first relevant result**?
   * Do we care about the **entire sorted order**?
-  * Do we care about **precision vs. recall** of the retrieved set?
+  * Do we care about **quality** (avoiding "noise" or false positives) vs. **completeness** (avoiding missing values)?
+::
+
+::right::
+
+::Card{title="Metrics usage" color="warning" v-click="2" class="mt-20"}
+* **Conflicting Trade-offs**: Optimizing for one aspect (e.g., getting the top item perfect) often sacrifices other metrics (e.g., overall quality).
 * **Pros & Cons**: Each metric targets a specific aspect of the user experience.
 ::
 
-::right::
 
-::Card{title="Dynamic & Subjective Ground Truth" color="warning"}
+---
+
+## Why is Evaluation Hard? A word about the Ground Truth
+
+Ground Truth is dynamic & subjective
+
+::Card{title="Temporal Drift & Feedback Loops" color="warning" v-click="1" class="mt-10"}
 * **No Perfect Ground Truth**: User expectations are subjective. Different users seeking the same query might expect different result sequences.
-* **Temporal Drift**: Relevant documents and user preferences evolve over time.
-* **Conflicting Trade-offs**: Optimizing for one aspect (e.g., getting the top item perfect) often sacrifices other metrics (e.g., overall recall).
+* **Temporal Drift**: Relevant documents can evolve over time, according to documents being added/removed/updated.
+* **Dynamic Ground Truth**: For queries like *"elections"* or *"market news"*, relevance can changes hourly.
+* **Evaluation**: Expectation lists **can** be updated continuously using **search log clicks** and user signals as proxy labels.
 ::
 
----
-layout: two-cols-header
----
+<div v-click="2" class="mt-10" >
 
-## Real-World Examples: Matching Metrics to Use Cases
+- Let's assume you've made the hard work with **product people**, **expert of the domain**, and collected **user signals**. Now you have some :badge[query / ground truth] couples ...
+- Let's have a look to the available metrics!
 
-::left::
+</div>
 
-::Card{title="Case A: Navigational & Fact-Checking" color="success"}
-* **Goal**: Find *one specific* target document (e.g., *"reset password"* or *"support email"*).
-* **Metric**: **MRR** (Mean Reciprocal Rank).
-* **Why**: The user only needs the top result to be correct. A correct item at rank 10 is almost useless (RR = 0.1).
-::
-
-::Card{title="Case B: Exploratory & Informational" color="note"}
-* **Goal**: Get a comprehensive overview (e.g., *"machine learning frameworks"*).
-* **Metric**: **NDCG & F1**.
-* **Why**: The user wants a diverse, high-quality set, and the ordering of multiple items matters.
-::
-
-::right::
-
-::Card{title="Temporal Drift & Feedback Loops" color="warning"}
-* **Dynamic Ground Truth**: For queries like *"elections"* or *"market news"*, relevance changes hourly.
-* **Evaluation**: Expectation lists must be updated continuously using search log clicks and user signals as proxy labels.
-::
 
 ---
 layout: section
 ---
 
-# Mean Reciprocal Rank (MRR)
+# Ranking metrics: MRR, NDCG, MAP, F1 Score, Size Accuracy, ...
+
 
 ---
-layout: two-cols-header
+layout: section
 ---
 
 ## Mean Reciprocal Rank (MRR)
 
-Focus on First Relevant Result
+---
+layout: two-cols-header
+class: text-sm
+---
 
 ::left::
+**MRR: Mean Reciprocal Rank**: Focus on First Relevant Result
 
-```mermaid
-graph TD
-    subgraph "Query: 'item1'"
-        Q([Query: 'item1']) --> C1["1. item1 ✓<br/>2. item2<br/>3. item3"]
-        Q --> C2["1. item2<br/>2. item1 ✓<br/>3. item3"]
-        Q --> C3["1. item2<br/>2. item3<br/>3. item4 ✗"]
-
-        C1 --> R1[Rank = 1<br/>RR = 1/1 = 1.0]
-        C2 --> R2[Rank = 2<br/>RR = 1/2 = 0.5]
-        C3 --> R3[Rank = N/A<br/>RR = 0]
-    end
-
-    style R1 fill:#4caf50,stroke:#388e3c,stroke-width:2px,color:#fff
-    style R2 fill:#ff9800,stroke:#f57c00,stroke-width:2px,color:#fff
-    style R3 fill:#f44336,stroke:#d32f2f,stroke-width:2px,color:#fff
-```
-
-::right::
-
-::Card{title="Key Concepts" color="important"}
+::Card{title="MRR" color="important"}
 * **First Relevant Item**: MRR only cares about where the *first* relevant result appears.
 * **Reciprocal Rank (RR)**: For a single query:
   $$\text{RR} = \frac{1}{\text{rank of first relevant item}}$$
@@ -146,79 +197,114 @@ graph TD
 * **Heavy late penalty**: Finding the first relevant item at rank 10 yields an RR of only 0.1.
 ::
 
+::right::
+<MrrDiagram class="h-full w-full max-h-70" v-click="1"/>
+
+<ul class="mt-2 tight-list" v-click="1">
+  <li><b>Candidates</b>: Query <code>"item1"</code> retrieves different rankings.</li>
+  <li v-click="1"><b>Case 1</b>: First relevant item is at rank 1. <span class="text-green font-bold">RR = 1.0</span></li>
+  <li v-click="2"><b>Case 2</b>: First relevant item is at rank 2. <span class="text-peach font-bold">RR = 0.5</span></li>
+  <li v-click="3"><b>Case 3</b>: No relevant items retrieved. <span class="text-red font-bold">RR = 0.0</span></li>
+  <li v-click="4">Then compute average for all the queries</li>
+</ul>
+
+
+---
+layout: two-cols-header
+class: text-sm
+---
+
+## Evaluating worst cases: minRR
+
+**Minimum Reciprocal Rank (minRR)**: Guarding the Tail
+
+::left::
+::Card{title="Example: Model A vs. Model B" color="warning" v-click="1"}
+
+<v-clicks depth="1" at="+1">
+
+* **Query Set**: 3 queries ($q_1, q_2, q_3$).
+* **Model A** (High Avg, Silent Failure):
+  * RRs: $[1.0, 1.0, 0.0]$
+  * **Mean MRR = 0.67** | **minRR = 0.00** ✗
+* **Model B** (Slightly Lower Avg, Consistent):
+  * RRs: $[0.5, 0.5, 0.5]$
+  * **Mean MRR = 0.50** | **minRR = 0.50** ✓
+* **Decision**: Model B is often preferred in production to avoid completely failing on any customer query.
+
+</v-clicks>
+::
+
+::right::
+
+::Card{title="Why minRR?" color="important" icon="i-carbon-warning-alt" v-click="5"}
+
+<v-clicks at="+1">
+
+* **Average Blindspot**: Averages (MRR, MAP, NDCG) can hide complete failures on a subset of queries.
+* **Formula**:
+  $$\text{minRR} = \min_{q \in Q} (\text{RR}_q)$$
+* **Worst-Case Guard**: Measures the absolute worst retrieval failure in your test set.
+* **Goal**: Maximize `minRR` to guarantee a baseline quality of service for every user query.
+
+</v-clicks>
+::
+
+
+
 ---
 layout: section
 ---
 
-# Normalized Discounted Cumulative Gain (NDCG)
+## Normalized Discounted Cumulative Gain (NDCG)
 
 ---
 layout: two-cols-header
+class: text-sm
 ---
-
-## NDCG: Graded Relevance with Logarithmic Discount
 
 ::left::
 
-```mermaid
-graph TD
-    subgraph "Expected: [item1 (rel=3), item2 (rel=2), item3 (rel=1)]"
-        Q([Query]) --> C1["Case 1: Perfect Order<br/>1. item1 (3)<br/>2. item2 (2)<br/>3. item3 (1)"]
-        Q --> C2["Case 2: Permuted Order<br/>1. item2 (2)<br/>2. item1 (3)<br/>3. item3 (1)"]
-        Q --> C3["Case 3: Missing item1<br/>1. item2 (2)<br/>2. item3 (1)<br/>3. item4 (0)"]
+**NDCG**: Graded Relevance with **Logarithmic Discount**
 
-        C1 --> D1["DCG = 3/1 + 2/1.58 + 1/2 = 4.76<br/>NDCG = 4.76/4.76 = 1.00"]
-        C2 --> D2["DCG = 2/1 + 3/1.58 + 1/2 = 4.39<br/>NDCG = 4.39/4.76 = 0.92"]
-        C3 --> D3["DCG = 2/1 + 1/1.58 + 0/2 = 2.63<br/>NDCG = 2.63/4.76 = 0.55"]
-    end
-
-    style D1 fill:#4caf50,stroke:#388e3c,stroke-width:2px,color:#fff
-    style D2 fill:#ff9800,stroke:#f57c00,stroke-width:2px,color:#fff
-    style D3 fill:#f44336,stroke:#d32f2f,stroke-width:2px,color:#fff
-```
-
-::right::
-
-::Card{title="Key Concepts" color="important"}
+::Card{title="NDCG" color="important"}
 * **Considers All Positions**: Unlike MRR, NDCG evaluates the quality of the entire list.
 * **Graded Relevance**: Documents can have varying relevance levels (e.g. 0 to 3).
 * **Discounted Cumulative Gain (DCG)**:
   $$\text{DCG}_p = \sum_{i=1}^p \frac{\text{rel}_i}{\log_2(i+1)}$$
 * **Normalized (NDCG)**: Divides DCG by the Ideal DCG (IDCG - the best possible ranking order):
   $$\text{NDCG}_p = \frac{\text{DCG}_p}{\text{IDCG}_p}$$
+* **Industry Gold Standard**: The default choice for web search engines (Google, Bing) and e-commerce platforms (Amazon).
 ::
+
+::right::
+
+<NdcgDiagram class="h-full w-full max-h-80" v-click="1"/>
+
+<ul class="mt-2 tight-list" v-click="1">
+  <li><b>Candidates</b>: Evaluated rankings are compared against the ideal relevance. Here <code>IDCG = 3/log2(2) + 2/log2(3) + 1/log2(4) = 4.76</code></li>
+  <li><b>Case 1</b>: Perfect ordering matches ideal order. <span class="text-green font-bold">NDCG = 1.00</span></li>
+  <li v-click="2"><b>Case 2</b>: High relevance item is delayed to rank 2. <span class="text-peach font-bold">NDCG = 0.92</span></li>
+  <li v-click="3"><b>Case 3</b>: Top relevant item (rel=3) is completely missing. <span class="text-red font-bold">NDCG = 0.55</span></li>
+</ul>
+
 
 ---
 layout: section
 ---
 
-# Mean Average Precision (MAP)
+## Mean Average Precision (MAP)
 
 ---
 layout: two-cols-header
+class: text-sm
 ---
-
-## Mean Average Precision (MAP): Order-Aware Binary Relevance
 
 ::left::
 
-```mermaid
-graph TD
-    subgraph "Query Expected: [item1 ✓, item2 ✓, item3 ✓]"
-        Q([Query]) --> C1["Case 1: Perfect Rank<br/>1. item1 ✓ (P@1 = 1/1 = 1.00)<br/>2. item2 ✓ (P@2 = 2/2 = 1.00)<br/>3. item3 ✓ (P@3 = 3/3 = 1.00)"]
-        Q --> C2["Case 2: Late Relevant Items<br/>1. item1 ✓ (P@1 = 1/1 = 1.00)<br/>2. item4 ✗ (P@2 = 1/2 = 0.50)<br/>3. item2 ✓ (P@3 = 2/3 = 0.67)"]
+**MAP: Mean Average Precision**: Order-Aware Binary Relevance
 
-        C1 --> A1["AP = (1.0 + 1.0 + 1.0)/3 = 1.00"]
-        C2 --> A2["AP = (1.0 + 0.67)/2 = 0.84"]
-    end
-
-    style A1 fill:#4caf50,stroke:#388e3c,stroke-width:2px,color:#fff
-    style A2 fill:#ff9800,stroke:#f57c00,stroke-width:2px,color:#fff
-```
-
-::right::
-
-::Card{title="Key Concepts" color="important"}
+::Card{title="MAP" color="important"}
 * **Binary Relevance**: Items are either relevant (1) or irrelevant (0).
 * **Average Precision (AP)**: For a single query:
   $$\text{AP} = \frac{1}{\text{No. of relevant items}} \sum_{k=1}^n P(k) \times rel(k)$$
@@ -228,80 +314,68 @@ graph TD
 * **Best For**: Systems retrieving *multiple* binary-relevant items where ranking order of all items is critical.
 ::
 
+::right::
+
+<MapDiagram class="h-full w-full max-h-70" v-click="1"/>
+
+<ul class="mt-2 tight-list" v-click="1">
+  <li><b>Candidates</b>: Rankings are evaluated against binary relevance checklist.</li>
+  <li><b>Case 1</b>: Perfect ranking yields maximum precision at all positions. <span class="text-green font-bold">AP = 1.00</span></li>
+  <li v-click="2"><b>Case 2</b>: Irrelevant item at rank 2 penalizes precision of subsequent items. <span class="text-peach font-bold">AP = 0.84</span></li>
+  <li v-click="3">Can be seen as an NDCG alternative with binary relevance.</li>
+</ul>
+
+
 ---
 layout: section
 ---
 
-# F1 Score
+## F1 Score
 
 ---
 layout: two-cols-header
+class: text-sm
 ---
-
-## F1 Score: Harmonic Mean of Precision and Recall
 
 ::left::
 
-| Expected / Predicted | In Results | Not in Results |
+## F1 Score
+Harmonic Mean of Precision and Recall
+
+| Confusion matrix | In Results | Not in Results |
 |:---|:---:|:---:|
 | **Expected** | **TP** (True Positive)<br/>Correctly found | **FN** (False Negative)<br/>Missed |
 | **Not Expected** | **FP** (False Positive)<br/>Incorrectly included | **TN** (True Negative)<br/>N/A in Search |
 
-* **Precision** = $\frac{\text{TP}}{\text{TP} + \text{FP}}$ (Quality of results)
-* **Recall** = $\frac{\text{TP}}{\text{TP} + \text{FN}}$ (Completeness of retrieval)
+* **Precision P** = $\frac{\text{TP}}{\text{TP} + \text{FP}}$ (Quality of results)
+* **Recall R** = $\frac{\text{TP}}{\text{TP} + \text{FN}}$ (Completeness of retrieval)
 * **F1 Score** = $2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}$
 
 ::right::
+<F1Diagram class="h-full w-full max-h-80" v-click="1"/>
 
-```mermaid
-graph TD
-    subgraph "Expected: [item1, item2, item3]"
-        Q([Query]) --> C1["Case 1: All Correct<br/>[item1, item2, item3]"]
-        Q --> C2["Case 2: Extra / Wrong Item<br/>[item1, item2, item4]"]
-        Q --> C3["Case 3: Missing Item<br/>[item1, item2]"]
-
-        C1 --> E1["TP=3, FP=0, FN=0<br/>P=1.00, R=1.00<br/>F1 = 1.00"]
-        C2 --> E2["TP=2, FP=1, FN=1<br/>P=0.67, R=0.67<br/>F1 = 0.67"]
-        C3 --> E3["TP=2, FP=0, FN=1<br/>P=1.00, R=0.67<br/>F1 = 0.80"]
-    end
-
-    style E1 fill:#4caf50,stroke:#388e3c,stroke-width:2px,color:#fff
-    style E2 fill:#ff9800,stroke:#f57c00,stroke-width:2px,color:#fff
-    style E3 fill:#fff9c4,stroke:#fbc02d,stroke-width:2px,color:#000
-```
+<ul class="mt-2 tight-list" v-click="1">
+  <li><b>Candidates</b>: Retrieved sets are evaluated against the expected ground truth set.</li>
+  <li><b>Case 1</b>: Perfect retrieval matches expected set exactly. <span class="text-green font-bold">F1 = 1.00</span></li>
+  <li v-click="2"><b>Case 2</b>: One missed item and one extra wrong item penalize both precision and recall. <span class="text-peach font-bold">F1 = 0.67</span></li>
+  <li v-click="3"><b>Case 3</b>: Missed item without any wrong/extra items penalizes recall but preserves perfect precision. <span class="text-yellow font-bold">F1 = 0.80</span></li>
+</ul>
 
 ---
 layout: section
 ---
 
-# Size Accuracy
+## Size Accuracy
 
 ---
 layout: two-cols-header
+class: text-sm
 ---
 
-## Size Accuracy: Penalizing Mismatch in Result Counts
-
 ::left::
+**Size Accuracy**: Penalizing Mismatch in Result Counts
 
-```mermaid
-graph TD
-    subgraph "Expected Count = 5"
-        Q([Query]) --> C1["Case 1: Actual = 5<br/>Diff = 0<br/>Score = 1.00"]
-        Q --> C2["Case 2: Actual = 10<br/>Diff = 5<br/>Score = 0.50"]
-        Q --> C3["Case 3: Actual = 2<br/>Diff = 3<br/>Score = 0.63"]
-        Q --> C4["Case 4: Actual = 0<br/>Diff = 5<br/>Score = 0.00"]
-    end
-
-    style C1 fill:#4caf50,stroke:#388e3c,stroke-width:2px,color:#fff
-    style C2 fill:#ff9800,stroke:#f57c00,stroke-width:2px,color:#fff
-    style C3 fill:#fff9c4,stroke:#fbc02d,stroke-width:2px,color:#000
-    style C4 fill:#f44336,stroke:#d32f2f,stroke-width:2px,color:#fff
-```
-
-::right::
-
-::Card{title="Key Concepts" color="important"}
+::Card{title="Size Accuracy" color="important"}
 * **Goal**: Measures how closely the quantity of returned results matches expectations.
 * **Normalized Difference**:
   $$\text{diff}_{\text{norm}} = \frac{|\text{expected} - \text{actual}|}{\max(\text{expected}, 1)}$$
@@ -310,96 +384,139 @@ graph TD
 * **Special Rule**: If $\text{expected} > 0$ and $\text{actual} = 0$ (or vice versa), score is strictly **0.0**.
 ::
 
+::right::
+
+<SizeAccuracyDiagram class="h-full w-full max-h-70" v-click="1"/>
+
+<ul class="mt-2 tight-list" v-click="1">
+  <li><b>Candidates</b>: Returned candidate counts are compared to target expected count (5).</li>
+  <li><b>Case 1</b>: Perfect match in count yields maximum accuracy. <span class="text-green font-bold">Score = 1.00</span></li>
+  <li v-click="2"><b>Case 2</b>: Double the expected results degrades accuracy. <span class="text-peach font-bold">Score = 0.50</span></li>
+  <li v-click="3"><b>Case 3</b>: Fewer than expected results degrades accuracy. <span class="text-yellow font-bold">Score = 0.63</span></li>
+  <li v-click="4"><b>Case 4</b>: Complete failure (0 results) is heavily penalized. <span class="text-red font-bold">Score = 0.00</span></li>
+</ul>
+
 ---
 layout: section
 ---
 
-# Bounding Metrics: Bounded @K
+## Bounding Metrics: Bounded @K
 
 ---
 layout: two-cols-header
+class: text-sm
 ---
 
-## Evaluating with Bounded Cutoffs: Precision@K & Recall@K
-
 ::left::
+**Evaluating with Bounded Cutoffs: Metric@K**
 
-```mermaid
-graph TD
-    subgraph "Query: Expected [item1, item2, item3] (3 items)"
-        Q([Query]) --> R["Retrieved: [item1 ✓, item4 ✗, item2 ✓, item5 ✗, item3 ✓, item6 ✗]"]
-        R --> K3["Cutoff @ K=3<br/>Retrieved: [item1 ✓, item4 ✗, item2 ✓]"]
-        R --> K5["Cutoff @ K=5<br/>Retrieved: [item1 ✓, item4 ✗, item2 ✓, item5 ✗, item3 ✓]"]
+<BoundedKDiagram class="h-full w-full max-h-70"/>
 
-        K3 --> C3["Precision@3 = 2/3 = 67%<br/>Recall@3 = 2/3 = 67%"]
-        K5 --> C5["Precision@5 = 3/5 = 60%<br/>Recall@5 = 3/3 = 100%"]
-    end
-
-    style C3 fill:#ff9800,stroke:#f57c00,stroke-width:2px,color:#fff
-    style C5 fill:#4caf50,stroke:#388e3c,stroke-width:2px,color:#fff
-```
+<ul class="tight-list">
+  <li><b>K = 3</b>: Evaluates only the top 3 retrieved candidate items.</li>
+  <li><b>Score @ 3</b>: 2 out of 3 retrieved items are relevant. <span class="text-peach font-bold">P@3 = 67% / R@3 = 67%</span></li>
+  <li v-click="2"><b>K = 5</b>: Expands the evaluation window to the top 5 candidates.</li>
+  <li v-click="3"><b>Score @ 5</b>: Retrieves all 3 target items, achieving full recall. <span class="text-green font-bold">P@5 = 60% / R@5 = 100%</span></li>
+</ul>
 
 ::right::
 
-::Card{title="Why Bounding @K Matters" color="warning"}
+
+::Card{title="Why Bounding @K Matters" color="warning" v-click="4"}
+
+<v-clicks at="+5">
+
+* When the ground truth is large, it might be interesting to focus only on the **top K** elements.
+* **Universal Application**: Bounded cutoffs apply to any ranking metric: precision, recall, ..., **MAP@K** and **NDCG@K** are standard industry practices.
 * **Real-World Limits**: Users rarely scroll past the first 5 or 10 search results. Bounding evaluates what the user actually sees.
 * **Recall@K Trade-off**: As $K$ increases, Recall increases (more chance to find relevant items), but Precision usually decreases (more irrelevant items are returned).
 * **RAG Prompt Constraints**: Bounding at $K$ is vital for RAG since LLM context windows are limited and larger prompts increase cost and latency.
+* **Compute & Latency Optimization**: Restricting evaluations to a smaller $K$ prevents downstream processing of unnecessary documents, saving context memory and compute.
+
+</v-clicks>
+
 ::
 
----
-layout: section
----
-
-# Combined Metric (Weighted Average)
 
 ---
 layout: two-cols-header
 ---
 
-## Combined Metric: Holistic Evaluation
+## Matching Metrics to Use Cases
 
 ::left::
 
-```mermaid
-graph TD
-    subgraph "Weighted Score Aggregation"
-        M[Individual Metrics] --> MRR[MRR = 0.85]
-        M --> F1[avgF1 = 0.80]
-        M --> NDCG[avgNDCG = 0.75]
-        M --> Size[avgSizeAccuracy = 0.90]
-        M --> MinRR[minRR = 0.70]
-
-        MRR --> W1[x 20% = 0.17]
-        F1 --> W2[x 20% = 0.16]
-        NDCG --> W3[x 30% = 0.225]
-        Size --> W4[x 10% = 0.09]
-        MinRR --> W5[x 20% = 0.14]
-
-        W1 --> Sum[Weighted Average: 0.785]
-        W2 --> Sum
-        W3 --> Sum
-        W4 --> Sum
-        W5 --> Sum
-    end
-
-    style W3 fill:#4caf50,stroke:#388e3c,stroke-width:2px,color:#fff
-    style Sum fill:#2196f3,stroke:#1976d2,stroke-width:2px,color:#fff
-```
+::Card{title="Case A: Navigational & Fact-Checking 🧐" color="success" class="mt-20" v-click="1"}
+* **Goal**: Find *one specific* target document (e.g., *"reset password"* or *"support email"*).
+* **Metric**: high **MRR** (Mean Reciprocal Rank) and low **Size**.
+* **Why**: The user only needs the few top result. A correct item at rank 10 is almost useless (RR = 0.1).
+::
 
 ::right::
 
-::Card{title="Key Concepts" color="important"}
-* **Holistic Score**: Aggregates all aspects of ranking, recall, size, and worst-case performance into a single number.
-* **Weight Distribution**:
-  * **avgNDCG** (30%): Most important (ranking order).
-  * **MRR** (20%): Importance of top result.
-  * **avgF1** (20%): Precision & recall.
-  * **minRR** (20%): Worst-case query check (guards against tail failures).
-  * **avgSizeAccuracy** (10%): Size correctness.
-* **Formula**:
-  $$\text{Score} = 0.3\text{NDCG} + 0.2\text{MRR} + 0.2\text{F1} + 0.2\text{minRR} + 0.1\text{Size}$$
+::Card{title="Case B: Exploratory & Informational ℹ️" color="note" class="mt-20" v-click="2"}
+* **Goal**: Get a comprehensive overview (e.g., *"machine learning frameworks"*).
+* **Metric**: high **NDCG, MAP & F1** and high **Size**.
+* **Why**: The user wants a diverse, high-quality set, and the ordering of multiple items matters.
 ::
+
+---
+layout: center
+class: text-sm
+---
+
+## Which Metric Should You Use?
+
+| Metric | Focus | Input Type | Best For |
+| :--- | :--- | :---: | :--- |
+| **MRR** | First relevant result position | Binary | Navigational search, Q&A |
+| **NDCG** | Overall ranking quality, all positions | Graded | Search engines, e-commerce |
+| **MAP** | Precision across multiple relevant items | Binary | Precision-critical retrieval |
+| **F1 Score** | Balance of precision and recall | Binary (Set) | Recommendation, classification |
+| **Size Accuracy** | Mismatch in total results count | Counts | Quantity-critical retrieval |
+| **minRR** | Worst-case tail performance | Binary | Guarding against complete failures |
+| **@K Bounded** | Real-world UI / context window limits | Any | RAG context chunking, mobile UI |
+
+
+
+
+---
+layout: section
+---
+
+## Combined Metric (Weighted Average)
+
+---
+layout: two-cols-header
+class: text-xs
+---
+
+::left::
+
+::Card{title="Weighted Combined Metric" color="important"}
+* **Holistic Score**: Aggregates all aspects of ranking, recall, size, and worst-case performance into a single meaningful metric.
+* **Formula**:
+  $$\text{Score} = \frac{\sum_{i=1}^{n} w_i \cdot \text{metric}_i}{\sum_{i=1}^{n} w_i}$$
+  * $w_i$ is the weight of each metric, $\text{metric}_i$ is the normalized score of each metric (between 0 and 1).
+  * $\sum_{i=1}^{n} w_i$ is the sum of all weights (can be 1 or >1). The final score is the weighted average of all metrics.
+* **Weight Distribution Example**:
+  $$\text{Score} = \frac{0.3\text{NDCG} + 0.2\text{MRR} + 0.2\text{F1} + 0.2\text{minRR} + 0.1\text{Size}}{1.0}$$
+::
+
+::right::
+
+<CombinedMetricDiagram class="h-full w-full max-h-70" />
+
+<ul class="mt-1 tight-list" v-click="1">
+  <li><b>MRR</b> <span class="text-peach font-bold">(20% weight)</span>: Captures importance of the top result.</li>
+  <li v-click="2"><b>avgF1</b> <span class="text-peach font-bold">(20% weight)</span>: Balances quality and completeness.</li>
+  <li v-click="3"><b>avgNDCG</b> <span class="text-green font-bold">(30% weight)</span>: Crucial ranking metric gets the highest allocation.</li>
+  <li v-click="4"><b>avgSizeAccuracy</b> <span class="text-yellow font-bold">(10% weight)</span>: Checks count correctness.</li>
+  <li v-click="5"><b>minRR</b> <span class="text-peach font-bold">(20% weight)</span>: Worst-case query check (guards against tail failures).</li>
+  <li v-click="6"><b>Holistic Score</b>: Sum of all weighted products yields the single KPI. <span class="text-blue font-bold">Score = 0.785</span></li>
+</ul>
+
+
 
 ---
 layout: section
@@ -409,24 +526,18 @@ layout: section
 
 ---
 layout: two-cols-header
+class: text-xs
 ---
 
 ## Production RAG Pipelines: Retrieve & Rerank
 
 ::left::
+<RerankPipelineDiagram class="h-full w-full max-h-80" />
 
-```mermaid
-graph TD
-    User([User Query]) --> Retrieve[Step 1: Retrieve<br/>Bi-Encoder / Vector Search]
-    Retrieve --> TopK["Broad Top-100 Results<br/>(Optimizing Recall@100)"]
-    TopK --> Rerank[Step 2: Rerank<br/>Cross-Encoder Model]
-    Rerank --> TopTen["Refined Top-5 Results<br/>(Optimizing NDCG@5 / MRR)"]
-    TopTen --> LLM([Step 3: LLM Context])
-
-    style Retrieve fill:#2196f3,stroke:#1976d2,color:#fff
-    style Rerank fill:#9c27b0,stroke:#7b1fa2,color:#fff
-    style LLM fill:#4caf50,stroke:#388e3c,color:#fff
-```
+<ul class="mt-2 tight-list">
+  <li v-click="1"><b>Step 2 (Rerank)</b>: Slower, deep Cross-Encoder model scores the top candidates.</li>
+  <li v-click="2"><b>Step 3 (Generation)</b>: LLM constructs the final response using only the top refined contexts.</li>
+</ul>
 
 ::right::
 
@@ -435,8 +546,64 @@ graph TD
   * **Goal**: High **Recall** (don't miss anything relevant).
   * **Scale**: Millions of docs $\to$ Top 50-100 candidates.
   * **Speed**: Extremely fast (milliseconds).
+  * **SOTA Stack**: Bi-Encoder models (e.g., *Sentence-Transformers*, *Cohere v3 Embed*).
 * **Step 2: Reranking (Cross-Encoder)**
   * **Goal**: High **NDCG / MRR** (push the most relevant documents to the top).
   * **Scale**: Top 100 candidates $\to$ Top 5-10.
   * **Speed**: Slower (deep transformer attention model checking all query-doc words simultaneously).
+  * **SOTA Stack**: Cross-Encoder models (e.g., *BGE-Reranker*, *Cohere Rerank*).
 ::
+
+---
+layout: section
+---
+
+# Hands-on: Interactive Playlist Recommendation Playground
+
+
+---
+
+<InteractivePlayground class="max-w-[1000px] max-h-[800px]" />
+
+
+---
+layout: two-cols-header
+---
+
+# 💡 Key Takeaways
+
+::left::
+
+<div class="mt-10" v-click="1">
+
+* **Select Metrics by Search Type**:
+  * **Navigational**: Focus on **MRR** (first hit is everything).
+  * **Exploratory**: Focus on **NDCG / MAP / F1** (whole-list relevance and completeness).
+  * **System Fit**: Focus on **Size Accuracy** (matching length expectations).
+
+</div>
+
+::right::
+
+<div class="mt-10" v-click="2">
+
+* **Guard the Tail**: Do not rely strictly on averages. Use **minRR** to check for silent failures where queries return zero relevant results.
+* **Funnel for Speed & Precision**: Build production pipelines as **Retrieve & Rerank** structures—retrieve cheaply for high recall, then rerank precisely for high NDCG.
+
+</div>
+
+---
+layout: center
+---
+
+## 🚀 Thanks!
+
+<a href="/blog/presentations/">Back to Presentations</a>
+
+::right::
+
+**Embeddings for Everything**
+
+Lecture by **Dan Gillick** (Google)
+
+::youtube{id="JGHVJXP9NHw"}
